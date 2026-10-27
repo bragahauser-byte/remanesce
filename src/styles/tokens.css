@@ -1,0 +1,75 @@
+/*
+ * Remanesce · tokens da marca
+ * Cores extraídas do line-up. Proporção: ~70% linho, ~25% índigo/denim, ~5% cobre + vermelho.
+ * O vermelho (pinhão) aparece por baixo, nas fendas e revelações; quase nunca como superfície.
+ */
+
+@theme {
+  --color-*: initial;
+  --color-linho: #f1ede4;
+  --color-linho-escuro: #e4ddd0;
+  --color-indigo: #161b27;
+  --color-denim: #2b3445;
+  --color-casca: #391502;
+  --color-pinhao: #650410;
+  --color-pinhao-vivo: #8e1420;
+  --color-cobre: #b9763e;
+  --color-gralha: #2f5d9e;
+  --color-araucaria: #34402e;
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  --font-serif: var(--font-bodoni), "Didot", "Bodoni 72", Georgia, serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, "SFMono-Regular", monospace;
+  --font-sans: var(--font-instrument), system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Escala tipográfica fluida (desktop → mobile ~ -30%) */
+  --text-display: clamp(4.25rem, 11.5vw, 13.75rem);
+  --text-display--line-height: 0.9;
+  --text-display--letter-spacing: -0.02em;
+  --text-h1: clamp(3.25rem, 6.6vw, 6rem);
+  --text-h1--line-height: 0.95;
+  --text-h1--letter-spacing: -0.015em;
+  --text-h2: clamp(2.5rem, 4.6vw, 4rem);
+  --text-h2--line-height: 1;
+  --text-h2--letter-spacing: -0.01em;
+  --text-h3: clamp(1.875rem, 2.9vw, 2.5rem);
+  --text-h3--line-height: 1.08;
+  --text-h4: clamp(1.375rem, 2vw, 1.75rem);
+  --text-h4--line-height: 1.15;
+  --text-body: 1.0625rem;
+  --text-body--line-height: 1.6;
+  --text-small: 0.875rem;
+  --text-small--line-height: 1.5;
+  --text-label: 0.75rem;
+  --text-label--line-height: 1.4;
+  --text-label--letter-spacing: 0.08em;
+
+  --ease-remanesce: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --spacing-gutter: clamp(1rem, 4vw, 3.5rem);
+  --spacing-header: 4.5rem;
+  --spacing-section: clamp(5rem, 12vw, 11rem);
+}
+
+:root {
+  --linho: #f1ede4;
+  --linho-escuro: #e4ddd0;
+  --indigo: #161b27;
+  --denim: #2b3445;
+  --casca: #391502;
+  --pinhao: #650410;
+  --pinhao-vivo: #8e1420;
+  --cobre: #b9763e;
+  --gralha: #2f5d9e;
+  --araucaria: #34402e;
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 400ms;
+  --dur-base: 600ms;
+  --dur-slow: 900ms;
+
+  /* Fundo de página. Páginas narrativas interpolam este valor no scroll. */
+  --page-bg: var(--linho);
+  --page-fg: var(--indigo);
+}

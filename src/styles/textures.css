@@ -1,0 +1,73 @@
+/*
+ * Kit de texturas (item 11)
+ * 1. Sarja  2. Escamas da pinha  3. Pesponto  4. Losango vermelho  5. Desfiado  6. Grão de papel
+ * Componentes React equivalentes em src/components/brand/textures.tsx
+ */
+
+/* 1. Sarja: diagonais finas a 63°, como o tecido do jeans */
+@utility tex-sarja {
+  background-image:
+    repeating-linear-gradient(63deg, rgb(241 237 228 / 0.055) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(63deg, transparent 0 2px, rgb(0 0 0 / 0.12) 2px 3px, transparent 3px 7px);
+}
+
+@utility tex-sarja-light {
+  background-image: repeating-linear-gradient(63deg, rgb(22 27 39 / 0.05) 0 1px, transparent 1px 4px);
+}
+
+/* 2. Escamas da pinha: a textura-assinatura */
+@utility tex-escamas {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='22' viewBox='0 0 28 22'%3E%3Cg fill='none' stroke='%23B9763E' stroke-width='.8' stroke-linecap='round' stroke-opacity='.55'%3E%3Cpath d='M0 0C1 8 7 13 14 22C21 13 27 8 28 0'/%3E%3Cpath d='M0 11C7 2 13-3 14-11M14-11C15-3 21 2 28 11'/%3E%3Cpath d='M0 33C7 24 13 19 14 11C15 19 21 24 28 33'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 28px 22px;
+}
+
+@utility tex-escamas-lg {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='22' viewBox='0 0 28 22'%3E%3Cg fill='none' stroke='%23B9763E' stroke-width='.6' stroke-linecap='round' stroke-opacity='.5'%3E%3Cpath d='M0 0C1 8 7 13 14 22C21 13 27 8 28 0'/%3E%3Cpath d='M0 11C7 2 13-3 14-11M14-11C15-3 21 2 28 11'/%3E%3Cpath d='M0 33C7 24 13 19 14 11C15 19 21 24 28 33'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 56px 44px;
+}
+
+/* 3. Pesponto: linha tracejada cobre 6/4 */
+@utility stitch-x {
+  background-image: linear-gradient(90deg, var(--cobre) 0 6px, transparent 6px 10px);
+  background-size: 10px 1px;
+  background-repeat: repeat-x;
+  background-position: 0 50%;
+  min-height: 1px;
+}
+
+@utility stitch-y {
+  background-image: linear-gradient(180deg, var(--cobre) 0 6px, transparent 6px 10px);
+  background-size: 1px 10px;
+  background-repeat: repeat-y;
+  background-position: 50% 0;
+  min-width: 1px;
+}
+
+/* Contorno em pesponto (cards em hover) */
+@utility stitch-outline {
+  outline: 1px dashed var(--cobre);
+  outline-offset: -8px;
+}
+
+/* 4. Losango vermelho */
+@utility losango {
+  display: inline-block;
+  width: 0.45em;
+  height: 0.9em;
+  background: var(--pinhao);
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+}
+
+/* 6. Grão de papel: ruído sutil sobre o linho */
+@utility tex-grao {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.09 0 0 0 0 0.1 0 0 0 0 0.15 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  opacity: 0.045;
+  mix-blend-mode: multiply;
+}
