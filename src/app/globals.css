@@ -6,38 +6,41 @@
 
 /* ------------------------------------------------------------------ base */
 
-html {
-  background: var(--page-bg);
-  color: var(--page-fg);
-  -webkit-text-size-adjust: 100%;
-  text-rendering: optimizeLegibility;
+@layer base {
+  html {
+    background: var(--page-bg);
+    color: var(--page-fg);
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    min-height: 100dvh;
+    background: var(--page-bg);
+    color: var(--page-fg);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    transition: background-color 700ms var(--ease), color 700ms var(--ease);
+  }
+
+  ::selection {
+    background: var(--pinhao);
+    color: var(--linho);
+  }
+
+  /* Foco visível: contorno em pesponto cobre */
+  :focus-visible {
+    outline: 1.5px dashed var(--cobre);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+
+  img {
+    user-select: none;
 }
 
-body {
-  min-height: 100dvh;
-  background: var(--page-bg);
-  color: var(--page-fg);
-  font-family: var(--font-sans);
-  font-size: var(--text-body);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  transition: background-color 700ms var(--ease), color 700ms var(--ease);
-}
-
-::selection {
-  background: var(--pinhao);
-  color: var(--linho);
-}
-
-/* Foco visível: contorno em pesponto cobre */
-:focus-visible {
-  outline: 1.5px dashed var(--cobre);
-  outline-offset: 4px;
-  border-radius: 2px;
-}
-
-img {
-  user-select: none;
 }
 
 /* Lenis */

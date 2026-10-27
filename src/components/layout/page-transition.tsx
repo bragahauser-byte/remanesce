@@ -31,6 +31,8 @@ export function PageTransition() {
       const url = new URL(anchor.href);
       if (url.origin !== location.origin) return;
       if (url.pathname === location.pathname) return;
+      // Produtos abrem como painel sobre a página atual.
+      if (url.pathname.startsWith("/loja/")) return;
       const node = panel.current;
       if (!node || busy.current) return;
 
@@ -52,8 +54,9 @@ export function PageTransition() {
       });
     }
 
-    document.addEventListener("click", onClick);
-    return () => document.removeEventListener("click", onClick);
+    // Captura: roda antes do Link do Next, que ignora cliques já com preventDefault.
+    document.addEventListener("click", onClick, true);
+    return () => document.removeEventListener("click", onClick, true);
   }, [router]);
 
   function reveal() {

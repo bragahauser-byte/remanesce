@@ -6,6 +6,7 @@ import { Header } from "@/components/layout/header";
 import { Menu } from "@/components/layout/menu";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { PageTransition } from "@/components/layout/page-transition";
+import { SearchOverlay } from "@/components/shop/search-overlay";
 import { SmoothScroll } from "@/components/layout/smooth-scroll";
 import { GrainOverlay } from "@/components/brand/textures";
 import { brand } from "@/data/copy";
@@ -55,7 +56,7 @@ export const viewport: Viewport = {
   themeColor: "#F1EDE4",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children, modal }: LayoutProps<"/">) {
   return (
     <html lang="pt-BR" className={`${bodoni.variable} ${plexMono.variable} ${instrument.variable}`}>
       <body>
@@ -67,10 +68,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </a>
         <Header />
         <Menu />
+        <SearchOverlay />
         <main id="conteudo" className="min-h-[70vh]">
           {children}
         </main>
         <Footer />
+        {modal}
         <MobileNav />
         <PageTransition />
         <SmoothScroll />
