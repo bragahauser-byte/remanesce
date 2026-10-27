@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Suspense } from "react";
 import { Bodoni_Moda, IBM_Plex_Mono, Instrument_Sans } from "next/font/google";
 import { Cursor } from "@/components/layout/cursor";
 import { Footer } from "@/components/layout/footer";
@@ -6,6 +7,7 @@ import { Header } from "@/components/layout/header";
 import { Menu } from "@/components/layout/menu";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { PageTransition } from "@/components/layout/page-transition";
+import { BagDrawer } from "@/components/shop/bag-drawer";
 import { SearchOverlay } from "@/components/shop/search-overlay";
 import { SmoothScroll } from "@/components/layout/smooth-scroll";
 import { GrainOverlay } from "@/components/brand/textures";
@@ -67,15 +69,21 @@ export default function RootLayout({ children, modal }: LayoutProps<"/">) {
           Pular para o conteúdo
         </a>
         <Header />
-        <Menu />
-        <SearchOverlay />
+        {/* Componentes que leem a rota: em rotas dinâmicas, entram por streaming. */}
+        <Suspense fallback={null}>
+          <Menu />
+          <SearchOverlay />
+          <BagDrawer />
+        </Suspense>
         <main id="conteudo" className="min-h-[70vh]">
           {children}
         </main>
         <Footer />
         {modal}
-        <MobileNav />
-        <PageTransition />
+        <Suspense fallback={null}>
+          <MobileNav />
+          <PageTransition />
+        </Suspense>
         <SmoothScroll />
         <Cursor />
         <GrainOverlay />

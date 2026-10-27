@@ -140,6 +140,54 @@ html.has-cursor select {
   cursor: auto;
 }
 
+/* Pinhão que cai e vira broto (confirmação do pedido) */
+@keyframes seed-fall {
+  0% {
+    transform: translateY(-120px) rotate(-30deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  55% {
+    transform: translateY(0) rotate(8deg);
+    opacity: 1;
+  }
+  70% {
+    transform: translateY(0) rotate(0) scale(1, 0.85);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(6px) scale(0.6);
+    opacity: 0;
+  }
+}
+@keyframes sprout-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes leaf-open {
+  to {
+    transform: scale(1);
+  }
+}
+.seed-fall {
+  animation: seed-fall 1.6s var(--ease) both;
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+}
+.sprout-stem {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: sprout-draw 0.9s var(--ease) 1.25s forwards;
+}
+.sprout-leaf {
+  transform: scale(0);
+  transform-box: fill-box;
+  animation: leaf-open 0.8s var(--ease) forwards;
+}
+
 /* --------------------------------------------------------------- print */
 
 @media print {

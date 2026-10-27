@@ -21,6 +21,8 @@ export function useFocusTrap(ref: RefObject<HTMLElement | null>, active: boolean
     requestAnimationFrame(() => initial?.focus({ preventScroll: true }));
 
     const onKey = (e: KeyboardEvent) => {
+      // Com painéis empilhados, só o que contém o foco responde.
+      if (!node.contains(document.activeElement)) return;
       if (e.key === "Escape" && onEscape) {
         e.stopPropagation();
         onEscape();

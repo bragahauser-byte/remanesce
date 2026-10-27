@@ -4,33 +4,39 @@ import { useEffect, useRef, useState } from "react";
 
 const format = new Intl.NumberFormat("pt-BR");
 
-/** Conta até `value` quando entra na tela. Com movimento reduzido, mostra o número direto. */
+/**
+ * Conta até `value` quando entra na tela, uma vez. Depois disso (ou com movimento
+ * reduzido) mostra o valor atual direto, inclusive quando ele muda.
+ */
 export function CountUp({ value, duration = 1800, className }: { value: number; duration?: number; className?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const [shown, setShown] = useState(value);
-  const started = useRef(false);
+  const [phase, setPhase] = useState<"idle" | "waiting" | "running" | "done">("idle");
+  const [shown, setShown] = useState(0);
+  const target = useRef(value);
+  useEffect(() => {
+    target.current = value;
+  }, [value]);
 
   useEffect(() => {
     const node = ref.current;
     if (!node) return;
+    // Com movimento reduzido fica em "idle", que já mostra o valor real.
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    if (started.current) return;
     let frame = 0;
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (started.current) return;
         if (!entry.isIntersecting) {
-          setShown(0);
+          setPhase((p) => (p === "idle" ? "waiting" : p));
           return;
         }
-        started.current = true;
         observer.disconnect();
+        setPhase("running");
         const t0 = performance.now();
         const tick = (now: number) => {
           const p = Math.min(1, (now - t0) / duration);
-          const eased = 1 - Math.pow(1 - p, 4);
-          setShown(Math.round(value * eased));
+          setShown(Math.round(target.current * (1 - Math.pow(1 - p, 4))));
           if (p < 1) frame = requestAnimationFrame(tick);
+          else setPhase("done");
         };
         frame = requestAnimationFrame(tick);
       },
@@ -41,11 +47,14 @@ export function CountUp({ value, duration = 1800, className }: { value: number; 
       observer.disconnect();
       cancelAnimationFrame(frame);
     };
-  }, [value, duration]);
+  }, [duration]);
+
+  // Antes do JS (e depois da animação) mostra o valor real; só zera enquanto espera entrar na tela.
+  const display = phase === "waiting" ? 0 : phase === "running" ? shown : value;
 
   return (
     <span ref={ref} className={className} aria-label={format.format(value)}>
-      <span aria-hidden>{format.format(shown)}</span>
+      <span aria-hidden>{format.format(display)}</span>
     </span>
   );
 }

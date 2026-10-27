@@ -9,6 +9,8 @@ export type CartLine = {
 
 type CartState = {
   lines: CartLine[];
+  coupon: string | null;
+  setCoupon: (code: string | null) => void;
   add: (line: CartLine, max?: number) => void;
   remove: (slug: string, size: string) => void;
   setQty: (slug: string, size: string, qty: number, max?: number) => void;
@@ -22,6 +24,8 @@ export const useCart = create<CartState>()(
   persist(
     (set) => ({
       lines: [],
+      coupon: null,
+      setCoupon: (coupon) => set({ coupon }),
       add: (line, max = 99) =>
         set((s) => {
           const existing = s.lines.find((l) => same(l, line.slug, line.size));
@@ -54,7 +58,7 @@ export const useCart = create<CartState>()(
           }
           return { lines: s.lines.map((l) => (same(l, slug, from) ? { ...l, size: to } : l)) };
         }),
-      clear: () => set({ lines: [] }),
+      clear: () => set({ lines: [], coupon: null }),
     }),
     { name: "remanesce:sacola", version: 1 },
   ),
