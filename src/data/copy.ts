@@ -187,3 +187,42 @@ export const conceptToPiece = [
   { from: "Sangue escondido", to: "Vermelho por dentro, nas fendas e forros", look: 6, focus: "50% 55%", zoom: 1.4 },
   { from: "Sementes", to: "Losangos e travetes vermelhos", look: 2, focus: "50% 45%", zoom: 1.4 },
 ];
+
+/*
+ * Raiz: parceria, pontos de plantio e números são EXEMPLOS do projeto acadêmico.
+ */
+export const plantingPoints = [
+  { city: "Curitiba", lon: -49.27, lat: -25.43, trees: 212 },
+  { city: "Ponta Grossa", lon: -50.16, lat: -25.09, trees: 268 },
+  { city: "Guarapuava", lon: -51.46, lat: -25.39, trees: 301 },
+  { city: "União da Vitória", lon: -51.09, lat: -26.23, trees: 247 },
+  { city: "General Carneiro", lon: -51.32, lat: -26.43, trees: 256 },
+];
+
+export const denimCycle = [
+  { title: "O algodão", text: "Denim 100% algodão, escolhido pela durabilidade: uma peça que dura é a forma mais simples de gastar menos.", icon: "agulha" },
+  { title: "Os retalhos", text: "As escamas são cortadas das sobras do corte principal. O que seria resto vira a parte mais importante da peça.", icon: "escama" },
+  { title: "A lavagem", text: "Lavagens com menos água e sem estonagem química. O tempo de uso cuida do desbotado.", icon: "regador" },
+  { title: "A embalagem", text: "Papel-semente: a tag e o envelope podem ser plantados. A embalagem também volta à terra.", icon: "broto" },
+] as const;
+
+export const team = [
+  // Placeholders editáveis: troque pelos nomes e papéis reais da equipe.
+  { name: "Maria Fernanda", role: "Conceito e direção criativa" },
+  { name: "Integrante 2", role: "Modelagem e line-up" },
+  { name: "Integrante 3", role: "Identidade visual" },
+  { name: "Integrante 4", role: "Pesquisa e sustentabilidade" },
+];
+
+export const palette = [
+  { token: "linho", name: "Linho", hex: "#F1EDE4", rgb: "241 237 228", cmyk: "0 2 5 5", use: "Fundo principal, como o fundo do line-up.", share: 70 },
+  { token: "linho-escuro", name: "Linho cru", hex: "#E4DDD0", rgb: "228 221 208", cmyk: "0 3 9 11", use: "Fundos secundários, cards e divisórias.", share: 0 },
+  { token: "indigo", name: "Índigo Remanescente", hex: "#161B27", rgb: "22 27 39", cmyk: "44 31 0 85", use: "Texto principal, fundos escuros, o denim.", share: 25 },
+  { token: "denim", name: "Denim lavado", hex: "#2B3445", rgb: "43 52 69", cmyk: "38 25 0 73", use: "Superfícies escuras secundárias e hover.", share: 0 },
+  { token: "casca", name: "Casca de araucária", hex: "#391502", rgb: "57 21 2", cmyk: "0 63 96 78", use: "Títulos sobre linho.", share: 0 },
+  { token: "pinhao", name: "Vermelho pinhão", hex: "#650410", rgb: "101 4 16", cmyk: "0 96 84 60", use: "Uso raro: revelações, badge da sacola, foco. Sempre por dentro.", share: 3 },
+  { token: "pinhao-vivo", name: "Vermelho brasa", hex: "#8E1420", rgb: "142 20 32", cmyk: "0 86 77 44", use: "Hover e estado ativo do vermelho.", share: 0 },
+  { token: "cobre", name: "Pesponto", hex: "#B9763E", rgb: "185 118 62", cmyk: "0 36 66 27", use: "Costuras, sublinhados, divisórias tracejadas.", share: 2 },
+  { token: "gralha", name: "Azul gralha", hex: "#2F5D9E", rgb: "47 93 158", cmyk: "70 41 0 38", use: "Acento raríssimo: só na lenda.", share: 0 },
+  { token: "araucaria", name: "Verde araucária", hex: "#34402E", rgb: "52 64 46", cmyk: "19 0 28 75", use: "Só na Raiz e no replantio.", share: 0 },
+] as const;
