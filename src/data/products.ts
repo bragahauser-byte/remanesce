@@ -5,6 +5,7 @@
  * com objectPosition + zoom. Para trocar por fotos de editorial, troque os `src`.
  */
 
+import { asset } from "@/lib/paths";
 import { looks } from "./looks";
 
 export type Category = "tops" | "saias" | "calcas" | "vestidos" | "jaquetas" | "acessorios";
@@ -336,18 +337,18 @@ export const products: Product[] = [
     price: 18900,
     color: "Retalhos de índigo · losango em vermelho pinhão",
     images: {
-      front: { src: "/images/produtos/lenco-escama-frente.svg", kind: "look", alt: "Lenço Escama aberto em losango, com borda desfiada e um losango vermelho bordado" },
-      back: { src: "/images/produtos/lenco-escama-dobrado.svg", kind: "look", alt: "Lenço Escama dobrado em triângulo" },
+      front: { src: asset("/images/produtos/lenco-escama-frente.svg"), kind: "look", alt: "Lenço Escama aberto em losango, com borda desfiada e um losango vermelho bordado" },
+      back: { src: asset("/images/produtos/lenco-escama-dobrado.svg"), kind: "look", alt: "Lenço Escama dobrado em triângulo" },
       details: [
         {
-          src: "/images/produtos/lenco-escama-frente.svg",
+          src: asset("/images/produtos/lenco-escama-frente.svg"),
           kind: "detalhe",
           alt: "Detalhe do losango vermelho bordado",
           objectPosition: "50% 70%",
           zoom: 2,
         },
         {
-          src: "/images/produtos/lenco-escama-frente.svg",
+          src: asset("/images/produtos/lenco-escama-frente.svg"),
           kind: "detalhe",
           alt: "Detalhe da borda desfiada",
           objectPosition: "85% 50%",

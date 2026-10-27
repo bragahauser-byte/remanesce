@@ -143,7 +143,7 @@ function OrdersTab() {
     <ul className="divide-y divide-dashed divide-cobre/40 border-y border-dashed border-cobre/40">
       {orders.map((o) => (
         <li key={o.id}>
-          <Link href={`/pedido/${o.id}`} className="group grid gap-2 py-5 sm:grid-cols-[1fr_auto_auto] sm:items-center sm:gap-10">
+          <Link href={`/pedido?id=${o.id}`} className="group grid gap-2 py-5 sm:grid-cols-[1fr_auto_auto] sm:items-center sm:gap-10">
             <div>
               <p className="label text-cobre">{o.id}</p>
               <p className="serif mt-1 text-[1.25rem] group-hover:text-casca">{o.items.map((i) => i.name).join(" · ")}</p>

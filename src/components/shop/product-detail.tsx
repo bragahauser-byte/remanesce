@@ -137,7 +137,7 @@ export function ProductDetail({ product, inPanel = false }: { product: Product; 
         <ul className="mt-8 grid grid-cols-2 gap-x-3 gap-y-10 md:grid-cols-4 md:gap-x-6">
           {related.map((p) => (
             <li key={p.slug}>
-              <ProductCard product={p} replace={inPanel} showTags={false} sizes="(min-width: 768px) 22vw, 46vw" />
+              <ProductCard product={p} showTags={false} sizes="(min-width: 768px) 22vw, 46vw" />
             </li>
           ))}
         </ul>
@@ -167,7 +167,7 @@ function ProductJsonLd({ product }: { product: Product }) {
     name: product.name,
     sku: product.code,
     description: product.short,
-    image: [`${brand.siteUrl}${product.images.front.src}`, `${brand.siteUrl}${product.images.back.src}`],
+    image: [new URL(product.images.front.src, brand.siteUrl).href, new URL(product.images.back.src, brand.siteUrl).href],
     brand: { "@type": "Brand", name: brand.name },
     material: "Denim 100% algodão",
     color: product.color,

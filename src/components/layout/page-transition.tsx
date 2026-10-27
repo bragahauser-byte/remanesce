@@ -4,6 +4,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { BrandSymbol } from "@/components/brand/logo";
 import { ScaleEdge } from "@/components/brand/textures";
+import { stripBase } from "@/lib/paths";
 
 const EASE = "cubic-bezier(0.22, 1, 0.36, 1)";
 const HIDDEN = "translateY(calc(-100% - 7vw))";
@@ -32,14 +33,14 @@ export function PageTransition() {
       if (url.origin !== location.origin) return;
       if (url.pathname === location.pathname) return;
       // Produtos abrem como painel sobre a página atual.
-      if (url.pathname.startsWith("/loja/")) return;
+      if (stripBase(url.pathname).startsWith("/loja/")) return;
       const node = panel.current;
       if (!node || busy.current) return;
 
       e.preventDefault();
       busy.current = true;
-      const target = url.pathname + url.search + url.hash;
-      pending.current = url.pathname;
+      const target = stripBase(url.pathname) + url.search + url.hash;
+      pending.current = stripBase(url.pathname);
 
       const cover = reduced()
         ? node.animate([{ opacity: 0, transform: "none" }, { opacity: 1, transform: "none" }], { duration: 160, fill: "forwards" })

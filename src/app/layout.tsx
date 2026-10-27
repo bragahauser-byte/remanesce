@@ -8,10 +8,12 @@ import { Menu } from "@/components/layout/menu";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { PageTransition } from "@/components/layout/page-transition";
 import { BagDrawer } from "@/components/shop/bag-drawer";
+import { ProductPanelHost } from "@/components/shop/product-panel";
 import { SearchOverlay } from "@/components/shop/search-overlay";
 import { SmoothScroll } from "@/components/layout/smooth-scroll";
 import { GrainOverlay } from "@/components/brand/textures";
 import { brand } from "@/data/copy";
+import { asset } from "@/lib/paths";
 import "./globals.css";
 
 const bodoni = Bodoni_Moda({
@@ -49,7 +51,7 @@ export const metadata: Metadata = {
     siteName: brand.name,
     title: `${brand.name} · ${brand.collection}`,
     description: brand.description,
-    images: [{ url: "/images/lineup/lineup-frente.jpg", width: 1600, height: 900, alt: "Line-up da coleção O Renascer da Permanência" }],
+    images: [{ url: asset("/images/lineup/lineup-frente.jpg"), width: 1600, height: 900, alt: "Line-up da coleção O Renascer da Permanência" }],
   },
   twitter: { card: "summary_large_image" },
 };
@@ -58,7 +60,7 @@ export const viewport: Viewport = {
   themeColor: "#F1EDE4",
 };
 
-export default function RootLayout({ children, modal }: LayoutProps<"/">) {
+export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="pt-BR" className={`${bodoni.variable} ${plexMono.variable} ${instrument.variable}`}>
       <body>
@@ -79,12 +81,12 @@ export default function RootLayout({ children, modal }: LayoutProps<"/">) {
           {children}
         </main>
         <Footer />
-        {modal}
         <Suspense fallback={null}>
           <MobileNav />
           <PageTransition />
+          <ProductPanelHost />
+          <SmoothScroll />
         </Suspense>
-        <SmoothScroll />
         <Cursor />
         <GrainOverlay />
       </body>

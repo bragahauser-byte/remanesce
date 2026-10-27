@@ -3,6 +3,8 @@
  * Imagens em public/images/looks/look-0N-frente.jpg e -costas.jpg (o look inteiro).
  */
 
+import { asset } from "@/lib/paths";
+
 export type Look = {
   number: number;
   slug: string;
@@ -16,7 +18,7 @@ export type Look = {
   size: { width: number; height: number };
 };
 
-const img = (n: number, side: "frente" | "costas") => `/images/looks/look-0${n}-${side}.jpg`;
+const img = (n: number, side: "frente" | "costas") => asset(`/images/looks/look-0${n}-${side}.jpg`);
 
 export const looks: Look[] = [
   {

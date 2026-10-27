@@ -1,7 +1,7 @@
-import Link from "next/link";
 import type { Product } from "@/data/products";
 import { formatBRL } from "@/lib/format";
 import { ProductImage } from "./product-image";
+import { ProductLink } from "./product-link";
 import { SaveButton } from "./save-button";
 import { TypeTag } from "./type-tag";
 
@@ -13,8 +13,6 @@ type Props = {
   aspect?: string;
   showTags?: boolean;
   priority?: boolean;
-  /** Dentro do painel, troca a peça sem empilhar histórico. */
-  replace?: boolean;
 };
 
 /**
@@ -28,17 +26,14 @@ export function ProductCard({
   aspect = "aspect-[3/4]",
   showTags = true,
   priority,
-  replace,
 }: Props) {
   const primary = mode === "detalhe" ? product.images.details[0] : product.images.front;
   const secondary = mode === "detalhe" ? product.images.front : product.images.back;
 
   return (
     <article className="group relative">
-      <Link
-        href={`/loja/${product.slug}`}
-        scroll={false}
-        replace={replace}
+      <ProductLink
+        slug={product.slug}
         data-cursor="ver"
         className="block focus-visible:outline-offset-8"
         aria-label={`${product.name}, ${formatBRL(product.price)}`}
@@ -73,15 +68,14 @@ export function ProductCard({
             ))}
           </div>
         )}
-      </Link>
+      </ProductLink>
       <div className="mt-4 flex items-start justify-between gap-3">
         <div className="min-w-0">
           <p className="label text-indigo/55">{product.code}</p>
           <h3 className="serif mt-1 text-[1.15rem] leading-tight md:text-[1.35rem]">
-            <Link href={`/loja/${product.slug}`} scroll={false}
-        replace={replace} tabIndex={-1} className="hover:text-casca">
+            <ProductLink slug={product.slug} tabIndex={-1} className="hover:text-casca">
               {product.name}
-            </Link>
+            </ProductLink>
           </h3>
           <p className="label mt-1.5 text-indigo">{formatBRL(product.price)}</p>
         </div>

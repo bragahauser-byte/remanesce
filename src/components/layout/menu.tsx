@@ -8,9 +8,10 @@ import { Icon } from "@/components/icons/icon";
 import { Diamond } from "@/components/brand/textures";
 import { brand, navLinks } from "@/data/copy";
 import { useFocusTrap } from "@/lib/focus-trap";
+import { asset } from "@/lib/paths";
 import { useUI } from "@/lib/store/ui";
 
-const lookImage = (n: number) => `/images/looks/look-0${n}-frente.jpg`;
+const lookImage = (n: number) => asset(`/images/looks/look-0${n}-frente.jpg`);
 
 export function Menu() {
   const open = useUI((s) => s.panel === "menu");

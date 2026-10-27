@@ -3,6 +3,8 @@
  * Tom: poético, contido, sensorial. Frases curtas.
  */
 
+import { SITE_URL } from "@/lib/paths";
+
 export const brand = {
   name: "Remanesce",
   signature: "O que permanece, renasce.",
@@ -15,7 +17,7 @@ export const brand = {
   city: "Curitiba · Paraná",
   email: "contato@remanesce.com.br",
   instagram: "https://instagram.com/remanesce",
-  siteUrl: "https://remanesce.vercel.app",
+  siteUrl: SITE_URL,
 };
 
 export const navLinks = [
@@ -98,3 +100,90 @@ export const microcopy = {
   academic: "Projeto acadêmico. Marca, preços, parcerias e números são exemplos.",
   demo: "Ambiente de demonstração · nenhuma cobrança real é feita.",
 };
+
+export const services = [
+  {
+    key: "reparo",
+    title: "Reparo para sempre",
+    icon: "agulha",
+    line: "Costura, troca de escamas danificadas, botões e zíperes, por toda a vida da peça.",
+    detail:
+      "Toda peça Remanesce tem reparo gratuito enquanto existir. Uma escama que se soltou, um zíper cansado, uma costura aberta: a peça volta ao ateliê e retorna inteira, com a marca do tempo preservada.",
+  },
+  {
+    key: "ajuste",
+    title: "Ajuste sob medida",
+    icon: "etiqueta",
+    line: "Barra, cintura e comprimento ajustados ao seu corpo.",
+    detail:
+      "O denim guarda a memória do corpo. Ajustamos barra, cintura e comprimento para que a peça acompanhe você, e não o contrário. O primeiro ajuste está incluído na compra.",
+  },
+  {
+    key: "ressignificar",
+    title: "Ressignificar",
+    icon: "geracoes",
+    line: "A memória da sua família, em outra forma.",
+    detail:
+      "Traga uma peça antiga sua, ou de alguém da família. Nós a transformamos em uma peça Remanesce, com escamas e detalhes em vermelho. O que foi vivido não se perde: renasce.",
+  },
+] as const;
+
+/*
+ * Conteúdo de exemplo (projeto acadêmico): memórias fictícias de clientes.
+ */
+export const memories = [
+  { text: "A sapecada de pinhão na casa da avó em Curitiba, todo mês de maio.", name: "Helena M.", city: "Curitiba, PR" },
+  { text: "Meu pai guardava pinhões no bolso do casaco para plantar na beira da estrada.", name: "Rafael T.", city: "Guarapuava, PR" },
+  { text: "A receita de paçoca de pinhão que ninguém escreveu, mas todo mundo lembra.", name: "Lúcia A.", city: "União da Vitória, PR" },
+  { text: "A araucária do quintal que meu bisavô plantou e que ainda faz sombra para nós.", name: "Bruno K.", city: "Ponta Grossa, PR" },
+];
+
+export const chapters = {
+  natureza: {
+    label: "Capítulo I",
+    title: "Natureza",
+    lead: "Duzentos anos de pé. Uma semente de cada vez.",
+    body: [
+      "A araucária pode viver mais de dois séculos. Atravessa gerações, mudanças de paisagem, invernos e queimadas, e continua ali.",
+      "Mas sozinha ela não continua. A árvore masculina e a feminina só se reproduzem juntas: o pólen encontra a pinha, e nasce o pinhão. Na terra, a semente vira outra árvore.",
+      "É assim que a permanência acontece: não por ficar igual, mas por renascer.",
+    ],
+    cycle: ["Pólen", "Pinha", "Pinhão", "Muda", "Araucária"],
+  },
+  memoria: {
+    label: "Capítulo II",
+    title: "Memória",
+    lead: "Passada de mão em mão, de geração em geração.",
+    body: [
+      "Antes da colonização, a araucária já era identidade no território que hoje é o Paraná. Está na paisagem, nas tradições, no nome das coisas.",
+      "Está também na cozinha: o pinhão cozido no inverno, a sapecada, a paçoca, receitas que passam de geração em geração sem nunca serem escritas.",
+      "A cultura muda de forma a cada geração. E renasce em cada uma delas.",
+    ],
+  },
+  lenda: {
+    label: "Capítulo III",
+    title: "Lenda",
+    lead: "Curiaçu virou árvore. Guacira virou gralha. O amor virou semente.",
+    frames: [
+      {
+        title: "O amor",
+        text: "Curiaçu e Guacira se amavam. Quando inimigos chegaram, Curiaçu desapareceu, e parecia que o amor dos dois tinha acabado ali.",
+      },
+      {
+        title: "A transformação",
+        text: "Mas eles renasceram na natureza: Curiaçu se transformou em araucária, de pé sobre a terra. Guacira se transformou na gralha-azul.",
+      },
+      {
+        title: "A semente",
+        text: "Desde então, a gralha enterra os pinhões, escondendo dos inimigos o sangue do amado. De cada semente guardada nasce outra araucária. O amor permanece, em outra forma.",
+      },
+    ],
+    credit: "Lenda da tradição oral paranaense, recontada a partir do conceito da equipe Remanesce.",
+  },
+};
+
+export const conceptToPiece = [
+  { from: "Brácteas da pinha", to: "Escamas de denim sobrepostas", look: 4, focus: "50% 60%", zoom: 1.3 },
+  { from: "Sangue escondido", to: "Vermelho por dentro, nas fendas e forros", look: 6, focus: "50% 55%", zoom: 1.4 },
+  { from: "Sementes", to: "Losangos e travetes vermelhos", look: 2, focus: "50% 45%", zoom: 1.4 },
+];

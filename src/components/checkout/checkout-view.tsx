@@ -99,7 +99,7 @@ function CheckoutFlow() {
     setPlacing(true);
     place(order);
     clear();
-    router.push(`/pedido/${order.id}`);
+    router.push(`/pedido?id=${order.id}`);
   }
 
   return (

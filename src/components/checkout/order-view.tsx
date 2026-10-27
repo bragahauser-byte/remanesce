@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { Stitch } from "@/components/brand/textures";
 import { Icon } from "@/components/icons/icon";
 import { ProductImage } from "@/components/shop/product-image";
@@ -14,7 +14,7 @@ import { useOrders } from "@/lib/store/orders";
 const number = new Intl.NumberFormat("pt-BR");
 
 export function OrderView() {
-  const { id } = useParams<{ id: string }>();
+  const id = useSearchParams().get("id") ?? "";
   const hydrated = useHydrated();
   const order = useOrders((s) => s.orders.find((o) => o.id === id));
 

@@ -20,7 +20,7 @@ export function Header() {
   return (
     <header
       data-scrolled={scrolled || undefined}
-      className="no-print fixed inset-x-0 top-0 z-50 h-header border-b border-transparent text-indigo transition-[background-color,border-color,backdrop-filter] duration-500 ease-remanesce data-scrolled:border-indigo/10 data-scrolled:bg-linho/80 data-scrolled:backdrop-blur-md"
+      className="no-print fixed inset-x-0 top-0 z-50 h-header border-b border-transparent text-[var(--page-fg)] transition-[background-color,border-color,backdrop-filter,color] duration-700 ease-remanesce data-scrolled:border-[color-mix(in_srgb,var(--page-fg)_12%,transparent)] data-scrolled:bg-[color-mix(in_srgb,var(--page-bg)_82%,transparent)] data-scrolled:backdrop-blur-md"
     >
       <div className="container-x grid h-full grid-cols-[1fr_auto_1fr] items-center">
         <div className="flex items-center">

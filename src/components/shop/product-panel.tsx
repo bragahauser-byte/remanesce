@@ -1,18 +1,38 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
-import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
+import { usePathname } from "next/navigation";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { getLenis } from "@/components/layout/smooth-scroll";
 import { Icon } from "@/components/icons/icon";
+import { getProduct } from "@/data/products";
 import { useFocusTrap } from "@/lib/focus-trap";
+import { productHref, useProductPanel } from "@/lib/store/product-panel";
+import { ProductDetail } from "./product-detail";
 
 /**
- * Painel grande da PDP sobre a grade (desktop: desliza da direita, ~85% da tela;
- * mobile: sobe de baixo, tela cheia). ESC, clique fora ou "Voltar" fecham sem perder o scroll.
+ * Hospeda o painel da PDP. Abre quando um ProductLink é clicado e fecha quando a URL
+ * deixa de ser a da peça (botão voltar do navegador, ESC, clique fora ou "Voltar").
  */
-export function ProductPanel({ title, children }: { title: string; children: ReactNode }) {
-  const router = useRouter();
+export function ProductPanelHost() {
+  const slug = useProductPanel((s) => s.slug);
+  const reset = useProductPanel((s) => s.reset);
   const pathname = usePathname();
+  const last = useRef(pathname);
+
+  useEffect(() => {
+    const changed = last.current !== pathname;
+    last.current = pathname;
+    if (changed && slug && pathname !== productHref(slug)) reset();
+  }, [pathname, slug, reset]);
+
+  const product = slug ? getProduct(slug) : undefined;
+  if (!product) return null;
+  return <ProductPanel key="panel" slug={product.slug} title={product.name} />;
+}
+
+function ProductPanel({ slug, title }: { slug: string; title: string }) {
+  const product = getProduct(slug)!;
+  const closePanel = useProductPanel((s) => s.close);
   const ref = useRef<HTMLDivElement>(null);
   const scroller = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
@@ -23,13 +43,12 @@ export function ProductPanel({ title, children }: { title: string; children: Rea
     closing.current = true;
     setOpen(false);
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    window.setTimeout(() => router.back(), reduced ? 0 : 420);
-  }, [router]);
+    window.setTimeout(closePanel, reduced ? 0 : 420);
+  }, [closePanel]);
 
   useFocusTrap(ref, open, close);
 
   useEffect(() => {
-    closing.current = false;
     const frame = requestAnimationFrame(() => setOpen(true));
     const root = document.documentElement;
     getLenis()?.stop();
@@ -44,7 +63,7 @@ export function ProductPanel({ title, children }: { title: string; children: Rea
   // Ao trocar de peça dentro do painel, volta ao topo.
   useEffect(() => {
     scroller.current?.scrollTo({ top: 0 });
-  }, [pathname]);
+  }, [slug]);
 
   return (
     <div className="no-print fixed inset-0 z-[70]" data-no-transition>
@@ -65,14 +84,14 @@ export function ProductPanel({ title, children }: { title: string; children: Rea
         <span aria-hidden className="absolute inset-y-0 left-0 hidden w-1 bg-pinhao md:block" />
         <div className="flex h-16 shrink-0 items-center justify-between border-b border-indigo/10 px-4 md:px-10">
           <button type="button" onClick={close} className="label flex items-center gap-3 py-2 hover:text-cobre" data-autofocus>
-            <Icon name="seta-esquerda" size={22} /> Voltar à loja
+            <Icon name="seta-esquerda" size={22} /> Voltar
           </button>
           <button type="button" onClick={close} className="-mr-2 p-2 hover:text-cobre" aria-label="Fechar">
             <Icon name="fechar" />
           </button>
         </div>
         <div ref={scroller} data-lenis-prevent className="flex-1 overflow-y-auto overscroll-contain px-4 pb-24 pt-6 md:px-10 md:pt-10">
-          {children}
+          <ProductDetail product={product} inPanel />
         </div>
       </div>
     </div>

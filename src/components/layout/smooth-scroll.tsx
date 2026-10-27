@@ -1,6 +1,7 @@
 "use client";
 
 import Lenis from "lenis";
+import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { useReducedMotion } from "@/lib/hooks";
 import { useUI } from "@/lib/store/ui";
@@ -14,17 +15,19 @@ export function getLenis() {
 
 export function SmoothScroll() {
   const reduced = useReducedMotion();
+  // Em /looks o scroll snap nativo conduz a página.
+  const native = usePathname() === "/looks";
   const panel = useUI((s) => s.panel);
 
   useEffect(() => {
-    if (reduced) return;
+    if (reduced || native) return;
     const lenis = new Lenis({ autoRaf: true, lerp: 0.11, anchors: true });
     instance = lenis;
     return () => {
       lenis.destroy();
       instance = null;
     };
-  }, [reduced]);
+  }, [reduced, native]);
 
   useEffect(() => {
     const root = document.documentElement;

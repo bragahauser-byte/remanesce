@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
 import { Icon } from "@/components/icons/icon";
@@ -10,6 +9,7 @@ import { useFocusTrap } from "@/lib/focus-trap";
 import { formatBRL, normalize } from "@/lib/format";
 import { useUI } from "@/lib/store/ui";
 import { ProductImage } from "./product-image";
+import { ProductLink } from "./product-link";
 
 const index = products.map((p) => {
   const look = p.look ? getLook(p.look) : undefined;
@@ -102,14 +102,14 @@ export function SearchOverlay() {
         <ul className="mt-6 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 md:grid-cols-6">
           {results.map((p) => (
             <li key={p.slug}>
-              <Link href={`/loja/${p.slug}`} scroll={false} onClick={close} className="group block" data-cursor="ver">
+              <ProductLink slug={p.slug} onClick={close} className="group block" data-cursor="ver">
                 <div className="relative aspect-[3/4] overflow-hidden bg-linho-escuro/40">
                   <ProductImage image={p.images.details[0]} alt="" sizes="(min-width: 768px) 16vw, 45vw" />
                 </div>
                 <p className="label mt-2 text-indigo/55">{p.code}</p>
                 <p className="serif text-[1.1rem] group-hover:text-casca">{p.name}</p>
                 <p className="label">{formatBRL(p.price)}</p>
-              </Link>
+              </ProductLink>
             </li>
           ))}
         </ul>
