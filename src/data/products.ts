@@ -19,6 +19,8 @@ export const categories: { key: Category; label: string; singular: string }[] = 
   { key: "acessorios", label: "Acessórios", singular: "Acessório" },
 ];
 
+export type Badge = "Pronta entrega" | "Vermelho por dentro" | "Peça-herói" | "Últimas unidades";
+
 export type TypeTag = "PEÇA-HERÓI" | "VERMELHO POR DENTRO" | "ÚLTIMAS UNIDADES" | "100% DENIM" | "PLANTA 1 ARAUCÁRIA";
 
 export type ProductImage = {
@@ -47,6 +49,15 @@ export type Product = {
   composition: string;
   care: string[];
   tags: TypeTag[];
+  /** Badge em pílula branca no card (FARM). */
+  badge: Badge | null;
+  /** Filtro "Pronta entrega". */
+  readyToShip: boolean;
+  /** Filtro "Detalhe vermelho": o vermelho aparece por dentro da peça. */
+  redDetail: boolean;
+  /** Nota média (exemplo) e número de avaliações. */
+  rating: number;
+  reviews: number;
   /** 1 a 3: ocupa 3, 4 ou 6 colunas na grade da loja. */
   weight: 1 | 2 | 3;
   featured: boolean;
@@ -103,6 +114,11 @@ export const products: Product[] = [
     composition: COMPOSITION,
     care: CARE,
     tags: ["100% DENIM"],
+    badge: "Pronta entrega",
+    readyToShip: true,
+    redDetail: false,
+    rating: 4.7,
+    reviews: 23,
     weight: 1,
     featured: false,
     createdAt: "2026-03-12",
@@ -123,6 +139,11 @@ export const products: Product[] = [
     composition: COMPOSITION,
     care: CARE,
     tags: ["PEÇA-HERÓI"],
+    badge: "Peça-herói",
+    readyToShip: true,
+    redDetail: false,
+    rating: 4.8,
+    reviews: 31,
     weight: 2,
     featured: true,
     createdAt: "2026-03-12",
@@ -143,6 +164,11 @@ export const products: Product[] = [
     composition: COMPOSITION,
     care: CARE,
     tags: ["PEÇA-HERÓI", "VERMELHO POR DENTRO"],
+    badge: "Vermelho por dentro",
+    readyToShip: false,
+    redDetail: true,
+    rating: 4.9,
+    reviews: 18,
     weight: 3,
     featured: true,
     createdAt: "2026-03-20",
@@ -163,6 +189,11 @@ export const products: Product[] = [
     composition: COMPOSITION,
     care: CARE,
     tags: ["100% DENIM"],
+    badge: "Pronta entrega",
+    readyToShip: true,
+    redDetail: false,
+    rating: 4.6,
+    reviews: 14,
     weight: 1,
     featured: false,
     createdAt: "2026-04-02",
@@ -183,6 +214,11 @@ export const products: Product[] = [
     composition: COMPOSITION,
     care: CARE,
     tags: ["PLANTA 1 ARAUCÁRIA"],
+    badge: null,
+    readyToShip: true,
+    redDetail: false,
+    rating: 4.8,
+    reviews: 27,
     weight: 2,
     featured: false,
     createdAt: "2026-04-02",
@@ -203,6 +239,11 @@ export const products: Product[] = [
     composition: COMPOSITION,
     care: CARE,
     tags: ["ÚLTIMAS UNIDADES"],
+    badge: "Últimas unidades",
+    readyToShip: false,
+    redDetail: false,
+    rating: 4.7,
+    reviews: 9,
     weight: 1,
     featured: false,
     createdAt: "2026-04-15",
@@ -223,6 +264,11 @@ export const products: Product[] = [
     composition: `${COMPOSITION} Franjas internas em sarja vermelha.`,
     care: CARE,
     tags: ["PEÇA-HERÓI", "VERMELHO POR DENTRO"],
+    badge: "Peça-herói",
+    readyToShip: false,
+    redDetail: true,
+    rating: 4.9,
+    reviews: 12,
     weight: 3,
     featured: true,
     createdAt: "2026-04-15",
@@ -243,6 +289,11 @@ export const products: Product[] = [
     composition: COMPOSITION,
     care: CARE,
     tags: ["VERMELHO POR DENTRO"],
+    badge: "Vermelho por dentro",
+    readyToShip: true,
+    redDetail: true,
+    rating: 4.8,
+    reviews: 21,
     weight: 2,
     featured: true,
     createdAt: "2026-05-04",
@@ -263,6 +314,11 @@ export const products: Product[] = [
     composition: COMPOSITION,
     care: CARE,
     tags: ["100% DENIM"],
+    badge: null,
+    readyToShip: true,
+    redDetail: false,
+    rating: 4.5,
+    reviews: 38,
     weight: 1,
     featured: false,
     createdAt: "2026-05-04",
@@ -283,6 +339,11 @@ export const products: Product[] = [
     composition: `${COMPOSITION} Travetes metálicos.`,
     care: CARE,
     tags: ["VERMELHO POR DENTRO", "PLANTA 1 ARAUCÁRIA"],
+    badge: "Vermelho por dentro",
+    readyToShip: true,
+    redDetail: true,
+    rating: 4.7,
+    reviews: 16,
     weight: 2,
     featured: false,
     createdAt: "2026-05-04",
@@ -303,6 +364,11 @@ export const products: Product[] = [
     composition: `${COMPOSITION} Forro em sarja vermelha.`,
     care: CARE,
     tags: ["PEÇA-HERÓI", "ÚLTIMAS UNIDADES"],
+    badge: "Últimas unidades",
+    readyToShip: false,
+    redDetail: true,
+    rating: 4.9,
+    reviews: 11,
     weight: 3,
     featured: true,
     createdAt: "2026-05-20",
@@ -323,6 +389,11 @@ export const products: Product[] = [
     composition: COMPOSITION,
     care: CARE,
     tags: ["VERMELHO POR DENTRO"],
+    badge: null,
+    readyToShip: true,
+    redDetail: true,
+    rating: 4.6,
+    reviews: 19,
     weight: 1,
     featured: false,
     createdAt: "2026-05-20",
@@ -362,6 +433,11 @@ export const products: Product[] = [
     composition: "100% algodão, retalhos de denim 12 oz. Bordado em linha vermelha.",
     care: CARE,
     tags: ["PLANTA 1 ARAUCÁRIA"],
+    badge: "Pronta entrega",
+    readyToShip: true,
+    redDetail: true,
+    rating: 4.8,
+    reviews: 42,
     weight: 1,
     featured: true,
     createdAt: "2026-06-01",

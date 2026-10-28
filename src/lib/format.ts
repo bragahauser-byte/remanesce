@@ -3,9 +3,14 @@ const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" 
 /** Centavos → "R$ 1.290,00". */
 export const formatBRL = (cents: number) => brl.format(cents / 100);
 
-export const MAX_INSTALLMENTS = 6;
-/** Parcela mínima de R$ 50,00. */
-const MIN_INSTALLMENT = 5000;
+const brlShort = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 });
+
+/** Preço de vitrine (FARM): "R$ 1.290" quando não há centavos. */
+export const formatPrice = (cents: number) => (cents % 100 === 0 ? brlShort.format(cents / 100) : formatBRL(cents));
+
+export const MAX_INSTALLMENTS = 10;
+/** Parcela mínima de R$ 20,00. */
+const MIN_INSTALLMENT = 2000;
 
 export function installments(cents: number, max = MAX_INSTALLMENTS) {
   const n = Math.max(1, Math.min(max, Math.floor(cents / MIN_INSTALLMENT)));
@@ -14,7 +19,7 @@ export function installments(cents: number, max = MAX_INSTALLMENTS) {
 
 export function installmentsLabel(cents: number) {
   const { n, value } = installments(cents);
-  return n > 1 ? `ou ${n}× de ${formatBRL(value)} sem juros` : "à vista";
+  return n > 1 ? `ou ${n}x ${formatBRL(value)}` : "à vista";
 }
 
 /** Remove acentos e caixa para busca. */
