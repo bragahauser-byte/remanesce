@@ -3,43 +3,70 @@
 @import "../styles/textures.css";
 
 @custom-variant pointer-fine (@media (hover: hover) and (pointer: fine));
+@custom-variant terra (&:where([data-theme="terra"], [data-theme="terra"] *));
 
 /* ------------------------------------------------------------------ base */
 
 @layer base {
   html {
-    background: var(--page-bg);
-    color: var(--page-fg);
+    background: var(--bg);
+    color: var(--fg);
     -webkit-text-size-adjust: 100%;
     text-rendering: optimizeLegibility;
+    scrollbar-width: none;
+  }
+
+  html::-webkit-scrollbar {
+    display: none;
   }
 
   body {
     min-height: 100dvh;
-    background: var(--page-bg);
-    color: var(--page-fg);
+    background: var(--bg);
+    color: var(--fg);
     font-family: var(--font-sans);
-    font-size: var(--text-body);
-    line-height: 1.55;
-    font-variant-numeric: tabular-nums;
+    font-size: 1rem;
+    line-height: 1.5;
     -webkit-font-smoothing: antialiased;
-    transition: background-color 700ms var(--ease), color 700ms var(--ease);
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* A troca de tema é lenta e deliberada, como a passagem do dia para a noite. */
+  html.theme-anim,
+  html.theme-anim body,
+  html.theme-anim * {
+    transition:
+      background-color 900ms var(--ease),
+      color 900ms var(--ease),
+      border-color 900ms var(--ease),
+      fill 900ms var(--ease),
+      stroke 900ms var(--ease) !important;
   }
 
   ::selection {
-    background: var(--pinhao);
-    color: var(--branco);
+    background: color-mix(in srgb, var(--fg) 20%, transparent);
+    color: var(--fg);
   }
 
-  /* Foco visível: contorno em pesponto cobre */
   :focus-visible {
-    outline: 1.5px dashed var(--cobre);
+    outline: 2px solid var(--fg);
     outline-offset: 4px;
-    border-radius: 2px;
+  }
+
+  /* Uma família só, sem itálico: a ênfase vem do peso e da cor. */
+  em {
+    font-style: normal;
+    font-weight: 300;
+    color: color-mix(in srgb, currentColor 60%, transparent);
   }
 
   img {
     user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  button {
+    cursor: pointer;
   }
 }
 
@@ -57,135 +84,232 @@ html.lenis body {
 
 /* --------------------------------------------------------- tipografia */
 
-/* Versalete A24: rótulos de ficha técnica, chips de estado, preços pequenos. */
+/* Rótulo de interface: 12 px em caixa alta, como o header da referência. */
 @utility label {
   font-family: var(--font-sans);
-  font-size: var(--text-label);
-  line-height: 1.4;
-  letter-spacing: 0.14em;
+  font-size: 0.75rem;
+  line-height: 1.3333;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 @utility label-lg {
   font-family: var(--font-sans);
   font-size: 0.75rem;
-  line-height: 1.4;
-  letter-spacing: 0.12em;
+  line-height: 1.3333;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
-  font-weight: 500;
+  font-weight: 600;
 }
 
-/* Kicker em serifa itálica (FARM): "Nova coleção", metade itálica dos títulos mistos. */
-@utility kicker {
-  font-family: var(--font-italic);
-  font-style: italic;
+/* Títulos gigantes em caixa baixa: 48 → 64 → 96 → 120 px. */
+@utility headline {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: 3rem;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  @media (width >= 768px) {
+    font-size: 4rem;
+  }
+  @media (width >= 1025px) {
+    font-size: 6rem;
+  }
+  @media (width >= 1440px) {
+    font-size: 7.5rem;
+  }
+}
+
+/* Texto de declaração: 24 → 32 → 40 → 48 px. */
+@utility statement {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: 1.5rem;
+  line-height: 1.3333;
+  letter-spacing: -0.02em;
+  @media (width >= 768px) {
+    font-size: 2rem;
+    line-height: 1.25;
+  }
+  @media (width >= 1025px) {
+    font-size: 2.5rem;
+    line-height: 1.2;
+  }
+  @media (width >= 1440px) {
+    font-size: 3rem;
+    line-height: 1.1667;
+  }
+}
+
+/* Corpo editorial: 16 → 24 px. */
+@utility lead {
+  font-family: var(--font-sans);
   font-weight: 400;
-  letter-spacing: 0;
-  text-transform: none;
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  @media (width >= 1025px) {
+    font-size: 1.5rem;
+    line-height: 1.3333;
+  }
 }
 
-/* Botão pílula preto (FARM). */
+/* Utilidades antigas, mantidas para sacola, checkout, marca e passaporte. */
+@utility kicker {
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-weight: 300;
+}
+
+@utility serif {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  letter-spacing: -0.03em;
+}
+
+@utility wordmark {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 @utility pill {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.6rem;
+  gap: 0.5rem;
   border-radius: var(--radius-pill);
-  background: var(--tinta);
-  color: var(--branco);
+  background: var(--fg);
+  color: var(--bg);
   font-family: var(--font-sans);
-  font-weight: 500;
-  font-size: 0.9375rem;
-  padding-inline: 1.75rem;
-  min-height: 3.25rem;
-  transition: background-color 300ms var(--ease), transform 300ms var(--ease);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  padding-inline: 1.5rem;
+  min-height: 3rem;
+  transition: opacity 300ms var(--ease);
   &:hover {
-    background: #2a2a2a;
+    opacity: 0.8;
   }
   &:disabled {
     opacity: 0.4;
   }
 }
 
-/* Chip de filtro em pílula com contorno fino. */
 @utility chip {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.5rem;
   white-space: nowrap;
-  border: 1px solid var(--linha);
+  border: 1px solid var(--line);
   border-radius: var(--radius-pill);
   padding: 0.5rem 1rem;
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   line-height: 1;
   transition: border-color 200ms, background-color 200ms, color 200ms;
   &:hover {
-    border-color: var(--tinta);
+    border-color: var(--fg);
   }
   &[aria-pressed="true"],
   &[aria-current="true"] {
-    background: var(--tinta);
-    border-color: var(--tinta);
-    color: var(--branco);
+    background: var(--fg);
+    border-color: var(--fg);
+    color: var(--bg);
   }
 }
 
-/* Botão circular (coração, sacola, voltar). */
 @utility circle-btn {
   display: grid;
   place-items: center;
-  width: 2.25rem;
-  height: 2.25rem;
+  width: 2.5rem;
+  height: 2.5rem;
   border-radius: 999px;
-  background: var(--branco);
-  color: var(--tinta);
-  transition: transform 300ms var(--ease), background-color 200ms;
-  &:hover {
-    transform: scale(1.06);
-  }
-}
-
-@utility serif {
-  font-family: var(--font-serif);
-  font-weight: 400;
-  font-optical-sizing: auto;
-}
-
-@utility wordmark {
-  font-family: var(--font-serif);
-  font-weight: 500;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+  background: var(--bg);
+  color: var(--fg);
 }
 
 @utility container-x {
   width: 100%;
   margin-inline: auto;
-  max-width: 1680px;
-  padding-inline: var(--spacing-gutter);
+  padding-inline: var(--pad);
 }
 
-/* Link editorial: sublinhado em pesponto que se desenha no hover */
+/* Link editorial: sublinhado fino que encolhe no hover. */
 @utility link-stitch {
-  background-image: linear-gradient(90deg, var(--cobre) 0 6px, transparent 6px 10px);
-  background-size: 10px 1px;
-  background-repeat: repeat-x;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
   background-position: 0 100%;
-  padding-bottom: 3px;
-  transition: background-size 400ms var(--ease), color 300ms var(--ease);
+  padding-bottom: 2px;
+  transition: background-size 400ms var(--ease);
   &:hover {
-    color: var(--cobre);
+    background-size: 0% 1px;
+    background-position: 100% 100%;
+  }
+}
+
+/* Grade de 6 (celular) e 14 colunas (desktop), gap 8 px, como a referência. */
+@utility grid-site {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  column-gap: 8px;
+  padding-inline: var(--pad);
+  @media (width >= 1025px) {
+    grid-template-columns: repeat(14, minmax(0, 1fr));
   }
 }
 
 /* ------------------------------------------------------------- motion */
 
+/* Rolagem do texto em hover (o rótulo sobe e a cópia entra por baixo). */
+.roll {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  line-height: 1.3333;
+}
+.roll > span {
+  display: block;
+  transition: transform 500ms var(--ease);
+}
+.roll > span + span {
+  position: absolute;
+  inset: 100% 0 auto 0;
+}
+@media (hover: hover) and (pointer: fine) {
+  :is(a, button):hover > .roll > span,
+  :is(a, button):focus-visible > .roll > span,
+  :is(a, button):hover .roll-host > span,
+  :is(a, button):focus-visible .roll-host > span {
+    transform: translateY(-100%);
+  }
+}
+.roll-host {
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+.roll-host > span {
+  display: block;
+  transition: transform 500ms var(--ease);
+}
+.roll-host > span + span {
+  position: absolute;
+  inset: 100% 0 auto 0;
+}
+
+/* Linhas que sobem por trás de uma máscara (entrada dos títulos). */
 .reveal-line {
   display: block;
   overflow: hidden;
-  padding-bottom: 0.08em;
-  margin-bottom: -0.08em;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+.reveal-line > span {
+  display: block;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -197,19 +321,6 @@ html.lenis body {
     transition-duration: 1ms !important;
     scroll-behavior: auto !important;
   }
-}
-
-/* Cursor personalizado: só em ponteiro fino, com a classe aplicada pelo componente */
-html.has-cursor,
-html.has-cursor a,
-html.has-cursor button,
-html.has-cursor [role="button"] {
-  cursor: none;
-}
-html.has-cursor input,
-html.has-cursor textarea,
-html.has-cursor select {
-  cursor: auto;
 }
 
 /* Pinhão que cai e vira broto (confirmação do pedido) */

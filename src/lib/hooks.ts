@@ -44,3 +44,7 @@ export function useScrolled(threshold = 24) {
   }, [threshold]);
   return scrolled;
 }
+
+/** Leitura direta, para efeitos que rodam na hidratação (antes do hook acima refletir o valor real). */
+export const prefersReducedMotion = () =>
+  typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;

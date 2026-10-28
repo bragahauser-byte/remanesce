@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-type Panel = "menu" | "search" | "bag" | "index" | null;
+type Panel = "menu" | null;
 
 type UIState = {
   panel: Panel;
@@ -9,7 +9,7 @@ type UIState = {
   toggle: (panel: Exclude<Panel, null>) => void;
 };
 
-/** Painéis globais (menu, índice, busca, mini-sacola). Só um aberto por vez. */
+/** Painel global aberto (hoje só o menu de páginas). */
 export const useUI = create<UIState>((set, get) => ({
   panel: null,
   open: (panel) => set({ panel }),

@@ -4,41 +4,28 @@ import Lenis from "lenis";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { useReducedMotion } from "@/lib/hooks";
-import { useUI } from "@/lib/store/ui";
 
 let instance: Lenis | null = null;
 
-/** Instância ativa do Lenis (null com movimento reduzido). Páginas com GSAP ligam o ScrollTrigger nela. */
+/** Instância ativa do Lenis (null com movimento reduzido ou no início). */
 export function getLenis() {
   return instance;
 }
 
 export function SmoothScroll() {
   const reduced = useReducedMotion();
-  // Em /colecao o scroll snap nativo conduz a página.
-  const native = usePathname() === "/colecao";
-  const panel = useUI((s) => s.panel);
+  // No início a página não rola na vertical: a galeria horizontal toma a roda do mouse.
+  const home = usePathname() === "/";
 
   useEffect(() => {
-    if (reduced || native) return;
-    const lenis = new Lenis({ autoRaf: true, lerp: 0.11, anchors: true });
+    if (reduced || home) return;
+    const lenis = new Lenis({ autoRaf: true, lerp: 0.1 });
     instance = lenis;
     return () => {
       lenis.destroy();
       instance = null;
     };
-  }, [reduced, native]);
-
-  useEffect(() => {
-    const root = document.documentElement;
-    if (panel) {
-      instance?.stop();
-      root.style.overflow = "hidden";
-    } else {
-      instance?.start();
-      root.style.overflow = "";
-    }
-  }, [panel]);
+  }, [reduced, home]);
 
   return null;
 }

@@ -26,8 +26,16 @@ Cada push na `main` publica o site no GitHub Pages pelo workflow `.github/workfl
 | Produtos, preços, estoques, histórias | `src/data/products.ts` |
 | Looks e frases | `src/data/looks.ts` |
 | Textos do site, serviços, equipe, cores do manual | `src/data/copy.ts` |
-| Cores e tipografia (tokens) | `src/styles/tokens.css` |
+| Ordem e agrupamento dos looks na galeria | `src/data/collection.ts` |
+| Cores, temas e tipografia (tokens) | `src/styles/tokens.css` |
 | Imagens | `public/images/` |
+
+## Navegação
+
+- **Início**: galeria horizontal (roda do mouse, arrastar, toque ou teclado). O card abre o look.
+- **Look** (`/looks/[slug]`): título e foto lado a lado, peças com preço e tamanho, próximo look.
+- **Conceito** e **Raiz**: páginas editoriais com os textos da equipe.
+- **Menu**: as três páginas em cartões. O círculo no canto superior direito troca o tema (claro/terra).
 
 ## Roupas recortadas (frente e verso)
 
@@ -61,7 +69,7 @@ docs/                 briefing e conceito da equipe
 public/images/        line-up, roupas recortadas, ilustrações
 scripts/              recorte das roupas e build do Pages
 src/app/              páginas
-src/components/       layout, loja, checkout, narrativa, marca, ícones
+src/components/       layout (header, menu, transições), home, look, page, checkout, marca
 src/data/             catálogo e textos
 src/lib/              sacola, pedidos, checkout, utilidades
 ```

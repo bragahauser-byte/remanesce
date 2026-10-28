@@ -44,3 +44,6 @@ yarn-error.log*
 /docs/referencias/farm-*.png
 # Cópia solta do line-up usada para a Tarefa 1 (a fonte oficial é public/images/lineup)
 /roupas/
+
+# Prints da referência de interação (brandonyasin.com): só na máquina
+/referencias/

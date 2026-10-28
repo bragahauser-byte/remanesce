@@ -26,7 +26,7 @@ export function BagView() {
       <div className="flex min-h-[50vh] flex-col items-start justify-center py-16">
         <p className="label text-cobre">Sacola</p>
         <h1 className="serif mt-4 text-h1 text-tinta">{microcopy.emptyBag}</h1>
-        <Link href="/loja" className="label-lg mt-10 flex h-13 items-center gap-3 bg-tinta px-8 text-branco hover:bg-preto">
+        <Link href="/" className="label-lg mt-10 flex h-13 items-center gap-3 bg-tinta px-8 text-branco hover:bg-preto">
           {microcopy.emptyBagCta} <Icon name="seta" size={22} />
         </Link>
       </div>

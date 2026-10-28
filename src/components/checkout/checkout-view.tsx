@@ -57,7 +57,7 @@ function CheckoutFlow() {
     return (
       <div className="flex min-h-[50vh] flex-col items-start justify-center">
         <h1 className="serif text-h1 text-tinta">{microcopy.emptyBag}</h1>
-        <Link href="/loja" className="label link-stitch mt-8">
+        <Link href="/" className="label link-stitch mt-8">
           {microcopy.emptyBagCta}
         </Link>
       </div>

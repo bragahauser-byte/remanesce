@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { ProductLink } from "./product-link";
 import { Icon } from "@/components/icons/icon";
 import type { DetailedLine } from "@/lib/checkout";
 import { formatBRL } from "@/lib/format";
@@ -20,19 +20,19 @@ export function CartLineItem({ line, compact = false }: { line: DetailedLine; co
 
   return (
     <li className="flex gap-4 py-5">
-      <Link
-        href={`/loja/${product.slug}`}
+      <ProductLink
+        slug={product.slug}
         className={`relative shrink-0 overflow-hidden bg-papel/40 ${compact ? "h-28 w-21" : "h-36 w-27 md:h-44 md:w-33"}`}
       >
         <ProductImage image={product.images.details[0]} alt={product.name} sizes="140px" />
-      </Link>
+      </ProductLink>
       <div className="flex min-w-0 flex-1 flex-col">
         <div className="flex items-start justify-between gap-3">
           <div>
             <p className="label text-tinta/50">{product.code}</p>
-            <Link href={`/loja/${product.slug}`} className={`serif mt-0.5 block leading-tight hover:text-tinta ${compact ? "text-[1.1rem]" : "text-h4"}`}>
+            <ProductLink slug={product.slug} className={`serif mt-0.5 block leading-tight hover:text-tinta ${compact ? "text-[1.1rem]" : "text-h4"}`}>
               {product.name}
-            </Link>
+            </ProductLink>
           </div>
           <p className="label shrink-0 pt-0.5">{formatBRL(line.total)}</p>
         </div>

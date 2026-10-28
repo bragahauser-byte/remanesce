@@ -1,12 +1,21 @@
 /*
- * Remanesce · tokens da marca (v2)
- * Base FARM: ~60% branco/papel, ~35% preto/tinta, ~5% acentos.
- * Acentos da coleção (vermelho pinhão, índigo, cobre) são raros: o vermelho aparece por
- * dentro, nos detalhes revelados; nunca como fundo de seção.
+ * Remanesce · tokens da marca (v3, estudo editorial)
+ * Uma família só: Plus Jakarta Sans. Tamanhos em múltiplos de 4 e 8 px.
+ * Dois temas: "claro" (branco, padrão) e "terra" (marrom escuro e neutros quentes),
+ * trocados pelo seletor redondo no canto superior direito.
  */
 
 @theme {
   --color-*: initial;
+  /* Cores de tema (mudam com data-theme) */
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-soft: var(--soft);
+  --color-line: var(--line);
+  --color-panel: var(--panel);
+  --color-stage: var(--stage);
+  /* Cores fixas da marca */
   --color-preto: #181508;
   --color-tinta: #111111;
   --color-branco: #ffffff;
@@ -19,42 +28,61 @@
   --color-indigo: #161b27;
   --color-cobre: #b9763e;
   --color-transparent: transparent;
+  --color-current: currentColor;
 
-  --font-serif: var(--font-bodoni), "Didot", "Bodoni 72", Georgia, serif;
-  --font-italic: var(--font-instrument-serif), Georgia, serif;
-  --font-sans: var(--font-instrument), system-ui, -apple-system, "Segoe UI", sans-serif;
-  /* Preços e códigos: a mesma sans, com algarismos tabulares. */
-  --font-mono: var(--font-instrument), system-ui, sans-serif;
+  --font-sans: var(--font-jakarta), "Helvetica Neue", Helvetica, Arial, sans-serif;
+  /* Aliases antigos apontam para a mesma família: o site inteiro é Plus Jakarta Sans. */
+  --font-serif: var(--font-sans);
+  --font-italic: var(--font-sans);
+  --font-mono: var(--font-sans);
 
-  --text-display: clamp(4.5rem, 14vw, 15rem);
-  --text-display--line-height: 0.88;
-  --text-display--letter-spacing: -0.02em;
-  --text-h1: clamp(3rem, 7.4vw, 7rem);
-  --text-h1--line-height: 0.95;
-  --text-h1--letter-spacing: -0.015em;
-  --text-h2: clamp(2.5rem, 4.5vw, 4rem);
-  --text-h2--line-height: 1;
-  --text-h2--letter-spacing: -0.01em;
-  --text-h3: clamp(1.75rem, 2.5vw, 2.25rem);
-  --text-h3--line-height: 1.1;
-  --text-h4: clamp(1.25rem, 1.8vw, 1.5rem);
-  --text-h4--line-height: 1.2;
+  /* Escala tipográfica (px): 12 · 16 · 24 · 32 · 40 · 48 · 64 · 96 · 120 */
+  --text-12: 0.75rem;
+  --text-12--line-height: 1.3333;
+  --text-16: 1rem;
+  --text-16--line-height: 1.5;
+  --text-24: 1.5rem;
+  --text-24--line-height: 1.3333;
+  --text-32: 2rem;
+  --text-32--line-height: 1.25;
+  --text-40: 2.5rem;
+  --text-40--line-height: 1.2;
+  --text-48: 3rem;
+  --text-48--line-height: 1.1667;
+  --text-64: 4rem;
+  --text-64--line-height: 1;
+  --text-96: 6rem;
+  --text-96--line-height: 1;
+  --text-120: 7.5rem;
+  --text-120--line-height: 1;
+
+  /* Aliases usados pelas páginas utilitárias (sacola, checkout, marca, passaporte) */
+  --text-display: 6rem;
+  --text-display--line-height: 1;
+  --text-h1: 4rem;
+  --text-h1--line-height: 1;
+  --text-h2: 3rem;
+  --text-h2--line-height: 1.1667;
+  --text-h3: 2rem;
+  --text-h3--line-height: 1.25;
+  --text-h4: 1.5rem;
+  --text-h4--line-height: 1.3333;
   --text-body: 1rem;
-  --text-body--line-height: 1.55;
+  --text-body--line-height: 1.5;
   --text-small: 0.875rem;
-  --text-small--line-height: 1.45;
-  --text-label: 0.6875rem;
-  --text-label--line-height: 1.4;
-  --text-label--letter-spacing: 0.14em;
+  --text-small--line-height: 1.4286;
+  --text-label: 0.75rem;
+  --text-label--line-height: 1.3333;
 
   --radius-pill: 999px;
-  --radius-card: 2rem;
+  --radius-card: 0;
 
   --ease-remanesce: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-expo: cubic-bezier(0.87, 0, 0.13, 1);
 
-  --spacing-gutter: clamp(1rem, 3.4vw, 3rem);
-  --spacing-header: 4.25rem;
-  --spacing-section: clamp(5rem, 11vw, 10rem);
+  --spacing-gutter: 1rem;
+  --spacing-header: 5.5rem;
+  --spacing-section: 8rem;
 }
 
 :root {
@@ -71,8 +99,50 @@
   --cobre: #b9763e;
 
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-expo: cubic-bezier(0.87, 0, 0.13, 1);
 
-  /* Fundo de página. Páginas narrativas trocam este valor com o scroll. */
-  --page-bg: var(--branco);
-  --page-fg: var(--tinta);
+  /* Tema claro (padrão) */
+  --bg: #ffffff;
+  --fg: #111111;
+  --muted: #8c8a85;
+  --soft: #5c5a55;
+  --line: #e4e1db;
+  /* Fundo atrás das roupas recortadas */
+  --panel: #f1ede4;
+  /* Fundo do menu (atrás das páginas em cartão) */
+  --stage: #7d7a68;
+
+  /* Compatibilidade com componentes antigos */
+  --page-bg: var(--bg);
+  --page-fg: var(--fg);
+
+  --gutter: 8px;
+  --pad: 8px;
+}
+
+/* Tema terra: os tons quentes do modo noite da referência */
+:root[data-theme="terra"] {
+  --bg: #2c2922;
+  --fg: #e3ddcf;
+  --muted: #9a9384;
+  --soft: #c2bba9;
+  --line: #4a453a;
+  --panel: #3a362d;
+  --stage: #1a1915;
+
+  /* As utilidades fixas (text-tinta, bg-branco…) das páginas de sacola, checkout e marca
+     também viram: o Tailwind 4 lê as cores por variável. */
+  --color-tinta: #e3ddcf;
+  --color-branco: #2c2922;
+  --color-preto: #ece7db;
+  --color-papel: #34302a;
+  --color-linho: #3a362d;
+  --color-linha: #4a453a;
+  --color-cinza: #9a9384;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --pad: 16px;
+  }
 }

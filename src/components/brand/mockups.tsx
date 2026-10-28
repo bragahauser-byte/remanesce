@@ -187,7 +187,7 @@ export function TissueMockup() {
 export function InstagramMockup() {
   return (
     <div className="flex h-[86%] items-center gap-5" aria-hidden>
-      <div className="flex aspect-[4/5] h-[86%] flex-col bg-white shadow-lg">
+      <div className="flex aspect-[4/5] h-[86%] flex-col bg-[#fff] shadow-lg">
         <div className="flex items-center gap-1.5 p-1.5">
           <span className="grid size-4 place-items-center rounded-full bg-tinta text-branco">
             <BrandSymbol size={10} seed="var(--linho)" />

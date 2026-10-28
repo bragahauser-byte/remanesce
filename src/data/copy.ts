@@ -20,49 +20,12 @@ export const brand = {
   siteUrl: SITE_URL,
 };
 
-/** Menu em tela cheia: todas as seções. `look` é a roupa que aparece no hover. */
-export const navLinks = [
-  { href: "/colecao", label: "Coleção", look: 1 },
-  { href: "/loja", label: "Loja", look: 4 },
-  { href: "/conceito", label: "Conceito", look: 6 },
-  { href: "/raiz", label: "Raiz", look: 3 },
-  { href: "/servicos", label: "Serviços", look: 5 },
-  { href: "/marca", label: "Marca", look: 2 },
-  { href: "/sobre", label: "Sobre", look: 1 },
+/** As três páginas principais (menu em cartões). */
+export const primaryPages = [
+  { href: "/", label: "Início", title: "início" },
+  { href: "/conceito", label: "Conceito", title: "conceito" },
+  { href: "/raiz", label: "Raiz", title: "raiz" },
 ] as const;
-
-/** Links do centro do header. */
-export const primaryNav = [
-  { href: "/colecao", label: "Coleção" },
-  { href: "/loja", label: "Loja", chip: "novo" },
-  { href: "/conceito", label: "Conceito" },
-  { href: "/raiz", label: "Raiz" },
-] as const;
-
-/** Seções extras listadas no Índice, abaixo dos seis looks. */
-export const indexSections = [
-  { href: "/conceito", label: "O Renascer da Permanência" },
-  { href: "/raiz", label: "Raiz" },
-  { href: "/servicos", label: "Serviços de Permanência" },
-  { href: "/marca", label: "Marca" },
-] as const;
-
-export const mobileNav = [
-  { href: "/colecao", label: "Coleção", icon: "pinha" },
-  { href: "/loja", label: "Loja", icon: "escama" },
-  { href: "/conta?aba=favoritos", label: "Favoritos", icon: "coracao" },
-  { href: "/sacola", label: "Sacola", icon: "sacola" },
-  { href: "/conta", label: "Conta", icon: "conta" },
-] as const;
-
-/** Palavras de estado da transição de página (A24), por destino. */
-export const transitionWords: Record<string, string> = {
-  "/colecao": "Revelando",
-  "/raiz": "Plantando",
-  "/conceito": "Lembrando",
-  "/servicos": "Costurando",
-  default: "Costurando",
-};
 
 export const hero = {
   beats: ["Tudo muda.", "Nada se perde.", "O que permanece, renasce."],
@@ -118,7 +81,7 @@ export const newsletter = {
 
 export const microcopy = {
   emptyBag: "Sua sacola ainda é semente.",
-  emptyBagCta: "Explorar a loja",
+  emptyBagCta: "Ver a coleção",
   emptySaved: "Nada guardado ainda. A gralha também começa com um pinhão.",
   added: "Guardado na sacola.",
   orderConfirmed: "Pedido recebido. Uma araucária já tem seu nome.",

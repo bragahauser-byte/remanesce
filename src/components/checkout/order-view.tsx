@@ -25,8 +25,8 @@ export function OrderView() {
         <p className="label text-cobre">Pedido {id}</p>
         <h1 className="serif mt-4 text-h2 text-tinta">Não encontramos este pedido neste navegador.</h1>
         <p className="mt-4 max-w-md text-tinta/70">Os pedidos ficam guardados no aparelho em que foram feitos.</p>
-        <Link href="/conta" className="label link-stitch mt-8 inline-block">
-          Ir para Minha Remanesce
+        <Link href="/" className="label link-stitch mt-8 inline-block">
+          Voltar ao início
         </Link>
       </div>
     );
@@ -61,11 +61,8 @@ export function OrderView() {
           </p>
         </div>
         <div className="mt-10 flex flex-wrap gap-4">
-          <Link href="/conta" className="label-lg flex h-13 items-center gap-3 bg-tinta px-8 text-branco hover:bg-preto">
-            Minha Remanesce <Icon name="seta" size={22} />
-          </Link>
-          <Link href="/loja" className="label-lg flex h-13 items-center border border-tinta/25 px-8 hover:border-tinta">
-            Continuar explorando
+          <Link href="/" className="label-lg flex h-13 items-center gap-3 bg-tinta px-8 text-branco hover:bg-preto">
+            Continuar explorando <Icon name="seta" size={22} />
           </Link>
         </div>
       </div>

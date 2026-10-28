@@ -1,41 +1,19 @@
 import type { Metadata, Viewport } from "next";
 import { Suspense } from "react";
-import { Bodoni_Moda, Instrument_Sans, Instrument_Serif } from "next/font/google";
-import { Cursor } from "@/components/layout/cursor";
-import { Footer } from "@/components/layout/footer";
+import { Plus_Jakarta_Sans } from "next/font/google";
+import { FlightLayer } from "@/components/layout/flight-layer";
 import { Header } from "@/components/layout/header";
-import { IndexPanel } from "@/components/layout/index-panel";
 import { Menu } from "@/components/layout/menu";
-import { MobileNav } from "@/components/layout/mobile-nav";
-import { PageTransition } from "@/components/layout/page-transition";
-import { BagDrawer } from "@/components/shop/bag-drawer";
-import { ProductPanelHost } from "@/components/shop/product-panel";
-import { SearchOverlay } from "@/components/shop/search-overlay";
 import { SmoothScroll } from "@/components/layout/smooth-scroll";
-import { GrainOverlay } from "@/components/brand/textures";
 import { brand } from "@/data/copy";
 import { asset } from "@/lib/paths";
+import { themeInitScript } from "@/lib/theme";
 import "./globals.css";
 
-const bodoni = Bodoni_Moda({
-  variable: "--font-bodoni",
+const jakarta = Plus_Jakarta_Sans({
+  variable: "--font-jakarta",
   subsets: ["latin"],
-  style: ["normal", "italic"],
-  axes: ["opsz"],
-  display: "swap",
-});
-
-const instrumentSerif = Instrument_Serif({
-  variable: "--font-instrument-serif",
-  subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
-  display: "swap",
-});
-
-const instrument = Instrument_Sans({
-  variable: "--font-instrument",
-  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -64,34 +42,26 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="pt-BR" className={`${bodoni.variable} ${instrumentSerif.variable} ${instrument.variable}`}>
+    <html lang="pt-BR" className={jakarta.variable} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body>
         <a
           href="#conteudo"
-          className="label fixed left-4 top-4 z-[110] -translate-y-24 bg-tinta px-4 py-3 text-branco focus:translate-y-0"
+          className="label fixed left-2 top-2 z-[110] -translate-y-24 bg-fg px-4 py-3 text-bg focus:translate-y-0"
         >
           Pular para o conteúdo
         </a>
         <Header />
-        {/* Componentes que leem a rota: em rotas dinâmicas, entram por streaming. */}
+        <div id="stage" className="min-h-dvh bg-bg">
+          <main id="conteudo">{children}</main>
+        </div>
+        <FlightLayer />
         <Suspense fallback={null}>
           <Menu />
-          <IndexPanel />
-          <SearchOverlay />
-          <BagDrawer />
-        </Suspense>
-        <main id="conteudo" className="min-h-[70vh]">
-          {children}
-        </main>
-        <Footer />
-        <Suspense fallback={null}>
-          <MobileNav />
-          <PageTransition />
-          <ProductPanelHost />
           <SmoothScroll />
         </Suspense>
-        <Cursor />
-        <GrainOverlay />
       </body>
     </html>
   );
