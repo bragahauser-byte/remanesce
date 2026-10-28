@@ -45,16 +45,16 @@ export function LooksStrip() {
   );
 
   return (
-    <section ref={root} aria-labelledby="looks-titulo" data-tone="linho-escuro" className="relative overflow-hidden lg:h-[100svh]">
+    <section ref={root} aria-labelledby="looks-titulo" data-tone="papel" className="relative overflow-hidden lg:h-[100svh]">
       <div className="flex h-full flex-col justify-center pb-12 pt-[calc(var(--spacing-header)+2rem)]">
         <div className="container-x flex items-end justify-between gap-6">
           <div>
             <p className="label text-cobre">O line-up</p>
-            <h2 id="looks-titulo" className="serif mt-3 text-h2 text-casca">
+            <h2 id="looks-titulo" className="serif mt-3 text-h2 text-tinta">
               Seis looks, <em>uma pinha</em>
             </h2>
           </div>
-          <Link href="/looks" className="label link-stitch shrink-0">
+          <Link href="/colecao" className="label link-stitch shrink-0">
             Ver os looks
           </Link>
         </div>
@@ -66,22 +66,22 @@ export function LooksStrip() {
           {looks.map((look) => (
             <Link
               key={look.number}
-              href={`/looks#look-${pad(look.number)}`}
+              href={`/colecao#look-${pad(look.number)}`}
               data-cursor="ver"
               className="group relative w-[68vw] shrink-0 snap-center sm:w-[40vw] lg:w-[min(26vw,380px)]"
             >
               <div className="relative">
                 <span aria-hidden className="absolute inset-x-0 bottom-0 h-2 bg-pinhao" />
-                <div className="relative aspect-[3/4] bg-linho transition-transform duration-700 ease-remanesce group-hover:-translate-y-1.5">
+                <div className="relative aspect-[3/4] bg-branco transition-transform duration-700 ease-remanesce group-hover:-translate-y-1.5">
                   <Image src={look.front} alt={`Look ${look.name}`} fill sizes="(min-width: 1024px) 26vw, 68vw" className="object-contain py-4 transition-opacity duration-700 group-hover:opacity-0" />
                   <Image src={look.back} alt="" fill sizes="(min-width: 1024px) 26vw, 68vw" className="object-contain py-4 opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
                 </div>
               </div>
-              <p className="label mt-4 text-indigo/55">
+              <p className="label mt-4 text-tinta/55">
                 Look {pad(look.number)} / {pad(looks.length)}
               </p>
               <p className="serif mt-1 text-h4">{look.name}</p>
-              <p className="mt-1 text-small italic text-indigo/70">{look.line}</p>
+              <p className="mt-1 text-small italic text-tinta/70">{look.line}</p>
             </Link>
           ))}
           <div aria-hidden className="w-[var(--spacing-gutter)] shrink-0 lg:w-[10vw]" />

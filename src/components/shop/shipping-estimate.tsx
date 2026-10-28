@@ -48,10 +48,10 @@ export function ShippingEstimate({
   return (
     <div>
       <form onSubmit={onSubmit} noValidate>
-        <label htmlFor="cep-estimativa" className="label text-indigo/70">
+        <label htmlFor="cep-estimativa" className="label text-tinta/70">
           Calcular frete
         </label>
-        <div className="mt-2 flex max-w-sm border-b border-indigo/30 focus-within:border-indigo">
+        <div className="mt-2 flex max-w-sm border-b border-tinta/30 focus-within:border-tinta">
           <input
             id="cep-estimativa"
             inputMode="numeric"
@@ -72,14 +72,14 @@ export function ShippingEstimate({
       </form>
       {address && (
         <fieldset className="mt-2">
-          <legend className="text-small text-indigo/70">
+          <legend className="text-small text-tinta/70">
             {address.city} · {address.state}
           </legend>
           <div className="mt-3 grid gap-2">
             {options.map((o) => (
               <label
                 key={o.id}
-                className="flex cursor-pointer items-center justify-between gap-4 border border-indigo/15 px-4 py-3 has-checked:border-indigo"
+                className="flex cursor-pointer items-center justify-between gap-4 border border-tinta/15 px-4 py-3 has-checked:border-tinta"
               >
                 <span className="flex items-center gap-3">
                   <input
@@ -87,11 +87,11 @@ export function ShippingEstimate({
                     name="frete-estimativa"
                     checked={selected === o.id}
                     onChange={() => onSelect(o)}
-                    className="accent-indigo"
+                    className="accent-tinta"
                   />
                   <span>
                     <span className="label block">{o.label}</span>
-                    <span className="text-small text-indigo/60">{o.days}</span>
+                    <span className="text-small text-tinta/60">{o.days}</span>
                   </span>
                 </span>
                 <span className="font-mono text-[13px]">{o.price === 0 ? "Grátis" : formatBRL(o.price)}</span>

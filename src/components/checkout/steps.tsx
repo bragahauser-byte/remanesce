@@ -10,7 +10,7 @@ import { formatBRL } from "@/lib/format";
 import { Field } from "./field";
 
 const nextButton =
-  "label-lg mt-10 flex h-14 w-full items-center justify-center gap-3 bg-indigo text-linho transition-colors hover:bg-denim disabled:opacity-50 sm:w-auto sm:px-10";
+  "label-lg mt-10 flex h-14 w-full items-center justify-center gap-3 bg-tinta text-branco transition-colors hover:bg-preto disabled:opacity-50 sm:w-auto sm:px-10";
 
 /* ------------------------------------------------------- 1. Identificação */
 
@@ -25,7 +25,7 @@ export function IdentityStep({ defaults, onNext }: { defaults?: Partial<Identity
 
   return (
     <form onSubmit={handleSubmit(onNext)} noValidate>
-      <h2 className="serif text-h3 text-casca">Quem recebe esta peça?</h2>
+      <h2 className="serif text-h3 text-tinta">Quem recebe esta peça?</h2>
       <div className="mt-8 grid gap-7 sm:grid-cols-2">
         <Field label="Nome completo" autoComplete="name" {...register("name")} error={errors.name?.message} className="sm:col-span-2" />
         <Field label="E-mail" type="email" autoComplete="email" {...register("email")} error={errors.email?.message} className="sm:col-span-2" />
@@ -121,7 +121,7 @@ export function DeliveryStep({
 
   return (
     <form onSubmit={handleSubmit(onNext)} noValidate>
-      <h2 className="serif text-h3 text-casca">Para onde ela vai?</h2>
+      <h2 className="serif text-h3 text-tinta">Para onde ela vai?</h2>
       <div className="mt-8 grid gap-7 sm:grid-cols-6">
         <Field
           label="CEP"
@@ -169,25 +169,25 @@ export function DeliveryStep({
 
       {options.length > 0 && (
         <fieldset className="mt-10">
-          <legend className="label text-indigo/70">Entrega</legend>
+          <legend className="label text-tinta/70">Entrega</legend>
           <div className="mt-3 grid gap-3 sm:grid-cols-2">
             {options.map((o) => (
               <label
                 key={o.id}
-                className="flex cursor-pointer items-start justify-between gap-4 border border-indigo/15 p-4 transition-colors has-checked:border-indigo has-checked:bg-linho-escuro/50"
+                className="flex cursor-pointer items-start justify-between gap-4 border border-tinta/15 p-4 transition-colors has-checked:border-tinta has-checked:bg-papel/50"
               >
                 <span className="flex items-start gap-3">
                   <input
                     type="radio"
                     value={o.id}
                     {...register("shipping", { onChange: () => onShipping(uf, o.id) })}
-                    className="mt-1 accent-indigo"
+                    className="mt-1 accent-tinta"
                   />
                   <span>
                     <span className="label-lg flex items-center gap-2">
                       <Icon name="caminhao" size={18} /> {o.label}
                     </span>
-                    <span className="mt-1 block text-small text-indigo/60">{o.days}</span>
+                    <span className="mt-1 block text-small text-tinta/60">{o.days}</span>
                   </span>
                 </span>
                 <span className="font-mono text-[13px]">{o.price === 0 ? "Grátis" : formatBRL(o.price)}</span>

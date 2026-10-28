@@ -93,7 +93,7 @@ export function PineconeHero() {
   );
 
   return (
-    <section ref={root} aria-labelledby="hero-titulo" className="relative h-[100svh] overflow-hidden bg-linho">
+    <section ref={root} aria-labelledby="hero-titulo" className="relative h-[100svh] overflow-hidden bg-branco">
       <h1 id="hero-titulo" className="sr-only">
         Remanesce. {hero.beats.join(" ")}
       </h1>
@@ -126,7 +126,7 @@ export function PineconeHero() {
               key={beat}
               data-beat={i}
               aria-hidden
-              className={`serif absolute bottom-0 left-0 max-w-[14ch] text-casca motion-reduce:relative motion-reduce:block md:max-w-none ${i === 2 ? "italic" : ""} ${
+              className={`serif absolute bottom-0 left-0 max-w-[14ch] text-tinta motion-reduce:relative motion-reduce:block md:max-w-none ${i === 2 ? "italic" : ""} ${
                 i === 0 ? "" : "opacity-0 motion-reduce:opacity-100"
               }`}
             >
@@ -136,7 +136,7 @@ export function PineconeHero() {
         </div>
       </div>
 
-      <p data-cue className="label absolute bottom-6 right-[var(--spacing-gutter)] hidden items-center gap-3 text-indigo/60 md:flex motion-reduce:hidden">
+      <p data-cue className="label absolute bottom-6 right-[var(--spacing-gutter)] hidden items-center gap-3 text-tinta/60 md:flex motion-reduce:hidden">
         Role para abrir a pinha
         <span aria-hidden className="stitch-y block h-8" />
       </p>

@@ -30,6 +30,34 @@ export const icons = {
       <path d="M10.2 6.6c1.2.7 2.4.7 3.6 0" stroke={filled ? "var(--linho)" : "currentColor"} />
     </>
   ),
+  coracao: (filled) => (
+    <path
+      d="M12 20.2s-7.6-4.5-7.6-10.1A4.3 4.3 0 0 1 12 7.5a4.3 4.3 0 0 1 7.6 2.6c0 5.6-7.6 10.1-7.6 10.1z"
+      fill={filled ? "var(--pinhao)" : "none"}
+      stroke={filled ? "var(--pinhao)" : "currentColor"}
+    />
+  ),
+  compartilhar: () => (
+    <>
+      <path d="M12 3.5v11.5" />
+      <path d="m8 7.5 4-4 4 4" />
+      <path d="M7.5 10.5H6v9.5h12v-9.5h-1.5" />
+    </>
+  ),
+  filtro: () => (
+    <>
+      <path d="M4 7h16M4 12h16M4 17h16" />
+      <circle cx="9" cy="7" r="1.8" fill="var(--branco, #fff)" />
+      <circle cx="15" cy="12" r="1.8" fill="var(--branco, #fff)" />
+      <circle cx="8" cy="17" r="1.8" fill="var(--branco, #fff)" />
+    </>
+  ),
+  regua: () => (
+    <>
+      <rect x="2.5" y="8" width="19" height="8" rx="1.2" />
+      <path d="M6 8v3M9.5 8v4.5M13 8v3M16.5 8v4.5" />
+    </>
+  ),
   conta: () => (
     <>
       <circle cx="12" cy="8.2" r="3.6" />
@@ -241,7 +269,11 @@ export const iconNames = Object.keys(icons) as IconName[];
 
 export const interfaceIcons: IconName[] = [
   "sacola",
+  "coracao",
   "pinhao",
+  "compartilhar",
+  "filtro",
+  "regua",
   "conta",
   "busca",
   "menu",

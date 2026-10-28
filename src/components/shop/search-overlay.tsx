@@ -54,7 +54,7 @@ export function SearchOverlay() {
       aria-label="Buscar na loja"
       inert={!open}
       data-open={open || undefined}
-      className="no-print fixed inset-0 z-[65] flex flex-col bg-linho/97 opacity-0 backdrop-blur-xl transition-opacity duration-500 ease-remanesce data-open:opacity-100"
+      className="no-print fixed inset-0 z-[65] flex flex-col bg-branco/97 opacity-0 backdrop-blur-xl transition-opacity duration-500 ease-remanesce data-open:opacity-100"
     >
       <div className="container-x flex h-header shrink-0 items-center justify-end">
         <button type="button" onClick={close} className="label -mr-2 flex items-center gap-2 p-2 hover:text-cobre">
@@ -65,8 +65,8 @@ export function SearchOverlay() {
         <label htmlFor="busca" className="label text-cobre">
           Buscar
         </label>
-        <div className="mt-3 flex items-center gap-4 border-b border-indigo/30 pb-3 focus-within:border-indigo">
-          <Icon name="busca" size={28} className="shrink-0 text-indigo/50" />
+        <div className="mt-3 flex items-center gap-4 border-b border-tinta/30 pb-3 focus-within:border-tinta">
+          <Icon name="busca" size={28} className="shrink-0 text-tinta/50" />
           <input
             id="busca"
             data-autofocus
@@ -75,19 +75,19 @@ export function SearchOverlay() {
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Peça, look, cor…"
             autoComplete="off"
-            className="serif min-w-0 flex-1 bg-transparent text-h2 placeholder:text-indigo/25 focus:outline-none [&::-webkit-search-cancel-button]:appearance-none"
+            className="serif min-w-0 flex-1 bg-transparent text-h2 placeholder:text-tinta/25 focus:outline-none [&::-webkit-search-cancel-button]:appearance-none"
           />
         </div>
 
         {!query && (
           <div className="mt-8 flex flex-wrap items-center gap-3">
-            <span className="label text-indigo/55">Sugestões</span>
+            <span className="label text-tinta/55">Sugestões</span>
             {suggestions.map((s) => (
               <button
                 key={s}
                 type="button"
                 onClick={() => setQuery(s)}
-                className="label border border-indigo/20 px-3 py-1.5 hover:border-cobre hover:text-cobre"
+                className="label border border-tinta/20 px-3 py-1.5 hover:border-cobre hover:text-cobre"
               >
                 {s}
               </button>
@@ -95,7 +95,7 @@ export function SearchOverlay() {
           </div>
         )}
 
-        <p role="status" className="label mt-8 text-indigo/55">
+        <p role="status" className="label mt-8 text-tinta/55">
           {query && (results.length ? `${results.length} ${results.length === 1 ? "peça" : "peças"}` : "Nada encontrado. Tente outra palavra.")}
         </p>
 
@@ -103,11 +103,11 @@ export function SearchOverlay() {
           {results.map((p) => (
             <li key={p.slug}>
               <ProductLink slug={p.slug} onClick={close} className="group block" data-cursor="ver">
-                <div className="relative aspect-[3/4] overflow-hidden bg-linho-escuro/40">
+                <div className="relative aspect-[3/4] overflow-hidden bg-papel/40">
                   <ProductImage image={p.images.details[0]} alt="" sizes="(min-width: 768px) 16vw, 45vw" />
                 </div>
-                <p className="label mt-2 text-indigo/55">{p.code}</p>
-                <p className="serif text-[1.1rem] group-hover:text-casca">{p.name}</p>
+                <p className="label mt-2 text-tinta/55">{p.code}</p>
+                <p className="serif text-[1.1rem] group-hover:text-tinta">{p.name}</p>
                 <p className="label">{formatBRL(p.price)}</p>
               </ProductLink>
             </li>

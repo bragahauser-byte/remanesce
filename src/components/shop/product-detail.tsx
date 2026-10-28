@@ -24,7 +24,7 @@ export function ProductDetail({ product, inPanel = false }: { product: Product; 
         <ProductGallery product={product} priority={!inPanel} />
 
         <div className={`lg:sticky lg:self-start ${inPanel ? "lg:top-6" : "lg:top-[calc(var(--spacing-header)+1.5rem)]"}`}>
-          <nav aria-label="Trilha" className="label flex flex-wrap gap-x-2 text-indigo/55">
+          <nav aria-label="Trilha" className="label flex flex-wrap gap-x-2 text-tinta/55">
             <Link href="/loja" className="hover:text-cobre">
               Loja
             </Link>
@@ -43,7 +43,7 @@ export function ProductDetail({ product, inPanel = false }: { product: Product; 
           </nav>
 
           <p className="label mt-8 text-cobre">{product.code}</p>
-          <TitleTag className="serif mt-2 text-h2 text-casca">{product.name}</TitleTag>
+          <TitleTag className="serif mt-2 text-h2 text-tinta">{product.name}</TitleTag>
 
           <div className="mt-5 flex flex-wrap gap-2">
             {product.tags.map((t) => (
@@ -52,24 +52,24 @@ export function ProductDetail({ product, inPanel = false }: { product: Product; 
           </div>
 
           <p className="mt-6 font-mono text-[1.15rem] tracking-[0.04em]">{formatBRL(product.price)}</p>
-          <p className="mt-1 text-small text-indigo/65">{installmentsLabel(product.price)}</p>
+          <p className="mt-1 text-small text-tinta/65">{installmentsLabel(product.price)}</p>
 
           <p className="mt-6 flex items-center gap-2.5 text-small">
-            <span aria-hidden className="size-3.5 rounded-full bg-indigo ring-1 ring-indigo/20 ring-offset-2 ring-offset-linho" />
+            <span aria-hidden className="size-3.5 rounded-full bg-tinta ring-1 ring-tinta/20 ring-offset-2 ring-offset-branco" />
             <Diamond size={6} />
             <span>{product.color}</span>
           </p>
-          <p className="mt-5 max-w-md text-body text-indigo/85">{product.short}</p>
+          <p className="mt-5 max-w-md text-body text-tinta/85">{product.short}</p>
 
           <div className="mt-8">
             <BuyBox product={product} />
           </div>
 
-          <div className="mt-8 flex items-start gap-4 bg-linho-escuro/70 p-5">
-            <Icon name="broto" className="mt-0.5 shrink-0 text-araucaria" />
+          <div className="mt-8 flex items-start gap-4 bg-papel/70 p-5">
+            <Icon name="broto" className="mt-0.5 shrink-0 text-tinta" />
             <div>
               <p className="serif text-[1.2rem] leading-snug">Esta peça planta uma araucária.</p>
-              <p className="mt-1 text-small text-indigo/70">
+              <p className="mt-1 text-small text-tinta/70">
                 Ao comprar, uma muda é plantada no Paraná e ganha um número no Passaporte da Peça.
               </p>
             </div>
@@ -80,7 +80,7 @@ export function ProductDetail({ product, inPanel = false }: { product: Product; 
             <Accordion title="A história da peça" defaultOpen>
               <p>{product.story}</p>
               {look && (
-                <p className="mt-3 serif italic text-casca">
+                <p className="mt-3 serif italic text-tinta">
                   Look {look.name}: {look.line}
                 </p>
               )}
@@ -117,7 +117,7 @@ export function ProductDetail({ product, inPanel = false }: { product: Product; 
 
       <section aria-labelledby={`completa-${product.slug}`} className="mt-24 md:mt-32">
         <div className="flex items-end justify-between gap-4">
-          <h2 id={`completa-${product.slug}`} className="serif text-h3 text-casca">
+          <h2 id={`completa-${product.slug}`} className="serif text-h3 text-tinta">
             {siblings.length ? (
               <>
                 Completa o <em>look</em>
@@ -129,7 +129,7 @@ export function ProductDetail({ product, inPanel = false }: { product: Product; 
             )}
           </h2>
           {look && (
-            <Link href="/looks" className="label link-stitch shrink-0">
+            <Link href="/colecao" className="label link-stitch shrink-0">
               Ver os 6 looks
             </Link>
           )}
@@ -155,7 +155,7 @@ function Accordion({ title, children, defaultOpen }: { title: string; children: 
         <span className="label-lg">{title}</span>
         <Icon name="seta-baixo" size={20} className="transition-transform duration-500 ease-remanesce group-open:rotate-180" />
       </summary>
-      <div className="pb-6 text-small leading-relaxed text-indigo/80">{children}</div>
+      <div className="pb-6 text-small leading-relaxed text-tinta/80">{children}</div>
     </details>
   );
 }

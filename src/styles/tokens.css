@@ -1,75 +1,78 @@
 /*
- * Remanesce · tokens da marca
- * Cores extraídas do line-up. Proporção: ~70% linho, ~25% índigo/denim, ~5% cobre + vermelho.
- * O vermelho (pinhão) aparece por baixo, nas fendas e revelações; quase nunca como superfície.
+ * Remanesce · tokens da marca (v2)
+ * Base FARM: ~60% branco/papel, ~35% preto/tinta, ~5% acentos.
+ * Acentos da coleção (vermelho pinhão, índigo, cobre) são raros: o vermelho aparece por
+ * dentro, nos detalhes revelados; nunca como fundo de seção.
  */
 
 @theme {
   --color-*: initial;
+  --color-preto: #181508;
+  --color-tinta: #111111;
+  --color-branco: #ffffff;
+  --color-papel: #f4f2ee;
   --color-linho: #f1ede4;
-  --color-linho-escuro: #e4ddd0;
-  --color-indigo: #161b27;
-  --color-denim: #2b3445;
-  --color-casca: #391502;
+  --color-cinza: #8c8a85;
+  --color-linha: #d9d6d0;
   --color-pinhao: #650410;
   --color-pinhao-vivo: #8e1420;
+  --color-indigo: #161b27;
   --color-cobre: #b9763e;
-  --color-gralha: #2f5d9e;
-  --color-araucaria: #34402e;
-  --color-white: #ffffff;
-  --color-black: #000000;
+  --color-transparent: transparent;
 
   --font-serif: var(--font-bodoni), "Didot", "Bodoni 72", Georgia, serif;
-  --font-mono: var(--font-plex-mono), ui-monospace, "SFMono-Regular", monospace;
+  --font-italic: var(--font-instrument-serif), Georgia, serif;
   --font-sans: var(--font-instrument), system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* Preços e códigos: a mesma sans, com algarismos tabulares. */
+  --font-mono: var(--font-instrument), system-ui, sans-serif;
 
-  /* Escala tipográfica fluida (desktop → mobile ~ -30%) */
-  --text-display: clamp(4.25rem, 11.5vw, 13.75rem);
-  --text-display--line-height: 0.9;
+  --text-display: clamp(4.5rem, 14vw, 15rem);
+  --text-display--line-height: 0.88;
   --text-display--letter-spacing: -0.02em;
-  --text-h1: clamp(3.25rem, 6.6vw, 6rem);
+  --text-h1: clamp(3rem, 7.4vw, 7rem);
   --text-h1--line-height: 0.95;
   --text-h1--letter-spacing: -0.015em;
-  --text-h2: clamp(2.5rem, 4.6vw, 4rem);
+  --text-h2: clamp(2.5rem, 4.5vw, 4rem);
   --text-h2--line-height: 1;
   --text-h2--letter-spacing: -0.01em;
-  --text-h3: clamp(1.875rem, 2.9vw, 2.5rem);
-  --text-h3--line-height: 1.08;
-  --text-h4: clamp(1.375rem, 2vw, 1.75rem);
-  --text-h4--line-height: 1.15;
-  --text-body: 1.0625rem;
-  --text-body--line-height: 1.6;
+  --text-h3: clamp(1.75rem, 2.5vw, 2.25rem);
+  --text-h3--line-height: 1.1;
+  --text-h4: clamp(1.25rem, 1.8vw, 1.5rem);
+  --text-h4--line-height: 1.2;
+  --text-body: 1rem;
+  --text-body--line-height: 1.55;
   --text-small: 0.875rem;
-  --text-small--line-height: 1.5;
-  --text-label: 0.75rem;
+  --text-small--line-height: 1.45;
+  --text-label: 0.6875rem;
   --text-label--line-height: 1.4;
-  --text-label--letter-spacing: 0.08em;
+  --text-label--letter-spacing: 0.14em;
+
+  --radius-pill: 999px;
+  --radius-card: 2rem;
 
   --ease-remanesce: cubic-bezier(0.22, 1, 0.36, 1);
 
-  --spacing-gutter: clamp(1rem, 4vw, 3.5rem);
-  --spacing-header: 4.5rem;
-  --spacing-section: clamp(5rem, 12vw, 11rem);
+  --spacing-gutter: clamp(1rem, 3.4vw, 3rem);
+  --spacing-header: 4.25rem;
+  --spacing-section: clamp(5rem, 11vw, 10rem);
 }
 
 :root {
+  --preto: #181508;
+  --tinta: #111111;
+  --branco: #ffffff;
+  --papel: #f4f2ee;
   --linho: #f1ede4;
-  --linho-escuro: #e4ddd0;
-  --indigo: #161b27;
-  --denim: #2b3445;
-  --casca: #391502;
+  --cinza: #8c8a85;
+  --linha: #d9d6d0;
   --pinhao: #650410;
   --pinhao-vivo: #8e1420;
+  --indigo: #161b27;
   --cobre: #b9763e;
-  --gralha: #2f5d9e;
-  --araucaria: #34402e;
 
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --dur-fast: 400ms;
-  --dur-base: 600ms;
-  --dur-slow: 900ms;
 
-  /* Fundo de página. Páginas narrativas interpolam este valor no scroll. */
-  --page-bg: var(--linho);
-  --page-fg: var(--indigo);
+  /* Fundo de página. Páginas narrativas trocam este valor com o scroll. */
+  --page-bg: var(--branco);
+  --page-fg: var(--tinta);
 }

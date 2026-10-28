@@ -80,15 +80,15 @@ export function PassportMemories({ code }: { code: string }) {
     <div>
       <form onSubmit={onSubmit} noValidate className="grid gap-6">
         <label className="block">
-          <span className="label text-linho/70">Onde</span>
-          <input name="onde" placeholder="Ex.: casamento da minha irmã, Morretes" className="mt-1.5 block w-full border-b border-linho/30 bg-transparent py-2.5 text-linho placeholder:text-linho/35 focus:border-linho focus:outline-none" />
+          <span className="label text-branco/70">Onde</span>
+          <input name="onde" placeholder="Ex.: casamento da minha irmã, Morretes" className="mt-1.5 block w-full border-b border-branco/30 bg-transparent py-2.5 text-branco placeholder:text-branco/35 focus:border-branco focus:outline-none" />
         </label>
         <label className="block">
-          <span className="label text-linho/70">O que vocês viveram</span>
-          <textarea name="memoria" rows={3} className="mt-1.5 block w-full resize-y border-b border-linho/30 bg-transparent py-2.5 text-linho focus:border-linho focus:outline-none" />
+          <span className="label text-branco/70">O que vocês viveram</span>
+          <textarea name="memoria" rows={3} className="mt-1.5 block w-full resize-y border-b border-branco/30 bg-transparent py-2.5 text-branco focus:border-branco focus:outline-none" />
         </label>
         <div className="flex flex-wrap items-center gap-4">
-          <button type="submit" className="label-lg flex h-12 items-center gap-3 bg-linho px-8 text-indigo hover:bg-linho-escuro">
+          <button type="submit" className="label-lg flex h-12 items-center gap-3 bg-branco px-8 text-tinta hover:bg-papel">
             Guardar memória <Icon name="pinhao" size={18} />
           </button>
           <p role="status" className="label text-pinhao-vivo brightness-150">
@@ -99,18 +99,18 @@ export function PassportMemories({ code }: { code: string }) {
       <ul className="mt-10 space-y-4">
         {memories.map((m) => (
           <li key={m.id} className="border-l border-dashed border-cobre pl-5">
-            <p className="label text-linho/55">
+            <p className="label text-branco/55">
               {formatDate(m.date)}
               {m.where ? ` · ${m.where}` : ""}
             </p>
             <p className="serif mt-1 text-[1.2rem]">{m.text}</p>
-            <button type="button" onClick={() => save(memories.filter((x) => x.id !== m.id))} className="label mt-2 text-linho/45 hover:text-linho">
+            <button type="button" onClick={() => save(memories.filter((x) => x.id !== m.id))} className="label mt-2 text-branco/45 hover:text-branco">
               Apagar
             </button>
           </li>
         ))}
       </ul>
-      {memories.length === 0 && <p className="mt-8 text-small text-linho/55">Nenhuma memória ainda. A primeira é sempre a mais difícil de escolher.</p>}
+      {memories.length === 0 && <p className="mt-8 text-small text-branco/55">Nenhuma memória ainda. A primeira é sempre a mais difícil de escolher.</p>}
     </div>
   );
 }

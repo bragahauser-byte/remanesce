@@ -3,11 +3,10 @@
 import { useEffect } from "react";
 
 export const tones = {
-  linho: { bg: "#F1EDE4", fg: "#161B27" },
-  "linho-escuro": { bg: "#E4DDD0", fg: "#161B27" },
-  denim: { bg: "#2B3445", fg: "#F1EDE4" },
-  indigo: { bg: "#161B27", fg: "#F1EDE4" },
-  araucaria: { bg: "#34402E", fg: "#F1EDE4" },
+  branco: { bg: "#FFFFFF", fg: "#111111" },
+  papel: { bg: "#F4F2EE", fg: "#111111" },
+  preto: { bg: "#181508", fg: "#F4F2EE" },
+  indigo: { bg: "#161B27", fg: "#F4F2EE" },
 } as const;
 
 export type Tone = keyof typeof tones;

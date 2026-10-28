@@ -1,6 +1,6 @@
 /*
  * Kit de texturas (item 11)
- * 1. Sarja  2. Escamas da pinha  3. Pesponto  4. Losango vermelho  5. Desfiado  6. Grão de papel
+ * 1. Sarja  2. Escamas da pinha  3. Pesponto  4. Losango vermelho  5. Desfiado  6. Grão de papel  7. Grade de pontos
  * Componentes React equivalentes em src/components/brand/textures.tsx
  */
 
@@ -70,4 +70,15 @@
   pointer-events: none;
   opacity: 0.045;
   mix-blend-mode: multiply;
+}
+
+/* 7. Grade de pontos (Grace): seções escuras */
+@utility tex-pontos {
+  background-image: radial-gradient(circle at 1px 1px, rgb(244 242 238 / 0.16) 1px, transparent 1.2px);
+  background-size: 14px 14px;
+}
+
+@utility tex-pontos-light {
+  background-image: radial-gradient(circle at 1px 1px, rgb(17 17 17 / 0.12) 1px, transparent 1.2px);
+  background-size: 14px 14px;
 }

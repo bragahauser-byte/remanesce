@@ -16,7 +16,7 @@ export function Legend({ frames }: { frames: readonly Frame[] }) {
       <div ref={skyRef} aria-hidden className="relative h-28 overflow-hidden md:h-40">
         <div
           data-cursor="lenda"
-          className="absolute top-1/2 text-gralha transition-transform ease-[cubic-bezier(0.45,0,0.2,1)] motion-reduce:left-1/2"
+          className="absolute top-1/2 text-branco transition-transform ease-[cubic-bezier(0.45,0,0.2,1)] motion-reduce:left-1/2"
           style={{
             transform: flying ? "translate(calc(100vw + 120px), -30%) rotate(-4deg)" : "translate(-140px, 10%)",
             transitionDuration: "5200ms",
@@ -30,9 +30,9 @@ export function Legend({ frames }: { frames: readonly Frame[] }) {
         {frames.map((f, i) => (
           <li key={f.title}>
             <Seed index={i} />
-            <p className="label mt-8 text-linho/55">Quadro {i + 1}</p>
+            <p className="label mt-8 text-branco/55">Quadro {i + 1}</p>
             <h3 className="serif mt-2 text-h3">{f.title}</h3>
-            <p className="mt-4 text-linho/80">{f.text}</p>
+            <p className="mt-4 text-branco/80">{f.text}</p>
           </li>
         ))}
       </ol>

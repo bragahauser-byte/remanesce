@@ -35,7 +35,7 @@ export function SizeGuide({ numeric }: { numeric: boolean }) {
       <dialog
         ref={ref}
         onClick={(e) => e.target === ref.current && ref.current?.close()}
-        className="m-auto w-[min(560px,calc(100vw-2rem))] bg-linho p-0 text-indigo backdrop:bg-indigo/60"
+        className="m-auto w-[min(560px,calc(100vw-2rem))] bg-branco p-0 text-tinta backdrop:bg-tinta/60"
         aria-labelledby="guia-titulo"
       >
         <div className="p-6 md:p-8">
@@ -52,9 +52,9 @@ export function SizeGuide({ numeric }: { numeric: boolean }) {
           </div>
           <table className="mt-6 w-full text-left text-small">
             <thead>
-              <tr className="border-b border-indigo/20">
+              <tr className="border-b border-tinta/20">
                 {head.map((h) => (
-                  <th key={h} scope="col" className="label py-2 font-normal text-indigo/60">
+                  <th key={h} scope="col" className="label py-2 font-normal text-tinta/60">
                     {h}
                   </th>
                 ))}
@@ -75,7 +75,7 @@ export function SizeGuide({ numeric }: { numeric: boolean }) {
               ))}
             </tbody>
           </table>
-          <p className="mt-5 text-small text-indigo/70">
+          <p className="mt-5 text-small text-tinta/70">
             Entre dois tamanhos? O denim cede com o uso e guarda a forma do corpo. Prefira o menor para um caimento justo.
           </p>
         </div>

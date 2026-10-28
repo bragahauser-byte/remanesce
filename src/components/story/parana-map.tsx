@@ -46,7 +46,7 @@ export function ParanaMap({ highlight }: { highlight?: string }) {
                 </svg>
               </button>
               <span
-                className={`label pointer-events-none absolute bottom-full left-1/2 mb-1 -translate-x-1/2 whitespace-nowrap bg-linho px-2.5 py-1.5 text-indigo shadow-sm transition-opacity group-focus-within:opacity-100 group-hover:opacity-100 ${on ? "opacity-100" : "opacity-0"}`}
+                className={`label pointer-events-none absolute bottom-full left-1/2 mb-1 -translate-x-1/2 whitespace-nowrap bg-branco px-2.5 py-1.5 text-tinta shadow-sm transition-opacity group-focus-within:opacity-100 group-hover:opacity-100 ${on ? "opacity-100" : "opacity-0"}`}
               >
                 {p.city} · {number.format(p.trees)} mudas
               </span>

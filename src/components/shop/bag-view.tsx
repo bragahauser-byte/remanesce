@@ -25,8 +25,8 @@ export function BagView() {
     return (
       <div className="flex min-h-[50vh] flex-col items-start justify-center py-16">
         <p className="label text-cobre">Sacola</p>
-        <h1 className="serif mt-4 text-h1 text-casca">{microcopy.emptyBag}</h1>
-        <Link href="/loja" className="label-lg mt-10 flex h-13 items-center gap-3 bg-indigo px-8 text-linho hover:bg-denim">
+        <h1 className="serif mt-4 text-h1 text-tinta">{microcopy.emptyBag}</h1>
+        <Link href="/loja" className="label-lg mt-10 flex h-13 items-center gap-3 bg-tinta px-8 text-branco hover:bg-preto">
           {microcopy.emptyBagCta} <Icon name="seta" size={22} />
         </Link>
       </div>
@@ -37,7 +37,7 @@ export function BagView() {
     <div className="grid gap-12 lg:grid-cols-[1.5fr_1fr] lg:gap-20">
       <div>
         <p className="label text-cobre">Sacola</p>
-        <h1 className="serif mt-3 text-h1 text-casca">
+        <h1 className="serif mt-3 text-h1 text-tinta">
           O que você <em>guardou</em>
         </h1>
         <ul className="mt-10 divide-y divide-dashed divide-cobre/40 border-y border-dashed border-cobre/40">
@@ -58,11 +58,11 @@ export function BagView() {
         <OrderSummary t={t} shippingLabel={shipping ? (shipping.price === 0 ? "Grátis" : formatBRL(shipping.price)) : null} />
         <Link
           href="/checkout"
-          className="label-lg mt-4 flex h-14 items-center justify-center gap-3 bg-indigo text-linho hover:bg-denim"
+          className="label-lg mt-4 flex h-14 items-center justify-center gap-3 bg-tinta text-branco hover:bg-preto"
         >
           Finalizar compra <Icon name="seta" size={22} />
         </Link>
-        <p className="label mt-4 flex items-center justify-center gap-2 text-indigo/55">
+        <p className="label mt-4 flex items-center justify-center gap-2 text-tinta/55">
           <Icon name="cadeado" size={16} /> {microcopy.demo}
         </p>
       </aside>

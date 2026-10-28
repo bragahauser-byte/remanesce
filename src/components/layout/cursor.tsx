@@ -67,13 +67,13 @@ export function Cursor() {
         className="group/cursor relative -translate-x-1/2 -translate-y-1/2 transition-all duration-500 ease-remanesce"
       >
         {/* círculo */}
-        <span className="block size-3.5 rounded-full border border-linho transition-all duration-500 ease-remanesce group-data-[mode=link]/cursor:size-10 group-data-[mode=lenda]/cursor:scale-0 group-data-[mode=ver]/cursor:scale-0" />
+        <span className="block size-3.5 rounded-full border border-branco transition-all duration-500 ease-remanesce group-data-[mode=link]/cursor:size-10 group-data-[mode=lenda]/cursor:scale-0 group-data-[mode=ver]/cursor:scale-0" />
         {/* losango VER */}
         <span className="absolute left-1/2 top-1/2 grid h-[72px] w-12 -translate-x-1/2 -translate-y-1/2 scale-0 place-items-center transition-transform duration-500 ease-remanesce group-data-[mode=ver]/cursor:scale-100">
           <svg viewBox="0 0 48 72" className="absolute inset-0 h-full w-full">
             <path d="M24 1 47 36 24 71 1 36z" fill="none" stroke="var(--linho)" strokeWidth="1" />
           </svg>
-          <span className="font-mono text-[10px] tracking-[0.12em] text-linho">VER</span>
+          <span className="font-mono text-[10px] tracking-[0.12em] text-branco">VER</span>
         </span>
         {/* pinhão */}
         <svg

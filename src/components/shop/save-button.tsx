@@ -4,8 +4,20 @@ import { Icon } from "@/components/icons/icon";
 import { useHydrated } from "@/lib/hooks";
 import { useSaved } from "@/lib/store/saved";
 
-/** Guardar a peça: o pinhão fica vermelho, como a semente que a gralha guarda. */
-export function SaveButton({ slug, name, className = "", withLabel = false }: { slug: string; name: string; className?: string; withLabel?: boolean }) {
+/** Favoritar a peça: o coração preenche em vermelho pinhão. */
+export function SaveButton({
+  slug,
+  name,
+  className = "",
+  withLabel = false,
+  size = 20,
+}: {
+  slug: string;
+  name: string;
+  className?: string;
+  withLabel?: boolean;
+  size?: number;
+}) {
   const hydrated = useHydrated();
   const saved = useSaved((s) => s.slugs.includes(slug));
   const toggle = useSaved((s) => s.toggle);
@@ -20,11 +32,11 @@ export function SaveButton({ slug, name, className = "", withLabel = false }: { 
         toggle(slug);
       }}
       aria-pressed={on}
-      aria-label={on ? `Remover ${name} dos guardados` : `Guardar ${name}`}
-      className={`group/save flex items-center gap-2 transition-colors hover:text-pinhao ${className}`}
+      aria-label={on ? `Remover ${name} dos favoritos` : `Favoritar ${name}`}
+      className={`group/save flex items-center gap-2 ${className}`}
     >
-      <Icon name="pinhao" filled={on} className="transition-transform duration-500 ease-remanesce group-active/save:scale-90" />
-      {withLabel && <span className="label">{on ? "Guardado" : "Guardar"}</span>}
+      <Icon name="coracao" size={size} filled={on} className="transition-transform duration-500 ease-remanesce group-active/save:scale-90" />
+      {withLabel && <span className="text-small">{on ? "Favoritado" : "Favoritar"}</span>}
     </button>
   );
 }

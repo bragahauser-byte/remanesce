@@ -64,7 +64,7 @@ export function BookingForm({ service, label }: { service: Booking["service"]; l
       <div role="status" className="border border-dashed border-cobre p-6 md:p-8">
         <p className="label text-cobre">Protocolo {done.protocol}</p>
         <p className="serif mt-3 text-h4">Agendado: {done.serviceLabel}.</p>
-        <p className="mt-2 flex items-center gap-2 text-indigo/75">
+        <p className="mt-2 flex items-center gap-2 text-tinta/75">
           <Icon name="calendario" size={18} /> {formatDate(done.date, { weekday: "long", day: "numeric", month: "long" })} às {done.time}
         </p>
         <div className="mt-6 flex flex-wrap gap-6">
@@ -91,14 +91,14 @@ export function BookingForm({ service, label }: { service: Booking["service"]; l
     <form onSubmit={handleSubmit(submit)} noValidate className="grid gap-7 sm:grid-cols-2">
       <Field id={id("data")} label="Data" type="date" {...register("date")} error={errors.date?.message} />
       <div>
-        <label htmlFor={id("horario")} className="label text-indigo/70">
+        <label htmlFor={id("horario")} className="label text-tinta/70">
           Horário
         </label>
         <select
           id={id("horario")}
           {...register("time")}
           defaultValue=""
-          className="mt-1.5 block w-full border-b border-indigo/30 bg-transparent py-2.5 font-mono text-[14px] focus:border-indigo focus:outline-none"
+          className="mt-1.5 block w-full border-b border-tinta/30 bg-transparent py-2.5 font-mono text-[14px] focus:border-tinta focus:outline-none"
         >
           <option value="" disabled>
             Escolha
@@ -124,17 +124,17 @@ export function BookingForm({ service, label }: { service: Booking["service"]; l
         error={errors.phone?.message}
       />
       <div className="sm:col-span-2">
-        <label htmlFor={id("descricao")} className="label text-indigo/70">
+        <label htmlFor={id("descricao")} className="label text-tinta/70">
           Conte sobre a peça (opcional)
         </label>
         <textarea
           id={id("descricao")}
           rows={3}
           {...register("description")}
-          className="mt-1.5 block w-full resize-y border-b border-indigo/30 bg-transparent py-2.5 focus:border-indigo focus:outline-none"
+          className="mt-1.5 block w-full resize-y border-b border-tinta/30 bg-transparent py-2.5 focus:border-tinta focus:outline-none"
         />
       </div>
-      <button type="submit" className="label-lg flex h-13 items-center justify-center gap-3 bg-indigo text-linho hover:bg-denim sm:w-fit sm:px-10">
+      <button type="submit" className="label-lg flex h-13 items-center justify-center gap-3 bg-tinta text-branco hover:bg-preto sm:w-fit sm:px-10">
         Agendar <Icon name="calendario" size={20} />
       </button>
     </form>

@@ -61,7 +61,7 @@ export function LookView({ look, pieces, total }: { look: Look; pieces: Product[
                 type="button"
                 aria-pressed={side === s}
                 onClick={() => setSide(s)}
-                className="label relative pb-1 text-indigo/50 aria-pressed:text-indigo"
+                className="label relative pb-1 text-tinta/50 aria-pressed:text-tinta"
               >
                 {s === "frente" ? "Frente" : "Costas"}
                 {side === s && <span aria-hidden className="stitch-x absolute inset-x-0 bottom-0" />}
@@ -74,7 +74,7 @@ export function LookView({ look, pieces, total }: { look: Look; pieces: Product[
           <p className="label text-cobre">
             Look {pad(look.number)} / 06
           </p>
-          <h2 id={`look-${look.number}-titulo`} className="serif mt-3 text-h1 text-casca">
+          <h2 id={`look-${look.number}-titulo`} className="serif mt-3 text-h1 text-tinta">
             {look.name}
           </h2>
           <p className="serif mt-4 text-h4 italic">{look.line}</p>
@@ -83,8 +83,8 @@ export function LookView({ look, pieces, total }: { look: Look; pieces: Product[
               <li key={p.slug}>
                 <ProductLink slug={p.slug} className="group flex items-baseline justify-between gap-4 py-3.5">
                   <span>
-                    <span className="label block text-indigo/50">{p.code}</span>
-                    <span className="serif text-[1.25rem] group-hover:text-casca">{p.name}</span>
+                    <span className="label block text-tinta/50">{p.code}</span>
+                    <span className="serif text-[1.25rem] group-hover:text-tinta">{p.name}</span>
                   </span>
                   <span className="label">{formatBRL(p.price)}</span>
                 </ProductLink>
@@ -94,11 +94,11 @@ export function LookView({ look, pieces, total }: { look: Look; pieces: Product[
           <button
             type="button"
             onClick={buyLook}
-            className="label-lg mt-8 flex h-14 w-full items-center justify-center gap-3 bg-indigo text-linho hover:bg-denim sm:w-auto sm:px-10"
+            className="label-lg mt-8 flex h-14 w-full items-center justify-center gap-3 bg-tinta text-branco hover:bg-preto sm:w-auto sm:px-10"
           >
             Comprar o look · {formatBRL(total)} <Icon name="sacola" size={20} />
           </button>
-          <p role="status" className="mt-3 min-h-5 text-small text-indigo/60">
+          <p role="status" className="mt-3 min-h-5 text-small text-tinta/60">
             {added ? "Peças na sacola em tamanho M (calças 40). Ajuste os tamanhos na sacola." : "Adiciona as peças em M (calças 40); ajuste depois na sacola."}
           </p>
         </div>

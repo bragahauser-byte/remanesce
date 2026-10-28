@@ -50,7 +50,7 @@ export function BuyBox({ product }: { product: Product }) {
       {!single && (
         <fieldset>
           <div className="flex items-baseline justify-between">
-            <legend className="label text-indigo/70">
+            <legend className="label text-tinta/70">
               Tamanho{size ? `: ${size}` : ""}
             </legend>
             <SizeGuide numeric={numeric} />
@@ -62,8 +62,8 @@ export function BuyBox({ product }: { product: Product }) {
               return (
                 <label
                   key={s.label}
-                  className={`relative grid h-11 cursor-pointer place-items-center border text-small transition-colors has-checked:border-indigo has-checked:bg-indigo has-checked:text-linho has-focus-visible:outline has-focus-visible:outline-dashed has-focus-visible:outline-cobre ${
-                    out ? "cursor-not-allowed border-indigo/10 text-indigo/35" : "border-indigo/25 hover:border-indigo"
+                  className={`relative grid h-11 cursor-pointer place-items-center border text-small transition-colors has-checked:border-tinta has-checked:bg-tinta has-checked:text-branco has-focus-visible:outline has-focus-visible:outline-dashed has-focus-visible:outline-cobre ${
+                    out ? "cursor-not-allowed border-tinta/10 text-tinta/35" : "border-tinta/25 hover:border-tinta"
                   }`}
                 >
                   <input
@@ -94,7 +94,7 @@ export function BuyBox({ product }: { product: Product }) {
       )}
 
       <div className="mt-6 flex gap-3">
-        <div className="flex h-14 items-center border border-indigo/25" role="group" aria-label="Quantidade">
+        <div className="flex h-14 items-center border border-tinta/25" role="group" aria-label="Quantidade">
           <button
             type="button"
             onClick={() => setQty((q) => Math.max(1, q - 1))}
@@ -121,7 +121,7 @@ export function BuyBox({ product }: { product: Product }) {
           type="button"
           onClick={onAdd}
           disabled={soldOut}
-          className="label-lg group relative flex h-14 flex-1 items-center justify-center gap-3 overflow-hidden bg-indigo text-linho transition-colors hover:bg-denim disabled:bg-indigo/30"
+          className="label-lg group relative flex h-14 flex-1 items-center justify-center gap-3 overflow-hidden bg-tinta text-branco transition-colors hover:bg-preto disabled:bg-tinta/30"
         >
           <span aria-hidden className="absolute inset-x-0 bottom-0 h-0 bg-pinhao transition-[height] duration-500 ease-remanesce group-hover:h-1" />
           {soldOut ? "Esgotado" : "Adicionar à sacola"}
@@ -133,7 +133,7 @@ export function BuyBox({ product }: { product: Product }) {
         {status === "need-size" && <span className="text-pinhao">Escolha um tamanho, por favor.</span>}
         {status === "limit" && <span className="text-pinhao">Você já tem todas as unidades deste tamanho na sacola.</span>}
         {status === "added" && (
-          <span className="flex items-center gap-2 text-araucaria">
+          <span className="flex items-center gap-2 text-tinta">
             <Icon name="check" size={16} /> {microcopy.added}
           </span>
         )}

@@ -21,7 +21,7 @@ export function ShopResults() {
 
   return (
     <>
-      <div className="sticky top-header z-30 border-y border-indigo/10 bg-linho/85 backdrop-blur-md">
+      <div className="sticky top-header z-30 border-y border-tinta/10 bg-branco/85 backdrop-blur-md">
         <div className="container-x flex items-center gap-6 overflow-x-auto py-3 [scrollbar-width:none]">
           <nav aria-label="Categorias" className="flex shrink-0 gap-5">
             <FilterLink href={shopHref(params, { cat: null })} active={!params.cat}>
@@ -33,7 +33,7 @@ export function ShopResults() {
               </FilterLink>
             ))}
           </nav>
-          <span className="ml-auto h-4 w-px shrink-0 bg-indigo/15" />
+          <span className="ml-auto h-4 w-px shrink-0 bg-tinta/15" />
           <nav aria-label="Ordenar" className="flex shrink-0 gap-5">
             {sortOptions.map((s) => (
               <FilterLink key={s.key} href={shopHref(params, { sort: s.key })} active={params.sort === s.key}>
@@ -41,7 +41,7 @@ export function ShopResults() {
               </FilterLink>
             ))}
           </nav>
-          <span className="h-4 w-px shrink-0 bg-indigo/15" />
+          <span className="h-4 w-px shrink-0 bg-tinta/15" />
           <nav aria-label="Visualização" className="flex shrink-0 gap-5">
             <FilterLink href={shopHref(params, { view: "galeria" })} active={params.view === "galeria"}>
               Galeria
@@ -53,18 +53,18 @@ export function ShopResults() {
         </div>
       </div>
 
-      <p className="container-x label pt-6 text-indigo/55" role="status">
+      <p className="container-x label pt-6 text-tinta/55" role="status">
         {list.length} {list.length === 1 ? "peça" : "peças"}
       </p>
 
       {list.length === 0 ? (
-        <p className="container-x serif py-24 text-h3 text-casca">Nenhuma peça aqui por enquanto.</p>
+        <p className="container-x serif py-24 text-h3 text-tinta">Nenhuma peça aqui por enquanto.</p>
       ) : params.view === "arquivo" ? (
         <ul className="container-x grid grid-cols-3 gap-x-3 gap-y-8 pt-6 sm:grid-cols-4 md:grid-cols-6 md:gap-x-5">
           {list.map((p) => (
             <li key={p.slug}>
               <ProductLink slug={p.slug} data-cursor="ver" className="group block">
-                <div className="relative aspect-[3/4] overflow-hidden bg-linho-escuro/50">
+                <div className="relative aspect-[3/4] overflow-hidden bg-papel/50">
                   <ProductImage image={p.images.details[0]} sizes="(min-width: 768px) 16vw, 33vw" />
                 </div>
                 <p className="label mt-2 text-[10px] group-hover:text-cobre md:text-[11px]">{p.code}</p>
@@ -103,7 +103,7 @@ function FilterLink({ href, active, children }: { href: string; active: boolean;
       href={href}
       scroll={false}
       aria-current={active ? "true" : undefined}
-      className="label relative whitespace-nowrap py-1.5 text-indigo/55 transition-colors hover:text-indigo aria-[current=true]:text-indigo"
+      className="label relative whitespace-nowrap py-1.5 text-tinta/55 transition-colors hover:text-tinta aria-[current=true]:text-tinta"
     >
       {children}
       {active && <span aria-hidden className="stitch-x absolute inset-x-0 -bottom-0.5" />}

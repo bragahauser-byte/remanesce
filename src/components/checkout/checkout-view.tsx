@@ -47,8 +47,8 @@ function CheckoutFlow() {
   if (placing) {
     return (
       <div className="flex min-h-[60vh] flex-col items-center justify-center text-center" role="status">
-        <Icon name="broto" size={40} className="text-araucaria" />
-        <p className="serif mt-6 text-h3 text-casca">{microcopy.orderConfirmed}</p>
+        <Icon name="broto" size={40} className="text-tinta" />
+        <p className="serif mt-6 text-h3 text-tinta">{microcopy.orderConfirmed}</p>
       </div>
     );
   }
@@ -56,7 +56,7 @@ function CheckoutFlow() {
   if (t.detailed.length === 0) {
     return (
       <div className="flex min-h-[50vh] flex-col items-start justify-center">
-        <h1 className="serif text-h1 text-casca">{microcopy.emptyBag}</h1>
+        <h1 className="serif text-h1 text-tinta">{microcopy.emptyBag}</h1>
         <Link href="/loja" className="label link-stitch mt-8">
           {microcopy.emptyBagCta}
         </Link>
@@ -107,12 +107,12 @@ function CheckoutFlow() {
       <div>
         <div className="flex items-baseline justify-between gap-4">
           <h1 className="label-lg text-cobre">Finalizar compra</h1>
-          <span className="label text-indigo/50">Pedido {orderId}</span>
+          <span className="label text-tinta/50">Pedido {orderId}</span>
         </div>
         <div className="mt-6">
           <CheckoutProgress step={step} onGo={go} />
         </div>
-        <a href="#resumo" className="mt-6 flex items-center justify-between bg-linho-escuro/60 px-4 py-3 lg:hidden">
+        <a href="#resumo" className="mt-6 flex items-center justify-between bg-papel/60 px-4 py-3 lg:hidden">
           <span className="label">
             {t.pieces} {t.pieces === 1 ? "peça" : "peças"} · ver resumo
           </span>
@@ -173,12 +173,12 @@ function Recap({ title, children, onEdit }: { title: string; children: React.Rea
   return (
     <div className="border border-dashed border-cobre/60 p-4">
       <div className="flex items-baseline justify-between">
-        <p className="label text-indigo/60">{title}</p>
+        <p className="label text-tinta/60">{title}</p>
         <button type="button" onClick={onEdit} className="label link-stitch">
           Editar
         </button>
       </div>
-      <p className="mt-2 text-indigo/85">{children}</p>
+      <p className="mt-2 text-tinta/85">{children}</p>
     </div>
   );
 }

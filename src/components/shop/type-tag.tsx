@@ -1,11 +1,11 @@
 import type { TypeTag as Tag } from "@/data/products";
 
 const styles: Record<Tag, string> = {
-  "PEÇA-HERÓI": "bg-indigo text-linho",
-  "VERMELHO POR DENTRO": "bg-pinhao text-linho",
-  "ÚLTIMAS UNIDADES": "bg-linho text-indigo ring-1 ring-indigo/70",
-  "100% DENIM": "bg-denim text-linho",
-  "PLANTA 1 ARAUCÁRIA": "bg-linho-escuro text-araucaria ring-1 ring-araucaria/40",
+  "PEÇA-HERÓI": "bg-tinta text-branco",
+  "VERMELHO POR DENTRO": "bg-pinhao text-branco",
+  "ÚLTIMAS UNIDADES": "bg-branco text-tinta ring-1 ring-tinta/70",
+  "100% DENIM": "bg-preto text-branco",
+  "PLANTA 1 ARAUCÁRIA": "bg-papel text-tinta ring-1 ring-tinta/40",
 };
 
 // Rotações fixas por etiqueta (−3° a 3°): estáveis entre servidor e cliente.

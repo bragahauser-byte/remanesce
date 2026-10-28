@@ -1,9 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { Suspense } from "react";
-import { Bodoni_Moda, IBM_Plex_Mono, Instrument_Sans } from "next/font/google";
+import { Bodoni_Moda, Instrument_Sans, Instrument_Serif } from "next/font/google";
 import { Cursor } from "@/components/layout/cursor";
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
+import { IndexPanel } from "@/components/layout/index-panel";
 import { Menu } from "@/components/layout/menu";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { PageTransition } from "@/components/layout/page-transition";
@@ -24,10 +25,11 @@ const bodoni = Bodoni_Moda({
   display: "swap",
 });
 
-const plexMono = IBM_Plex_Mono({
-  variable: "--font-plex-mono",
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument-serif",
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: "400",
+  style: ["normal", "italic"],
   display: "swap",
 });
 
@@ -57,16 +59,16 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#F1EDE4",
+  themeColor: "#FFFFFF",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="pt-BR" className={`${bodoni.variable} ${plexMono.variable} ${instrument.variable}`}>
+    <html lang="pt-BR" className={`${bodoni.variable} ${instrumentSerif.variable} ${instrument.variable}`}>
       <body>
         <a
           href="#conteudo"
-          className="label fixed left-4 top-4 z-[110] -translate-y-24 bg-indigo px-4 py-3 text-linho focus:translate-y-0"
+          className="label fixed left-4 top-4 z-[110] -translate-y-24 bg-tinta px-4 py-3 text-branco focus:translate-y-0"
         >
           Pular para o conteúdo
         </a>
@@ -74,6 +76,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         {/* Componentes que leem a rota: em rotas dinâmicas, entram por streaming. */}
         <Suspense fallback={null}>
           <Menu />
+          <IndexPanel />
           <SearchOverlay />
           <BagDrawer />
         </Suspense>

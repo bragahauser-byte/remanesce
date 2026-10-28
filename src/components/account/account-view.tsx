@@ -41,11 +41,11 @@ export function AccountView() {
       <div className="flex flex-wrap items-end justify-between gap-6">
         <div>
           <p className="label text-cobre">Minha Remanesce</p>
-          <h1 className="serif mt-3 text-h1 text-casca">{user ? <>Olá, <em>{user.name.split(" ")[0]}</em>.</> : <>O que você <em>guarda</em>.</>}</h1>
+          <h1 className="serif mt-3 text-h1 text-tinta">{user ? <>Olá, <em>{user.name.split(" ")[0]}</em>.</> : <>O que você <em>guarda</em>.</>}</h1>
         </div>
         {user && (
           <div className="text-right">
-            <p className="text-small text-indigo/70">{user.email}</p>
+            <p className="text-small text-tinta/70">{user.email}</p>
             <button type="button" onClick={logout} className="label link-stitch mt-2">
               Sair
             </button>
@@ -55,7 +55,7 @@ export function AccountView() {
 
       {!user && <LoginCard />}
 
-      <div role="tablist" aria-label="Seções da conta" className="mt-12 flex gap-6 overflow-x-auto border-b border-indigo/10 [scrollbar-width:none]">
+      <div role="tablist" aria-label="Seções da conta" className="mt-12 flex gap-6 overflow-x-auto border-b border-tinta/10 [scrollbar-width:none]">
         {tabs.map((t) => (
           <button
             key={t.key}
@@ -65,7 +65,7 @@ export function AccountView() {
             aria-selected={tab === t.key}
             aria-controls="painel-conta"
             onClick={() => router.replace(`${pathname}?aba=${t.key}`, { scroll: false })}
-            className="label relative shrink-0 whitespace-nowrap pb-3 text-indigo/55 aria-selected:text-indigo"
+            className="label relative shrink-0 whitespace-nowrap pb-3 text-tinta/55 aria-selected:text-tinta"
           >
             {t.label}
             {tab === t.key && <span aria-hidden className="absolute inset-x-0 -bottom-px h-0.5 bg-pinhao" />}
@@ -101,18 +101,18 @@ function LoginCard() {
 
   return (
     <form onSubmit={onSubmit} noValidate className="mt-10 grid gap-6 border border-dashed border-cobre/60 p-6 md:grid-cols-[1fr_1fr_auto] md:items-end md:p-8">
-      <p className="text-small text-indigo/70 md:col-span-3">
+      <p className="text-small text-tinta/70 md:col-span-3">
         Entre com seu nome e e-mail para acompanhar pedidos, serviços e araucárias. Sem senha: fica tudo neste navegador.
       </p>
       <label className="block">
-        <span className="label text-indigo/70">Nome</span>
-        <input name="nome" autoComplete="name" className="mt-1.5 block w-full border-b border-indigo/30 bg-transparent py-2.5 focus:border-indigo focus:outline-none" />
+        <span className="label text-tinta/70">Nome</span>
+        <input name="nome" autoComplete="name" className="mt-1.5 block w-full border-b border-tinta/30 bg-transparent py-2.5 focus:border-tinta focus:outline-none" />
       </label>
       <label className="block">
-        <span className="label text-indigo/70">E-mail</span>
-        <input name="email" type="email" autoComplete="email" className="mt-1.5 block w-full border-b border-indigo/30 bg-transparent py-2.5 focus:border-indigo focus:outline-none" />
+        <span className="label text-tinta/70">E-mail</span>
+        <input name="email" type="email" autoComplete="email" className="mt-1.5 block w-full border-b border-tinta/30 bg-transparent py-2.5 focus:border-tinta focus:outline-none" />
       </label>
-      <button type="submit" className="label-lg h-12 bg-indigo px-8 text-linho hover:bg-denim">
+      <button type="submit" className="label-lg h-12 bg-tinta px-8 text-branco hover:bg-preto">
         Entrar
       </button>
       <p role="status" className="label text-pinhao md:col-span-3">
@@ -125,8 +125,8 @@ function LoginCard() {
 function Empty({ icon, children, cta }: { icon: IconName; children: ReactNode; cta?: { href: string; label: string } }) {
   return (
     <div className="flex flex-col items-start py-10">
-      <Icon name={icon} size={36} className="text-indigo/40" />
-      <p className="serif mt-5 max-w-lg text-h4 text-casca">{children}</p>
+      <Icon name={icon} size={36} className="text-tinta/40" />
+      <p className="serif mt-5 max-w-lg text-h4 text-tinta">{children}</p>
       {cta && (
         <Link href={cta.href} className="label link-stitch mt-6">
           {cta.label}
@@ -146,9 +146,9 @@ function OrdersTab() {
           <Link href={`/pedido?id=${o.id}`} className="group grid gap-2 py-5 sm:grid-cols-[1fr_auto_auto] sm:items-center sm:gap-10">
             <div>
               <p className="label text-cobre">{o.id}</p>
-              <p className="serif mt-1 text-[1.25rem] group-hover:text-casca">{o.items.map((i) => i.name).join(" · ")}</p>
+              <p className="serif mt-1 text-[1.25rem] group-hover:text-tinta">{o.items.map((i) => i.name).join(" · ")}</p>
             </div>
-            <p className="label text-indigo/60">{formatDate(o.createdAt)}</p>
+            <p className="label text-tinta/60">{formatDate(o.createdAt)}</p>
             <p className="label flex items-center gap-3">
               {formatBRL(o.total)} <Icon name="seta" size={18} className="transition-transform group-hover:translate-x-1" />
             </p>
@@ -185,13 +185,13 @@ function ServicesTab() {
   return (
     <ul className="grid gap-4 md:grid-cols-2">
       {bookings.map((b) => (
-        <li key={b.protocol} className="border border-indigo/15 p-6">
+        <li key={b.protocol} className="border border-tinta/15 p-6">
           <p className="label text-cobre">Protocolo {b.protocol}</p>
           <p className="serif mt-2 text-h4">{b.serviceLabel}</p>
-          <p className="label mt-3 flex items-center gap-2 text-indigo/70">
+          <p className="label mt-3 flex items-center gap-2 text-tinta/70">
             <Icon name="calendario" size={16} /> {formatDate(b.date)} · {b.time}
           </p>
-          {b.description && <p className="mt-3 text-small text-indigo/75">{b.description}</p>}
+          {b.description && <p className="mt-3 text-small text-tinta/75">{b.description}</p>}
         </li>
       ))}
     </ul>
@@ -219,12 +219,12 @@ function TreesTab() {
   return (
     <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {trees.map((t) => (
-        <li key={t.number} className="flex items-start gap-4 bg-araucaria p-6 text-linho">
+        <li key={t.number} className="flex items-start gap-4 bg-preto p-6 text-branco">
           <Icon name="araucaria" size={32} className="shrink-0" />
           <div>
-            <p className="label text-linho/65">Araucária nº</p>
+            <p className="label text-branco/65">Araucária nº</p>
             <p className="serif text-h3 leading-none">{number.format(t.number)}</p>
-            <p className="mt-3 text-small text-linho/75">
+            <p className="mt-3 text-small text-branco/75">
               Plantada pela {t.item.name} · {formatDate(t.order.createdAt, { month: "long", year: "numeric" })}
             </p>
           </div>
@@ -252,11 +252,11 @@ function PassportsTab() {
               <div className="flex items-center gap-4">
                 <Icon name="qr" size={28} />
                 <div>
-                  <p className="label text-indigo/55">{t.item.code}</p>
-                  <p className="serif text-[1.2rem] group-hover:text-casca">{product?.name ?? t.item.name}</p>
+                  <p className="label text-tinta/55">{t.item.code}</p>
+                  <p className="serif text-[1.2rem] group-hover:text-tinta">{product?.name ?? t.item.name}</p>
                 </div>
               </div>
-              <p className="label flex items-center gap-3 text-indigo/70">
+              <p className="label flex items-center gap-3 text-tinta/70">
                 Araucária nº {number.format(t.number)} <Icon name="seta" size={18} />
               </p>
             </Link>

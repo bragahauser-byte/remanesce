@@ -22,15 +22,15 @@ export function CartLineItem({ line, compact = false }: { line: DetailedLine; co
     <li className="flex gap-4 py-5">
       <Link
         href={`/loja/${product.slug}`}
-        className={`relative shrink-0 overflow-hidden bg-linho-escuro/40 ${compact ? "h-28 w-21" : "h-36 w-27 md:h-44 md:w-33"}`}
+        className={`relative shrink-0 overflow-hidden bg-papel/40 ${compact ? "h-28 w-21" : "h-36 w-27 md:h-44 md:w-33"}`}
       >
         <ProductImage image={product.images.details[0]} alt={product.name} sizes="140px" />
       </Link>
       <div className="flex min-w-0 flex-1 flex-col">
         <div className="flex items-start justify-between gap-3">
           <div>
-            <p className="label text-indigo/50">{product.code}</p>
-            <Link href={`/loja/${product.slug}`} className={`serif mt-0.5 block leading-tight hover:text-casca ${compact ? "text-[1.1rem]" : "text-h4"}`}>
+            <p className="label text-tinta/50">{product.code}</p>
+            <Link href={`/loja/${product.slug}`} className={`serif mt-0.5 block leading-tight hover:text-tinta ${compact ? "text-[1.1rem]" : "text-h4"}`}>
               {product.name}
             </Link>
           </div>
@@ -39,14 +39,14 @@ export function CartLineItem({ line, compact = false }: { line: DetailedLine; co
 
         <div className="mt-auto flex flex-wrap items-end gap-3 pt-3">
           {single ? (
-            <span className="label text-indigo/60">Tamanho único</span>
+            <span className="label text-tinta/60">Tamanho único</span>
           ) : (
-            <label className="label flex items-center gap-2 text-indigo/60">
+            <label className="label flex items-center gap-2 text-tinta/60">
               Tam.
               <select
                 value={line.size}
                 onChange={(e) => setSize(product.slug, line.size, e.target.value)}
-                className="h-9 border border-indigo/20 bg-transparent px-2 font-mono text-[12px] text-indigo"
+                className="h-9 border border-tinta/20 bg-transparent px-2 font-mono text-[12px] text-tinta"
               >
                 {product.sizes.map((s) => {
                   const out = stockOf(product, s.label) === 0;
@@ -60,7 +60,7 @@ export function CartLineItem({ line, compact = false }: { line: DetailedLine; co
               </select>
             </label>
           )}
-          <div className="flex h-9 items-center border border-indigo/20" role="group" aria-label={`Quantidade de ${product.name}`}>
+          <div className="flex h-9 items-center border border-tinta/20" role="group" aria-label={`Quantidade de ${product.name}`}>
             <button
               type="button"
               onClick={() => setQty(product.slug, line.size, line.qty - 1, max)}
@@ -83,7 +83,7 @@ export function CartLineItem({ line, compact = false }: { line: DetailedLine; co
           <button
             type="button"
             onClick={() => remove(product.slug, line.size)}
-            className="label ml-auto text-indigo/55 underline-offset-4 hover:text-pinhao hover:underline"
+            className="label ml-auto text-tinta/55 underline-offset-4 hover:text-pinhao hover:underline"
           >
             Remover
           </button>

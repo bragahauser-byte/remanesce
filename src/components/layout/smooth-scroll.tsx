@@ -15,8 +15,8 @@ export function getLenis() {
 
 export function SmoothScroll() {
   const reduced = useReducedMotion();
-  // Em /looks o scroll snap nativo conduz a página.
-  const native = usePathname() === "/looks";
+  // Em /colecao o scroll snap nativo conduz a página.
+  const native = usePathname() === "/colecao";
   const panel = useUI((s) => s.panel);
 
   useEffect(() => {

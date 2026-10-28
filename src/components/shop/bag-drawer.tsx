@@ -37,19 +37,19 @@ export function BagDrawer() {
     <div className="no-print fixed inset-0 z-[75]" inert={!open} aria-hidden={!open}>
       <div
         onClick={close}
-        className={`absolute inset-0 bg-indigo/40 transition-opacity duration-500 ease-remanesce ${open ? "opacity-100" : "pointer-events-none opacity-0"}`}
+        className={`absolute inset-0 bg-tinta/40 transition-opacity duration-500 ease-remanesce ${open ? "opacity-100" : "pointer-events-none opacity-0"}`}
       />
       <div
         ref={ref}
         role="dialog"
         aria-modal="true"
         aria-labelledby="sacola-titulo"
-        className={`absolute inset-y-0 right-0 flex w-full flex-col bg-linho transition-transform duration-[600ms] ease-remanesce sm:w-[460px] ${open ? "translate-x-0" : "translate-x-full"}`}
+        className={`absolute inset-y-0 right-0 flex w-full flex-col bg-branco transition-transform duration-[600ms] ease-remanesce sm:w-[460px] ${open ? "translate-x-0" : "translate-x-full"}`}
       >
         <span aria-hidden className="absolute inset-y-0 left-0 w-1 bg-pinhao" />
-        <div className="flex h-header shrink-0 items-center justify-between border-b border-indigo/10 px-6">
+        <div className="flex h-header shrink-0 items-center justify-between border-b border-tinta/10 px-6">
           <h2 id="sacola-titulo" className="label-lg">
-            Sacola {pieces > 0 && <span className="text-indigo/50">({pieces})</span>}
+            Sacola {pieces > 0 && <span className="text-tinta/50">({pieces})</span>}
           </h2>
           <button type="button" onClick={close} className="-mr-2 p-2 hover:text-cobre" aria-label="Fechar sacola" data-autofocus>
             <Icon name="fechar" />
@@ -58,19 +58,19 @@ export function BagDrawer() {
 
         {detailed.length === 0 ? (
           <div className="flex flex-1 flex-col items-center justify-center px-8 text-center">
-            <Icon name="pinhao" size={40} className="text-indigo/40" />
-            <p className="serif mt-6 text-h4 text-casca">{microcopy.emptyBag}</p>
+            <Icon name="pinhao" size={40} className="text-tinta/40" />
+            <p className="serif mt-6 text-h4 text-tinta">{microcopy.emptyBag}</p>
             <Link href="/loja" onClick={close} className="label link-stitch mt-6">
               {microcopy.emptyBagCta}
             </Link>
           </div>
         ) : (
           <>
-            <div className="border-b border-indigo/10 px-6 py-3">
-              <p className="label text-indigo/70">
+            <div className="border-b border-tinta/10 px-6 py-3">
+              <p className="label text-tinta/70">
                 {missing > 0 ? `Faltam ${formatBRL(missing)} para o frete grátis` : "Frete grátis garantido"}
               </p>
-              <div className="mt-2 h-px bg-indigo/10">
+              <div className="mt-2 h-px bg-tinta/10">
                 <div className="h-px bg-cobre transition-[width] duration-700" style={{ width: `${Math.min(100, (subtotal / FREE_SHIPPING_FROM) * 100)}%` }} />
               </div>
             </div>
@@ -79,21 +79,21 @@ export function BagDrawer() {
                 <CartLineItem key={`${l.slug}:${l.size}`} line={l} compact />
               ))}
             </ul>
-            <div className="border-t border-indigo/10 px-6 pb-6 pt-5">
+            <div className="border-t border-tinta/10 px-6 pb-6 pt-5">
               <div className="flex items-baseline justify-between">
                 <span className="label">Subtotal</span>
                 <span className="font-mono text-[1.05rem]">{formatBRL(subtotal)}</span>
               </div>
-              <p className="mt-1 text-right text-small text-indigo/60">{installmentsLabel(subtotal)}</p>
+              <p className="mt-1 text-right text-small text-tinta/60">{installmentsLabel(subtotal)}</p>
               <div className="mt-5 grid gap-2">
                 <Link
                   href="/checkout"
                   onClick={close}
-                  className="label-lg flex h-13 items-center justify-center gap-3 bg-indigo text-linho hover:bg-denim"
+                  className="label-lg flex h-13 items-center justify-center gap-3 bg-tinta text-branco hover:bg-preto"
                 >
                   Finalizar compra <Icon name="seta" size={22} />
                 </Link>
-                <Link href="/sacola" onClick={close} className="label-lg flex h-12 items-center justify-center border border-indigo/25 hover:border-indigo">
+                <Link href="/sacola" onClick={close} className="label-lg flex h-12 items-center justify-center border border-tinta/25 hover:border-tinta">
                   Ver sacola
                 </Link>
               </div>

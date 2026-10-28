@@ -22,14 +22,14 @@ export function LineupViewer() {
             type="button"
             aria-pressed={side === s}
             onClick={() => setSide(s)}
-            className="label relative pb-1.5 text-indigo/50 aria-pressed:text-indigo"
+            className="label relative pb-1.5 text-tinta/50 aria-pressed:text-tinta"
           >
             {s === "frente" ? "Frente" : "Costas"}
             {side === s && <span aria-hidden className="stitch-x absolute inset-x-0 bottom-0" />}
           </button>
         ))}
       </div>
-      <div className="relative mt-6 aspect-[16/7.8] w-full overflow-hidden bg-linho">
+      <div className="relative mt-6 aspect-[16/7.8] w-full overflow-hidden bg-branco">
         {(["frente", "costas"] as const).map((s) => (
           <Image
             key={s}
@@ -52,7 +52,7 @@ export function LineupViewer() {
               aria-label={`Look ${look.name}: ver ${main.name}`}
             >
               <span className="absolute inset-0 opacity-0 outline-1 outline-dashed outline-cobre transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" />
-              <span className="label absolute bottom-0 left-1/2 hidden -translate-x-1/2 whitespace-nowrap bg-indigo px-2 py-1 text-[10px] text-linho opacity-0 transition-opacity group-hover:opacity-100 md:block">
+              <span className="label absolute bottom-0 left-1/2 hidden -translate-x-1/2 whitespace-nowrap bg-tinta px-2 py-1 text-[10px] text-branco opacity-0 transition-opacity group-hover:opacity-100 md:block">
                 {look.name}
               </span>
             </ProductLink>

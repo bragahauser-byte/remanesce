@@ -26,10 +26,10 @@ export function ReturnForm() {
 
   if (sent) {
     return (
-      <div role="status" className="border border-dashed border-linho/40 p-8">
+      <div role="status" className="border border-dashed border-branco/40 p-8">
         <Icon name="broto" size={32} />
         <p className="serif mt-4 text-h4">Obrigado, {sent.name.split(" ")[0]}.</p>
-        <p className="mt-2 text-linho/80">
+        <p className="mt-2 text-branco/80">
           Seu jeans vai virar escamas. Enviamos as instruções de envio para {sent.email}. Quando ele chegar, você ganha R$ 100 de crédito.
         </p>
         <button
@@ -47,11 +47,11 @@ export function ReturnForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit(setSent)} noValidate className="grid gap-7 sm:grid-cols-2 [&_input]:border-linho/30 [&_input]:text-linho [&_label]:text-linho/70">
+    <form onSubmit={handleSubmit(setSent)} noValidate className="grid gap-7 sm:grid-cols-2 [&_input]:border-branco/30 [&_input]:text-branco [&_label]:text-branco/70">
       <Field label="Nome" autoComplete="name" {...register("name")} error={errors.name?.message} />
       <Field label="E-mail" type="email" autoComplete="email" {...register("email")} error={errors.email?.message} />
       <Field label="A peça (ex.: calça jeans da minha mãe, anos 90)" {...register("piece")} error={errors.piece?.message} className="sm:col-span-2" />
-      <button type="submit" className="label-lg flex h-13 items-center justify-center gap-3 bg-linho text-araucaria hover:bg-linho-escuro sm:col-span-2 sm:w-fit sm:px-10">
+      <button type="submit" className="label-lg flex h-13 items-center justify-center gap-3 bg-branco text-tinta hover:bg-papel sm:col-span-2 sm:w-fit sm:px-10">
         Quero devolver e renascer <Icon name="seta" size={22} />
       </button>
     </form>

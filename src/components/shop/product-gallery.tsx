@@ -50,7 +50,7 @@ export function ProductGallery({ product, priority }: { product: Product; priori
               key={i}
               type="button"
               onClick={() => open(i)}
-              className="relative aspect-[3/4] w-full shrink-0 snap-center md:aspect-[4/3] overflow-hidden bg-linho"
+              className="relative aspect-[3/4] w-full shrink-0 snap-center md:aspect-[4/3] overflow-hidden bg-branco"
               aria-label={`${labels[i]}: ampliar imagem`}
             >
               <ProductImage image={img} sizes="(min-width: 1024px) 1px, 100vw" priority={priority && i === 0} />
@@ -68,7 +68,7 @@ export function ProductGallery({ product, priority }: { product: Product; priori
               onClick={() => goTo(i)}
               className="grid h-6 w-8 place-items-center"
             >
-              <span className={`block h-px w-full ${index === i ? "bg-indigo" : "stitch-x opacity-70"}`} />
+              <span className={`block h-px w-full ${index === i ? "bg-tinta" : "stitch-x opacity-70"}`} />
             </button>
           ))}
         </div>
@@ -82,11 +82,11 @@ export function ProductGallery({ product, priority }: { product: Product; priori
             type="button"
             onClick={() => open(i)}
             data-cursor="ver"
-            className={`group relative overflow-hidden bg-linho ${i < 2 ? "col-span-2 aspect-[4/5]" : "aspect-[3/4]"}`}
+            className={`group relative overflow-hidden bg-branco ${i < 2 ? "col-span-2 aspect-[4/5]" : "aspect-[3/4]"}`}
             aria-label={`${labels[i]}: ampliar imagem`}
           >
             <ProductImage image={img} sizes={i < 2 ? "(min-width: 768px) 50vw" : "(min-width: 768px) 25vw"} priority={priority && i === 0} />
-            <span className="label absolute bottom-3 left-3 bg-linho/85 px-1.5 py-0.5 text-indigo/70">
+            <span className="label absolute bottom-3 left-3 bg-branco/85 px-1.5 py-0.5 text-tinta/70">
               {String(i + 1).padStart(2, "0")} · {labels[i]}
             </span>
           </button>
@@ -97,7 +97,7 @@ export function ProductGallery({ product, priority }: { product: Product; priori
         ref={dialog}
         onClose={() => setZoomed(null)}
         onClick={(e) => e.target === dialog.current && dialog.current?.close()}
-        className="m-0 h-dvh max-h-none w-screen max-w-none bg-linho p-0 backdrop:bg-indigo/60"
+        className="m-0 h-dvh max-h-none w-screen max-w-none bg-branco p-0 backdrop:bg-tinta/60"
         aria-label={`Ampliação: ${product.name}`}
       >
         {zoomed !== null && <Lightbox image={images[zoomed]} onClose={() => dialog.current?.close()} />}
@@ -135,7 +135,7 @@ function Lightbox({ image, onClose }: { image: ProductImageData; onClose: () => 
         type="button"
         onClick={onClose}
         autoFocus
-        className="label absolute right-4 top-4 flex items-center gap-2 bg-linho/80 px-3 py-2 hover:text-cobre"
+        className="label absolute right-4 top-4 flex items-center gap-2 bg-branco/80 px-3 py-2 hover:text-cobre"
       >
         <Icon name="fechar" size={20} /> Fechar
       </button>

@@ -6,39 +6,42 @@ import { Icon } from "@/components/icons/icon";
 import { mobileNav } from "@/data/copy";
 import { useHydrated } from "@/lib/hooks";
 import { selectCount, useCart } from "@/lib/store/cart";
+import { useSaved } from "@/lib/store/saved";
 
-/** Barra inferior no celular: Explorar · Loja · Serviços · Conta · Sacola. */
+/** Barra inferior no celular: Coleção · Loja · Favoritos · Sacola · Conta. */
 export function MobileNav() {
   const pathname = usePathname();
   const hydrated = useHydrated();
   const count = useCart(selectCount);
-  if (pathname.startsWith("/checkout")) return null;
+  const saved = useSaved((s) => s.slugs.length);
+  if (pathname.startsWith("/checkout") || pathname.startsWith("/loja/")) return null;
 
   return (
     <nav
       aria-label="Navegação inferior"
-      className="no-print fixed inset-x-0 bottom-0 z-40 border-t border-indigo/10 bg-linho/90 pb-[env(safe-area-inset-bottom)] backdrop-blur-md md:hidden"
+      className="no-print fixed inset-x-0 bottom-0 z-40 border-t border-linha bg-branco/92 pb-[env(safe-area-inset-bottom)] text-tinta backdrop-blur-lg md:hidden"
     >
       <ul className="grid grid-cols-5">
         {mobileNav.map((item) => {
-          const current = pathname === item.href || pathname.startsWith(`${item.href}/`);
+          const path = item.href.split("?")[0];
+          const current = !item.href.includes("?") && (pathname === path || pathname.startsWith(`${path}/`));
+          const badge = item.icon === "sacola" ? count : 0;
           return (
             <li key={item.href}>
               <Link
                 href={item.href}
                 aria-current={current ? "page" : undefined}
-                className="relative flex h-16 flex-col items-center justify-center gap-1 text-indigo/60 aria-[current=page]:text-indigo"
+                className="relative flex h-15 flex-col items-center justify-center gap-1 text-cinza aria-[current=page]:text-tinta"
               >
                 <span className="relative">
-                  <Icon name={item.icon} size={22} />
-                  {item.href === "/sacola" && hydrated && count > 0 && (
-                    <span className="absolute -right-2 -top-1 grid h-4 min-w-4 place-items-center rounded-full bg-pinhao px-1 font-mono text-[9px] leading-none text-linho">
-                      {count}
+                  <Icon name={item.icon} size={22} filled={item.icon === "coracao" && hydrated && saved > 0} />
+                  {hydrated && badge > 0 && (
+                    <span className="absolute -right-2 -top-1 grid h-4 min-w-4 place-items-center rounded-full bg-pinhao px-1 text-[9px] font-medium leading-none text-branco">
+                      {badge}
                     </span>
                   )}
                 </span>
-                <span className="font-mono text-[10px] uppercase tracking-[0.06em]">{item.label}</span>
-                {current && <span aria-hidden className="absolute top-0 h-0.5 w-6 bg-pinhao" />}
+                <span className="text-[10px]">{item.label}</span>
               </Link>
             </li>
           );

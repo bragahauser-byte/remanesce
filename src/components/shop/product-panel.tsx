@@ -70,19 +70,19 @@ function ProductPanel({ slug, title }: { slug: string; title: string }) {
       <div
         aria-hidden
         onClick={close}
-        className={`absolute inset-0 bg-indigo/45 backdrop-blur-[2px] transition-opacity duration-500 ease-remanesce ${open ? "opacity-100" : "opacity-0"}`}
+        className={`absolute inset-0 bg-tinta/45 backdrop-blur-[2px] transition-opacity duration-500 ease-remanesce ${open ? "opacity-100" : "opacity-0"}`}
       />
       <div
         ref={ref}
         role="dialog"
         aria-modal="true"
         aria-label={title}
-        className={`absolute inset-0 flex flex-col bg-linho shadow-[-24px_0_60px_rgb(22_27_39/0.25)] transition-transform duration-[600ms] ease-remanesce md:left-auto md:w-[85vw] ${
+        className={`absolute inset-0 flex flex-col bg-branco shadow-[-24px_0_60px_rgb(22_27_39/0.25)] transition-transform duration-[600ms] ease-remanesce md:left-auto md:w-[85vw] ${
           open ? "translate-x-0 translate-y-0" : "translate-y-full md:translate-x-full md:translate-y-0"
         }`}
       >
         <span aria-hidden className="absolute inset-y-0 left-0 hidden w-1 bg-pinhao md:block" />
-        <div className="flex h-16 shrink-0 items-center justify-between border-b border-indigo/10 px-4 md:px-10">
+        <div className="flex h-16 shrink-0 items-center justify-between border-b border-tinta/10 px-4 md:px-10">
           <button type="button" onClick={close} className="label flex items-center gap-3 py-2 hover:text-cobre" data-autofocus>
             <Icon name="seta-esquerda" size={22} /> Voltar
           </button>

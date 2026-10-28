@@ -20,23 +20,49 @@ export const brand = {
   siteUrl: SITE_URL,
 };
 
+/** Menu em tela cheia: todas as seções. `look` é a roupa que aparece no hover. */
 export const navLinks = [
   { href: "/colecao", label: "Coleção", look: 1 },
   { href: "/loja", label: "Loja", look: 4 },
-  { href: "/looks", label: "Looks", look: 6 },
+  { href: "/conceito", label: "Conceito", look: 6 },
   { href: "/raiz", label: "Raiz", look: 3 },
   { href: "/servicos", label: "Serviços", look: 5 },
   { href: "/marca", label: "Marca", look: 2 },
   { href: "/sobre", label: "Sobre", look: 1 },
 ] as const;
 
-export const mobileNav = [
-  { href: "/colecao", label: "Explorar", icon: "pinha" },
-  { href: "/loja", label: "Loja", icon: "escama" },
-  { href: "/servicos", label: "Serviços", icon: "agulha" },
-  { href: "/conta", label: "Conta", icon: "conta" },
-  { href: "/sacola", label: "Sacola", icon: "sacola" },
+/** Links do centro do header. */
+export const primaryNav = [
+  { href: "/colecao", label: "Coleção" },
+  { href: "/loja", label: "Loja", chip: "novo" },
+  { href: "/conceito", label: "Conceito" },
+  { href: "/raiz", label: "Raiz" },
 ] as const;
+
+/** Seções extras listadas no Índice, abaixo dos seis looks. */
+export const indexSections = [
+  { href: "/conceito", label: "O Renascer da Permanência" },
+  { href: "/raiz", label: "Raiz" },
+  { href: "/servicos", label: "Serviços de Permanência" },
+  { href: "/marca", label: "Marca" },
+] as const;
+
+export const mobileNav = [
+  { href: "/colecao", label: "Coleção", icon: "pinha" },
+  { href: "/loja", label: "Loja", icon: "escama" },
+  { href: "/conta?aba=favoritos", label: "Favoritos", icon: "coracao" },
+  { href: "/sacola", label: "Sacola", icon: "sacola" },
+  { href: "/conta", label: "Conta", icon: "conta" },
+] as const;
+
+/** Palavras de estado da transição de página (A24), por destino. */
+export const transitionWords: Record<string, string> = {
+  "/colecao": "Revelando",
+  "/raiz": "Plantando",
+  "/conceito": "Lembrando",
+  "/servicos": "Costurando",
+  default: "Costurando",
+};
 
 export const hero = {
   beats: ["Tudo muda.", "Nada se perde.", "O que permanece, renasce."],
@@ -215,14 +241,14 @@ export const team = [
 ];
 
 export const palette = [
-  { token: "linho", name: "Linho", hex: "#F1EDE4", rgb: "241 237 228", cmyk: "0 2 5 5", use: "Fundo principal, como o fundo do line-up.", share: 70 },
-  { token: "linho-escuro", name: "Linho cru", hex: "#E4DDD0", rgb: "228 221 208", cmyk: "0 3 9 11", use: "Fundos secundários, cards e divisórias.", share: 0 },
-  { token: "indigo", name: "Índigo Remanescente", hex: "#161B27", rgb: "22 27 39", cmyk: "44 31 0 85", use: "Texto principal, fundos escuros, o denim.", share: 25 },
-  { token: "denim", name: "Denim lavado", hex: "#2B3445", rgb: "43 52 69", cmyk: "38 25 0 73", use: "Superfícies escuras secundárias e hover.", share: 0 },
-  { token: "casca", name: "Casca de araucária", hex: "#391502", rgb: "57 21 2", cmyk: "0 63 96 78", use: "Títulos sobre linho.", share: 0 },
-  { token: "pinhao", name: "Vermelho pinhão", hex: "#650410", rgb: "101 4 16", cmyk: "0 96 84 60", use: "Uso raro: revelações, badge da sacola, foco. Sempre por dentro.", share: 3 },
-  { token: "pinhao-vivo", name: "Vermelho brasa", hex: "#8E1420", rgb: "142 20 32", cmyk: "0 86 77 44", use: "Hover e estado ativo do vermelho.", share: 0 },
-  { token: "cobre", name: "Pesponto", hex: "#B9763E", rgb: "185 118 62", cmyk: "0 36 66 27", use: "Costuras, sublinhados, divisórias tracejadas.", share: 2 },
-  { token: "gralha", name: "Azul gralha", hex: "#2F5D9E", rgb: "47 93 158", cmyk: "70 41 0 38", use: "Acento raríssimo: só na lenda.", share: 0 },
-  { token: "araucaria", name: "Verde araucária", hex: "#34402E", rgb: "52 64 46", cmyk: "19 0 28 75", use: "Só na Raiz e no replantio.", share: 0 },
+  { token: "branco", name: "Branco", hex: "#FFFFFF", rgb: "255 255 255", cmyk: "0 0 0 0", use: "Superfície principal: loja, cards, PDP, painéis.", share: 40 },
+  { token: "papel", name: "Papel", hex: "#F4F2EE", rgb: "244 242 238", cmyk: "0 1 2 4", use: "Fundo da coleção (com grão) e das fotos de produto.", share: 20 },
+  { token: "linho", name: "Linho", hex: "#F1EDE4", rgb: "241 237 228", cmyk: "0 2 5 5", use: "Fundo nativo do line-up, atrás das fotos para fundir.", share: 0 },
+  { token: "preto", name: "Preto quente", hex: "#181508", rgb: "24 21 8", cmyk: "0 13 67 91", use: "Seções escuras, moldura, rodapé, menu.", share: 20 },
+  { token: "tinta", name: "Tinta", hex: "#111111", rgb: "17 17 17", cmyk: "0 0 0 93", use: "Texto, botões pílula, chip ativo, tamanho selecionado.", share: 15 },
+  { token: "cinza", name: "Cinza texto", hex: "#8C8A85", rgb: "140 138 133", cmyk: "0 1 5 45", use: "Textos secundários, parcelamento, rótulos.", share: 0 },
+  { token: "linha", name: "Linha", hex: "#D9D6D0", rgb: "217 214 208", cmyk: "0 1 4 15", use: "Contorno dos chips, divisórias, linhas da ficha técnica.", share: 0 },
+  { token: "pinhao", name: "Vermelho pinhão", hex: "#650410", rgb: "101 4 16", cmyk: "0 96 84 60", use: "Acento raro: badge da sacola, favorito ativo, o que está por dentro.", share: 2 },
+  { token: "indigo", name: "Índigo denim", hex: "#161B27", rgb: "22 27 39", cmyk: "44 31 0 85", use: "Acento raro: o denim; fim da transição do glifo.", share: 2 },
+  { token: "cobre", name: "Pesponto", hex: "#B9763E", rgb: "185 118 62", cmyk: "0 36 66 27", use: "Detalhes: sublinhado tracejado, costuras dos mockups.", share: 1 },
 ] as const;

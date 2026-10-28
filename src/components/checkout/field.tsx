@@ -15,7 +15,7 @@ export const Field = forwardRef<HTMLInputElement, FieldProps>(function Field(
   const fieldId = id ?? rest.name;
   return (
     <div className={className}>
-      <label htmlFor={fieldId} className="label text-indigo/70">
+      <label htmlFor={fieldId} className="label text-tinta/70">
         {label}
       </label>
       <input
@@ -24,7 +24,7 @@ export const Field = forwardRef<HTMLInputElement, FieldProps>(function Field(
         aria-invalid={!!error || undefined}
         aria-describedby={error ? `${fieldId}-erro` : undefined}
         className={`mt-1.5 block w-full border-b bg-transparent py-2.5 text-body focus:outline-none ${
-          error ? "border-pinhao" : "border-indigo/30 focus:border-indigo"
+          error ? "border-pinhao" : "border-tinta/30 focus:border-tinta"
         } ${mono ? "font-mono text-[15px] tracking-[0.04em]" : ""}`}
         {...rest}
       />
@@ -33,7 +33,7 @@ export const Field = forwardRef<HTMLInputElement, FieldProps>(function Field(
           {error}
         </p>
       ) : (
-        hint && <p className="mt-1.5 text-small text-indigo/55">{hint}</p>
+        hint && <p className="mt-1.5 text-small text-tinta/55">{hint}</p>
       )}
     </div>
   );

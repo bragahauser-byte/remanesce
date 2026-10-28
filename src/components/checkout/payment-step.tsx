@@ -20,8 +20,8 @@ export function PaymentStep({ total, orderId, onPay }: { total: number; orderId:
 
   return (
     <div>
-      <h2 className="serif text-h3 text-casca">Como você prefere pagar?</h2>
-      <div role="tablist" aria-label="Forma de pagamento" className="mt-8 grid grid-cols-2 border border-indigo/20">
+      <h2 className="serif text-h3 text-tinta">Como você prefere pagar?</h2>
+      <div role="tablist" aria-label="Forma de pagamento" className="mt-8 grid grid-cols-2 border border-tinta/20">
         {(
           [
             ["pix", "Pix", "pix"],
@@ -34,14 +34,14 @@ export function PaymentStep({ total, orderId, onPay }: { total: number; orderId:
             role="tab"
             aria-selected={method === key}
             onClick={() => setMethod(key)}
-            className="label-lg flex h-14 items-center justify-center gap-2.5 transition-colors aria-selected:bg-indigo aria-selected:text-linho"
+            className="label-lg flex h-14 items-center justify-center gap-2.5 transition-colors aria-selected:bg-tinta aria-selected:text-branco"
           >
             <Icon name={icon} size={20} /> {label}
           </button>
         ))}
       </div>
       <div className="mt-8">{method === "pix" ? <PixPanel total={total} orderId={orderId} onPay={onPay} /> : <CardPanel total={total} onPay={onPay} />}</div>
-      <p className="label mt-8 flex items-center gap-2 text-indigo/55">
+      <p className="label mt-8 flex items-center gap-2 text-tinta/55">
         <Icon name="cadeado" size={16} /> {microcopy.demo}
       </p>
     </div>
@@ -94,14 +94,14 @@ function PixPanel({ total, orderId, onPay }: { total: number; orderId: string; o
 
   return (
     <div className="grid gap-8 sm:grid-cols-[220px_1fr] sm:items-start">
-      <div className="relative aspect-square w-full max-w-[220px] bg-linho p-2 ring-1 ring-indigo/15">
+      <div className="relative aspect-square w-full max-w-[220px] bg-branco p-2 ring-1 ring-tinta/15">
         {/* eslint-disable-next-line @next/next/no-img-element -- QR gerado em data URL */}
         {qr && <img src={qr} alt={`QR Code Pix de ${formatBRL(total)} (exemplo)`} className={`h-full w-full ${expired ? "opacity-15" : ""}`} />}
         {expired && <p className="label absolute inset-0 grid place-items-center text-center text-pinhao">Código expirado</p>}
       </div>
       <div>
         <p className="font-mono text-[1.35rem]">{formatBRL(total)}</p>
-        <p className="mt-1 text-small text-indigo/70">Abra o app do seu banco, escolha Pix e leia o QR Code ou cole o código.</p>
+        <p className="mt-1 text-small text-tinta/70">Abra o app do seu banco, escolha Pix e leia o QR Code ou cole o código.</p>
         <p className="label mt-4" aria-live="off">
           {expired ? (
             <span className="text-pinhao">O código expirou.</span>
@@ -111,9 +111,9 @@ function PixPanel({ total, orderId, onPay }: { total: number; orderId: string; o
             </>
           )}
         </p>
-        <div className="mt-4 flex border border-indigo/20">
-          <input readOnly value={payload} aria-label="Código Pix copia e cola" className="min-w-0 flex-1 bg-transparent px-3 py-2.5 font-mono text-[11px] text-indigo/70" />
-          <button type="button" onClick={copy} className="label flex shrink-0 items-center gap-2 border-l border-indigo/20 px-4 hover:text-cobre">
+        <div className="mt-4 flex border border-tinta/20">
+          <input readOnly value={payload} aria-label="Código Pix copia e cola" className="min-w-0 flex-1 bg-transparent px-3 py-2.5 font-mono text-[11px] text-tinta/70" />
+          <button type="button" onClick={copy} className="label flex shrink-0 items-center gap-2 border-l border-tinta/20 px-4 hover:text-cobre">
             <Icon name={copied ? "check" : "copiar"} size={16} /> {copied ? "Copiado" : "Copiar"}
           </button>
         </div>
@@ -121,7 +121,7 @@ function PixPanel({ total, orderId, onPay }: { total: number; orderId: string; o
           {copied ? "Código copiado." : ""}
         </p>
         {expired ? (
-          <button type="button" onClick={regenerate} className="label-lg mt-6 flex h-14 w-full items-center justify-center gap-3 border border-indigo hover:bg-indigo hover:text-linho">
+          <button type="button" onClick={regenerate} className="label-lg mt-6 flex h-14 w-full items-center justify-center gap-3 border border-tinta hover:bg-tinta hover:text-branco">
             Gerar novo código
           </button>
         ) : (
@@ -129,13 +129,13 @@ function PixPanel({ total, orderId, onPay }: { total: number; orderId: string; o
             type="button"
             onClick={paid}
             disabled={confirming}
-            className="label-lg mt-6 flex h-14 w-full items-center justify-center gap-3 bg-indigo text-linho hover:bg-denim disabled:opacity-70"
+            className="label-lg mt-6 flex h-14 w-full items-center justify-center gap-3 bg-tinta text-branco hover:bg-preto disabled:opacity-70"
           >
             {confirming ? "Confirmando pagamento…" : "Já paguei"}
             {!confirming && <Icon name="check" size={20} />}
           </button>
         )}
-        <p className="mt-3 text-small text-indigo/55">Pagamento simulado: o QR Code é um exemplo e não gera cobrança.</p>
+        <p className="mt-3 text-small text-tinta/55">Pagamento simulado: o QR Code é um exemplo e não gera cobrança.</p>
       </div>
     </div>
   );
@@ -222,13 +222,13 @@ function CardPanel({ total, onPay }: { total: number; onPay: (p: Payment) => voi
           className="sm:col-span-3"
         />
         <div className="sm:col-span-6">
-          <label htmlFor="installments" className="label text-indigo/70">
+          <label htmlFor="installments" className="label text-tinta/70">
             Parcelas
           </label>
           <select
             id="installments"
             {...register("installments")}
-            className="mt-1.5 block w-full border-b border-indigo/30 bg-transparent py-2.5 font-mono text-[14px] focus:border-indigo focus:outline-none"
+            className="mt-1.5 block w-full border-b border-tinta/30 bg-transparent py-2.5 font-mono text-[14px] focus:border-tinta focus:outline-none"
           >
             {Array.from({ length: maxN }, (_, i) => i + 1).map((n) => (
               <option key={n} value={n}>
@@ -241,7 +241,7 @@ function CardPanel({ total, onPay }: { total: number; onPay: (p: Payment) => voi
       <button
         type="submit"
         disabled={state === "processing"}
-        className="label-lg mt-10 flex h-14 w-full items-center justify-center gap-3 bg-indigo text-linho hover:bg-denim disabled:opacity-70"
+        className="label-lg mt-10 flex h-14 w-full items-center justify-center gap-3 bg-tinta text-branco hover:bg-preto disabled:opacity-70"
       >
         {state === "processing" ? "Processando…" : `Pagar ${formatBRL(total)}`}
         {state !== "processing" && <Icon name="cadeado" size={18} />}

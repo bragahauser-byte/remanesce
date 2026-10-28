@@ -17,8 +17,8 @@ export function CheckoutProgress({ step, onGo }: { step: number; onGo: (step: nu
               aria-current={current ? "step" : undefined}
               className="group w-full text-left disabled:cursor-default"
             >
-              <span className={`block h-[2px] ${done || current ? "bg-indigo" : "stitch-x"}`} />
-              <span className={`label mt-3 flex items-center gap-2 ${current ? "text-indigo" : done ? "text-indigo/70 group-hover:text-cobre" : "text-indigo/40"}`}>
+              <span className={`block h-[2px] ${done || current ? "bg-tinta" : "stitch-x"}`} />
+              <span className={`label mt-3 flex items-center gap-2 ${current ? "text-tinta" : done ? "text-tinta/70 group-hover:text-cobre" : "text-tinta/40"}`}>
                 <span className="tabular-nums">0{n}</span>
                 <span className="hidden sm:inline">{label}</span>
                 {current && <span className="sm:hidden">{label}</span>}

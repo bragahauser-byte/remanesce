@@ -21,10 +21,10 @@ export default function RaizPage() {
     <>
       <ToneController />
 
-      <section data-tone="araucaria" className="relative overflow-hidden bg-araucaria pb-section pt-[calc(var(--spacing-header)+5rem)] text-linho">
+      <section data-tone="preto" className="relative overflow-hidden bg-preto pb-section pt-[calc(var(--spacing-header)+5rem)] text-branco">
         <ScalePattern scale={2.6} opacity={0.16} id="escamas-raiz-hero" />
         <div className="container-x relative">
-          <p className="label text-linho/70">Raiz · sustentabilidade e replantio</p>
+          <p className="label text-branco/70">Raiz · sustentabilidade e replantio</p>
           <RevealLines
             as="h1"
             lines={[
@@ -36,12 +36,12 @@ export default function RaizPage() {
             className="serif mt-6 text-display"
           />
           <div className="mt-14 grid gap-12 md:grid-cols-12 md:items-end">
-            <p className="max-w-xl text-[1.15rem] leading-relaxed text-linho/85 md:col-span-6 md:text-[1.3rem]">
+            <p className="max-w-xl text-[1.15rem] leading-relaxed text-branco/85 md:col-span-6 md:text-[1.3rem]">
               A cada peça vendida, uma muda de araucária é plantada em parceria com projetos de reflorestamento no Paraná.{" "}
               {raiz.line}
             </p>
             <div className="md:col-span-4 md:col-start-9">
-              <p className="label text-linho/70">Araucárias plantadas</p>
+              <p className="label text-branco/70">Araucárias plantadas</p>
               <p className="serif mt-2 text-[clamp(4rem,9vw,8rem)] leading-none">
                 <TreesPlanted />
               </p>
@@ -51,11 +51,11 @@ export default function RaizPage() {
       </section>
 
       {/* Mapa */}
-      <section data-tone="linho" aria-labelledby="mapa-titulo" className="container-x py-section">
+      <section data-tone="branco" aria-labelledby="mapa-titulo" className="container-x py-section">
         <div className="grid gap-12 md:grid-cols-12 md:items-center">
           <div className="md:col-span-4">
             <p className="label text-cobre">Onde plantamos</p>
-            <h2 id="mapa-titulo" className="serif mt-3 text-h2 text-casca">
+            <h2 id="mapa-titulo" className="serif mt-3 text-h2 text-tinta">
               Cinco pontos, <em>uma floresta</em>.
             </h2>
             <ul className="mt-8 divide-y divide-dashed divide-cobre/40 border-y border-dashed border-cobre/40">
@@ -66,30 +66,30 @@ export default function RaizPage() {
                 </li>
               ))}
             </ul>
-            <p className="label mt-3 text-indigo/55">Total nos pontos: {number.format(totalPoints)} mudas</p>
+            <p className="label mt-3 text-tinta/55">Total nos pontos: {number.format(totalPoints)} mudas</p>
           </div>
-          <div className="text-araucaria md:col-span-7 md:col-start-6">
+          <div className="text-tinta md:col-span-7 md:col-start-6">
             <ParanaMap />
           </div>
         </div>
       </section>
 
       {/* Ciclo do denim */}
-      <section data-tone="linho-escuro" aria-labelledby="ciclo-titulo" className="py-section">
+      <section data-tone="papel" aria-labelledby="ciclo-titulo" className="py-section">
         <div className="container-x">
           <p className="label text-cobre">O ciclo do denim</p>
-          <RevealLines lines={["Nada se perde."]} className="serif mt-3 text-h1 text-casca" />
+          <RevealLines lines={["Nada se perde."]} className="serif mt-3 text-h1 text-tinta" />
           <span id="ciclo-titulo" className="sr-only">
             O ciclo do denim
           </span>
-          <ol className="mt-14 grid gap-px bg-indigo/10 sm:grid-cols-2 lg:grid-cols-4">
+          <ol className="mt-14 grid gap-px bg-tinta/10 sm:grid-cols-2 lg:grid-cols-4">
             {denimCycle.map((step, i) => (
-              <li key={step.title} className="bg-linho-escuro">
+              <li key={step.title} className="bg-papel">
                 <FadeIn delay={i * 100} className="flex h-full flex-col p-7">
-                  <span className="label text-indigo/50">0{i + 1}</span>
+                  <span className="label text-tinta/50">0{i + 1}</span>
                   <Icon name={step.icon} size={36} strokeWidth={1} className="mt-6" />
                   <h3 className="serif mt-8 text-h4">{step.title}</h3>
-                  <p className="mt-3 text-small text-indigo/75">{step.text}</p>
+                  <p className="mt-3 text-small text-tinta/75">{step.text}</p>
                 </FadeIn>
               </li>
             ))}
@@ -98,14 +98,14 @@ export default function RaizPage() {
       </section>
 
       {/* Devolva e Renasça */}
-      <section data-tone="araucaria" aria-labelledby="devolva-titulo" className="tex-sarja bg-araucaria py-section text-linho">
+      <section data-tone="preto" aria-labelledby="devolva-titulo" className="tex-sarja bg-preto py-section text-branco">
         <div className="container-x grid gap-12 md:grid-cols-12">
           <div className="md:col-span-5">
-            <p className="label text-linho/70">Programa</p>
+            <p className="label text-branco/70">Programa</p>
             <h2 id="devolva-titulo" className="serif mt-3 text-h1">
               Devolva e <em>Renasça</em>
             </h2>
-            <p className="mt-6 max-w-md text-linho/85">
+            <p className="mt-6 max-w-md text-branco/85">
               Traga um jeans antigo. Ele vira escamas de novas peças, e você ganha crédito para a próxima. O tecido que guardou
               uma história continua guardando, em outra forma.
             </p>
@@ -117,11 +117,11 @@ export default function RaizPage() {
       </section>
 
       {/* Por que replantar */}
-      <section data-tone="linho" aria-labelledby="ameaca-titulo" className="container-x py-section">
+      <section data-tone="branco" aria-labelledby="ameaca-titulo" className="container-x py-section">
         <div className="grid gap-12 md:grid-cols-12">
           <div className="md:col-span-5">
-            <Icon name="araucaria" size={64} strokeWidth={0.8} className="text-araucaria" />
-            <h2 id="ameaca-titulo" className="serif mt-6 text-h2 text-casca">
+            <Icon name="araucaria" size={64} strokeWidth={0.8} className="text-tinta" />
+            <h2 id="ameaca-titulo" className="serif mt-6 text-h2 text-tinta">
               Por que <em>replantar</em> importa
             </h2>
           </div>
@@ -141,7 +141,7 @@ export default function RaizPage() {
               semeadoras da floresta. Replantar é fazer o que a lenda conta.
             </p>
             <Stitch />
-            <p className="label text-indigo/60">
+            <p className="label text-tinta/60">
               Fontes:{" "}
               <a href="https://www.iucnredlist.org/search?query=Araucaria%20angustifolia&searchType=species" target="_blank" rel="noreferrer" className="link-stitch">
                 IUCN Red List
@@ -153,7 +153,7 @@ export default function RaizPage() {
             </p>
           </div>
         </div>
-        <p className="label mt-20 text-indigo/45">
+        <p className="label mt-20 text-tinta/45">
           Nota: a parceria de reflorestamento, os pontos de plantio e os números desta página são exemplos do projeto acadêmico.
         </p>
       </section>

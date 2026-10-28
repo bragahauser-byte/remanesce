@@ -10,11 +10,11 @@ export default function NotFound() {
         <path d="M60 64c4 4.3 6 9.5 5.7 15.5-.3 5.5-2.5 9.8-5.7 11.9-3.2-2.1-5.4-6.4-5.7-11.9C54 73.5 56 68.3 60 64z" fill="var(--pinhao)" />
       </svg>
       <p className="label mt-8 text-cobre">Erro 404</p>
-      <h1 className="serif mt-4 max-w-3xl text-h1 text-casca">
+      <h1 className="serif mt-4 max-w-3xl text-h1 text-tinta">
         Esta página voltou à terra. <em>Talvez ela renasça em outro lugar.</em>
       </h1>
       <span className="sr-only">{microcopy.notFound}</span>
-      <Link href="/" className="label-lg mt-12 inline-flex h-13 w-fit items-center gap-3 bg-indigo px-8 text-linho hover:bg-denim">
+      <Link href="/" className="label-lg mt-12 inline-flex h-13 w-fit items-center gap-3 bg-tinta px-8 text-branco hover:bg-preto">
         Voltar ao início <Icon name="seta" size={22} />
       </Link>
     </div>

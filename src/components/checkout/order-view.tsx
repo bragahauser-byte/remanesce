@@ -23,8 +23,8 @@ export function OrderView() {
     return (
       <div className="min-h-[50vh] py-10">
         <p className="label text-cobre">Pedido {id}</p>
-        <h1 className="serif mt-4 text-h2 text-casca">Não encontramos este pedido neste navegador.</h1>
-        <p className="mt-4 max-w-md text-indigo/70">Os pedidos ficam guardados no aparelho em que foram feitos.</p>
+        <h1 className="serif mt-4 text-h2 text-tinta">Não encontramos este pedido neste navegador.</h1>
+        <p className="mt-4 max-w-md text-tinta/70">Os pedidos ficam guardados no aparelho em que foram feitos.</p>
         <Link href="/conta" className="label link-stitch mt-8 inline-block">
           Ir para Minha Remanesce
         </Link>
@@ -43,46 +43,46 @@ export function OrderView() {
       <div>
         <SeedToSprout />
         <p className="label mt-10 text-cobre">Pedido {order.id}</p>
-        <h1 className="serif mt-4 text-h1 text-casca">
+        <h1 className="serif mt-4 text-h1 text-tinta">
           Pedido recebido. <em>Uma araucária já tem seu nome.</em>
         </h1>
-        <p className="mt-6 max-w-lg text-body text-indigo/80">
+        <p className="mt-6 max-w-lg text-body text-tinta/80">
           Obrigado, {order.customer.name.split(" ")[0]}. A confirmação vai para {order.customer.email}. Previsão de entrega:{" "}
           <strong className="font-medium">{formatDate(order.deliveryBy, { weekday: "long", day: "numeric", month: "long" })}</strong>.
         </p>
-        <div className="mt-10 bg-araucaria p-6 text-linho md:p-8">
-          <p className="label text-linho/70">Minhas araucárias</p>
+        <div className="mt-10 bg-preto p-6 text-branco md:p-8">
+          <p className="label text-branco/70">Minhas araucárias</p>
           <p className="serif mt-3 text-h3">
             {order.trees.length === 1 ? "Araucária nº " : "Araucárias nº "}
             {order.trees.map((n) => number.format(n)).join(", ")}
           </p>
-          <p className="mt-3 text-small text-linho/75">
+          <p className="mt-3 text-small text-branco/75">
             Cada peça planta uma muda no Paraná. O número fica registrado no Passaporte de cada peça.
           </p>
         </div>
         <div className="mt-10 flex flex-wrap gap-4">
-          <Link href="/conta" className="label-lg flex h-13 items-center gap-3 bg-indigo px-8 text-linho hover:bg-denim">
+          <Link href="/conta" className="label-lg flex h-13 items-center gap-3 bg-tinta px-8 text-branco hover:bg-preto">
             Minha Remanesce <Icon name="seta" size={22} />
           </Link>
-          <Link href="/loja" className="label-lg flex h-13 items-center border border-indigo/25 px-8 hover:border-indigo">
+          <Link href="/loja" className="label-lg flex h-13 items-center border border-tinta/25 px-8 hover:border-tinta">
             Continuar explorando
           </Link>
         </div>
       </div>
 
-      <aside className="bg-linho-escuro/60 p-6 md:p-8 lg:self-start">
+      <aside className="bg-papel/60 p-6 md:p-8 lg:self-start">
         <h2 className="label-lg">Resumo</h2>
         <ul className="mt-5 space-y-5">
           {order.items.map((item, i) => {
             const product = getProduct(item.slug);
             return (
               <li key={`${item.slug}:${item.size}`} className="flex gap-4">
-                <div className="relative h-20 w-15 shrink-0 overflow-hidden bg-linho">
+                <div className="relative h-20 w-15 shrink-0 overflow-hidden bg-branco">
                   {product && <ProductImage image={product.images.details[0]} alt="" sizes="60px" />}
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="serif text-[1.1rem] leading-tight">{item.name}</p>
-                  <p className="label mt-1 text-indigo/55">
+                  <p className="label mt-1 text-tinta/55">
                     Tam. {item.size} · {item.qty}× {formatBRL(item.price)}
                   </p>
                   <Link
@@ -116,13 +116,13 @@ export function OrderView() {
         <div className="my-5">
           <Stitch />
         </div>
-        <p className="text-small text-indigo/75">
+        <p className="text-small text-tinta/75">
           {order.address.street}, {order.address.number}
           {order.address.complement ? ` · ${order.address.complement}` : ""} · {order.address.district}
           <br />
           {order.address.city} · {order.address.state} · {order.address.cep}
         </p>
-        <p className="label mt-6 text-indigo/50">{microcopy.demo}</p>
+        <p className="label mt-6 text-tinta/50">{microcopy.demo}</p>
       </aside>
     </div>
   );
@@ -131,7 +131,7 @@ export function OrderView() {
 function Line({ label, value, strong }: { label: string; value: string; strong?: boolean }) {
   return (
     <div className={`flex justify-between gap-4 ${strong ? "pt-1 font-medium" : ""}`}>
-      <dt className="text-indigo/75">{label}</dt>
+      <dt className="text-tinta/75">{label}</dt>
       <dd className="font-mono text-[13px]">{value}</dd>
     </div>
   );
@@ -147,20 +147,20 @@ function SeedToSprout() {
         d="M60 74c4 4.3 6 9.5 5.7 15.5-.3 5.5-2.5 9.8-5.7 11.9-3.2-2.1-5.4-6.4-5.7-11.9C54 83.5 56 78.3 60 74z"
         fill="var(--pinhao)"
       />
-      <g stroke="var(--araucaria)" strokeWidth="1.6" strokeLinecap="round">
+      <g stroke="var(--preto)" strokeWidth="1.6" strokeLinecap="round">
         <path className="sprout-stem" pathLength={1} d="M60 100V62" fill="none" />
         <path
           className="sprout-leaf"
           style={{ transformOrigin: "100% 100%", animationDelay: "1.9s" }}
           d="M60 72c-9 .3-14.8-5.4-15-14.4 8.7-.2 14.8 5.6 15 14.4z"
-          fill="var(--araucaria)"
+          fill="var(--preto)"
           fillOpacity=".15"
         />
         <path
           className="sprout-leaf"
           style={{ transformOrigin: "0% 100%", animationDelay: "2.1s" }}
           d="M60 66c.2-8.7 6.2-14.6 15-14.6-.2 8.7-6.1 14.4-15 14.6z"
-          fill="var(--araucaria)"
+          fill="var(--preto)"
           fillOpacity=".15"
         />
       </g>
