@@ -38,3 +38,9 @@ yarn-error.log*
 .pnpm-debug.log*
 .env*
 !.env.example
+
+# Referências visuais de terceiros (FARM Rio): ficam só na máquina, não no repositório público
+/organizacao imagens/
+/docs/referencias/farm-*.png
+# Cópia solta do line-up usada para a Tarefa 1 (a fonte oficial é public/images/lineup)
+/roupas/

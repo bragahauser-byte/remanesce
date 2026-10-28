@@ -28,7 +28,15 @@
 ## Line-up
 6 looks, frente e costas, em `public/images/lineup/` (originais) e `public/images/looks/` (recortes por look).
 
-## Referências de site
+## Direção v2 (27/10, noite)
+- Estilo do site: **https://a24.raviklaassens.com/** misturado com **https://gracefashion.ai/**.
+- Cards de produto, listagem e organização da loja: **igual às imagens da FARM Rio** em
+  `organizacao imagens/`.
+- Cores: as mesmas da FARM (preto quente, branco, cinza-claro, botões pretos em pílula).
+- Tarefa extra: pasta `roupas/` com uma subpasta por roupa (roupa-1 … roupa-6), cada uma com
+  frente e verso recortados.
+
+## Referências de site (v1)
 - AKQA — Casa LOEWE: https://www.akqa.com/work/loewe/casa-loewe/ (favorita)
 - AKQA — The LV App: https://www.akqa.com/work/louis-vuitton/the-lv-app/ (favorita)
 - AKQA — The Maison Dior: https://www.akqa.com/work/dior/the-maison-dior/

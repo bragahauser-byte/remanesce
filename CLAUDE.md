@@ -1,26 +1,29 @@
 # CLAUDE.md — Remanesce
 
-Contexto permanente para o Claude Code neste repositório. A especificação completa está em `PROMPT.md`.
+Contexto permanente para o Claude Code. A especificação completa está em `PROMPT.md` (v2).
 
 ## Projeto
-Site institucional + e-commerce funcional da marca de denim autoral **Remanesce**, coleção
+Site + e-commerce funcional da marca de denim autoral **Remanesce**, coleção
 **"O Renascer da Permanência"** (tema: pinha da araucária). Projeto acadêmico.
 
+## Direção de arte (v2)
+- Coleção, loader, Índice e páginas de look: estilo **a24.raviklaassens.com** (carrossel 3D
+  diagonal guiado pelo scroll, ficha técnica no canto, linhas que se desenham).
+- Início, Conceito e Raiz: estilo **gracefashion.ai** (hero de ponta a ponta, moldura sticky,
+  glifo gigante, grade de pontos, blur → foco, FAQ com "+").
+- Loja, cards, PDP, sacola, checkout: padrão **FARM Rio** (pasta `organizacao imagens/`).
+- Cores FARM: preto quente `#181508`, tinta `#111111`, branco `#FFFFFF`, papel `#F4F2EE`,
+  linho `#F1EDE4`, cinza `#8C8A85`, linha `#D9D6D0`. Acentos raros: vermelho pinhão
+  `#650410`, índigo `#161B27`, cobre `#B9763E`.
+- Fontes: Bodoni Moda (títulos) · Instrument Serif Italic (subtítulos) · Instrument Sans (texto/UI).
+
 ## Fontes de verdade
-- `PROMPT.md`: especificação completa (páginas, design system, catálogo, fases).
-- `docs/conceito.md`: texto do conceito da equipe. Não alterar o sentido.
-- `docs/briefing.md`: briefing da cliente e entregáveis (itens 8–12 e 14).
-- `public/images/`: line-up original e recortes por look.
+`PROMPT.md` · `docs/conceito.md` · `docs/briefing.md` · `organizacao imagens/` · `public/images/`
 
 ## Regras rápidas
-- Conteúdo visível em pt-BR; código em inglês.
-- Cores: linho `#F1EDE4`, índigo `#161B27`, denim `#2B3445`, casca `#391502`,
-  vermelho pinhão `#650410`, cobre `#B9763E`, azul gralha `#2F5D9E` (só na lenda),
-  verde araucária `#34402E` (só em Raiz).
-- Fontes: Bodoni Moda (títulos) · IBM Plex Mono (subtítulos/rótulos, caixa alta) · Instrument Sans (texto).
-- O vermelho aparece **por baixo/por dentro** (revelações, forros, fendas), quase nunca como superfície.
-- Respeitar `prefers-reduced-motion` em toda animação.
-- Preços e textos editáveis em `src/data/`.
-- Rodar `npm run build` e `npm run lint` antes de cada commit; olhar as páginas em 1440/768/390px.
-- Nunca salvar dados de cartão. Pagamento é simulado (Stripe só em modo teste, opcional).
-- Não apagar `docs/`, `public/images/`, `PROMPT.md`, `CLAUDE.md`.
+- Conteúdo em pt-BR; código em inglês. Preços e textos em `src/data/`.
+- O vermelho aparece por baixo/por dentro, nunca como fundo de seção.
+- `prefers-reduced-motion` em toda animação; 3D com fallback.
+- `npm run build` e `npm run lint` antes de cada commit; olhar em 1440/768/390px.
+- Nunca salvar dados de cartão. Pagamento simulado (Stripe só em modo teste, opcional).
+- Não apagar `docs/`, `public/images/`, `organizacao imagens/`, `PROMPT.md`, `CLAUDE.md`.
