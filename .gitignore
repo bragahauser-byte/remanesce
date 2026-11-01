@@ -47,3 +47,9 @@ yarn-error.log*
 
 # Prints da referência de interação (brandonyasin.com): só na máquina
 /referencias/
+
+# Materiais de origem da equipe (só na máquina): o site usa as versões geradas em public/ e src/fonts/
+/modelos e roupas/
+/identidade visual/
+/tipografia/
+/sacola/

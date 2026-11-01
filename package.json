@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "build:pages": "node scripts/build-pages.mjs",
-    "recortar": "node scripts/recortar-roupas.mjs"
+    "recortar": "node scripts/recortar-roupas.mjs",
+    "imagens": "node scripts/preparar-imagens.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
