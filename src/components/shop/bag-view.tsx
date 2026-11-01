@@ -10,11 +10,12 @@ import { useHydrated } from "@/lib/hooks";
 import { asset } from "@/lib/paths";
 import { useCart } from "@/lib/store/cart";
 import { CartLineItem } from "./cart-line";
+import { TransitionLink } from "@/components/layout/page-transition";
 import { CouponForm } from "./order-summary";
 import { ShippingEstimate } from "./shipping-estimate";
 
-/** Recuo do texto na largura da miniatura + espaço, como na referência (tudo alinha ao nome da peça). */
-const indent = "md:pl-[calc(7rem+1.5rem)]";
+/** Eixo do texto: a coluna onde começam os nomes das peças (3 em 6 colunas, 2 em 14). */
+const textCol = "col-span-full md:col-span-4 md:col-start-3 lg:col-span-8 lg:col-start-2";
 
 /**
  * Linha horizontal com a gralha-azul pousada nela (referência "image 4135": a ilustração
@@ -66,83 +67,96 @@ export function BagView() {
 
   return (
     <section aria-labelledby="sacola-titulo" className="surface-azul min-h-dvh pb-24 pt-28 md:pt-36 lg:pt-44">
-      <div className="px-[var(--pad)]">
-        <header className="flex flex-wrap items-end justify-between gap-x-8 gap-y-2 pb-6 md:pb-8">
-          <h1 id="sacola-titulo" className="font-display text-[3rem] font-extralight leading-[0.95] tracking-[-0.02em] md:text-64 lg:text-96">
+      {/*
+        Tudo na grade do site (grid-site): título, fios, miniaturas e pássaro na coluna 1;
+        nomes, total e ações na coluna seguinte à miniatura (3 no celular, 2 no desktop),
+        o mesmo eixo da referência; preços na margem direita.
+      */}
+      <div className="grid-site">
+        <header className="col-span-full flex items-end justify-between gap-x-8 pb-6 md:pb-8">
+          <h1 id="sacola-titulo" className="headline">
             sacola
           </h1>
-          <p className="label pb-1 text-muted" aria-live="polite">
-            {!hydrated ? " " : count === 0 ? "Vazia" : `${count} ${count === 1 ? "peça" : "peças"}`}
+          <p className="label pb-[0.35em] text-muted" aria-live="polite">
+            {!hydrated ? "\u00a0" : count === 0 ? "Vazia" : `${count} ${count === 1 ? "peça" : "peças"}`}
           </p>
         </header>
 
         {!hydrated ? (
-          <div className="min-h-[40vh] border-t border-[#fff]" aria-busy="true" />
+          <div className="col-span-full min-h-[40vh] border-t border-[#fff]" aria-busy="true" />
         ) : t.detailed.length === 0 ? (
-          <div className="border-t border-[#fff]">
-            <div className={`py-12 md:py-16 ${indent}`}>
-              <p className="title-display max-w-[18ch]">{microcopy.emptyBag}</p>
-              <p className="mt-4 max-w-[44ch] text-16 text-soft">As peças que você guardar aparecem aqui, com o tamanho escolhido.</p>
+          <>
+            <div className="col-span-full grid grid-cols-subgrid border-t border-[#fff] py-12 md:py-16">
+              <div className={textCol}>
+                <p className="title-display max-w-[18ch]">{microcopy.emptyBag}</p>
+                <p className="mt-4 max-w-[44ch] text-16 text-soft">As peças que você guardar aparecem aqui, com o tamanho escolhido.</p>
+              </div>
             </div>
-            <Perch at="72%" />
-            <div className={`pt-10 ${indent}`}>
-              <Link href="/" className="btn-line w-full sm:w-auto sm:min-w-64">
-                {microcopy.emptyBagCta}
-              </Link>
+            <div className="col-span-full">
+              <Perch at="72%" />
             </div>
-          </div>
+            <div className="col-span-full grid grid-cols-subgrid pt-10">
+              <div className={textCol}>
+                <TransitionLink href="/" className="btn-line w-full sm:w-auto sm:min-w-64">
+                  {microcopy.emptyBagCta}
+                </TransitionLink>
+              </div>
+            </div>
+          </>
         ) : (
           <>
-            <ul className="divide-y divide-line border-t border-[#fff]">
+            <ul className="col-span-full grid grid-cols-subgrid divide-y divide-line border-t border-[#fff]">
               {t.detailed.map((l) => (
                 <CartLineItem key={`${l.slug}:${l.size}`} line={l} />
               ))}
             </ul>
-            <div className="pt-6 md:pt-10">
+            <div className="col-span-full pt-6 md:pt-10">
               <Perch />
             </div>
 
-            <div className={`mt-8 max-w-[calc(34rem+8.5rem)] md:mt-10 ${indent}`}>
-              <dl className="grid grid-cols-[1fr_auto] gap-x-6 gap-y-2 text-16">
-                <dt className="font-display font-extralight italic">Subtotal</dt>
-                <dd className="tabular-nums">{formatBRL(t.subtotal)}</dd>
-                {t.discount > 0 && (
-                  <>
-                    <dt className="font-display font-extralight italic">Cupom {t.coupon?.code}</dt>
-                    <dd className="tabular-nums">− {formatBRL(t.discount)}</dd>
-                  </>
-                )}
-                <dt className="font-display font-extralight italic">Frete</dt>
-                <dd className="text-right">
-                  {shipping ? (shipping.price === 0 ? "Grátis" : formatBRL(shipping.price)) : <span className="text-muted">Calcule abaixo</span>}
-                </dd>
-                <dt className="mt-2 font-display text-24 font-extralight italic">Total</dt>
-                <dd className="mt-2 text-24 tabular-nums">{formatBRL(t.total)}</dd>
-                <dd className="col-span-2 text-right text-12 text-muted">
-                  {parcel.n > 1 ? `ou ${parcel.n}× de ${formatBRL(parcel.value)} sem juros` : "à vista"}
-                </dd>
-              </dl>
+            <div className="col-span-full mt-8 grid grid-cols-subgrid md:mt-10">
+              <div className="col-span-full md:col-span-4 md:col-start-3 lg:col-span-6 lg:col-start-2">
+                <dl className="grid grid-cols-[1fr_auto] gap-x-6 gap-y-2 text-16">
+                  <dt className="font-display font-extralight italic">Subtotal</dt>
+                  <dd className="tabular-nums">{formatBRL(t.subtotal)}</dd>
+                  {t.discount > 0 && (
+                    <>
+                      <dt className="font-display font-extralight italic">Cupom {t.coupon?.code}</dt>
+                      <dd className="tabular-nums">− {formatBRL(t.discount)}</dd>
+                    </>
+                  )}
+                  <dt className="font-display font-extralight italic">Frete</dt>
+                  <dd className="text-right">
+                    {shipping ? (shipping.price === 0 ? "Grátis" : formatBRL(shipping.price)) : <span className="text-muted">Calcule abaixo</span>}
+                  </dd>
+                  <dt className="mt-2 font-display text-24 font-extralight italic">Total</dt>
+                  <dd className="mt-2 text-24 tabular-nums">{formatBRL(t.total)}</dd>
+                  <dd className="col-span-2 text-right text-12 text-muted">
+                    {parcel.n > 1 ? `ou ${parcel.n}× de ${formatBRL(parcel.value)} sem juros` : "à vista"}
+                  </dd>
+                </dl>
 
-              <Link
-                href="/checkout"
-                className="label-lg mt-8 flex min-h-14 items-center justify-center bg-[#fff] px-8 text-azul transition-opacity duration-300 hover:opacity-85 focus-visible:outline-[#fff]"
-              >
-                Finalizar compra
-              </Link>
-              <p className="label mt-4 text-center text-muted">{microcopy.demo}</p>
-              <p className="mt-6 text-16 text-soft">
-                Este pedido planta {count} {count === 1 ? "araucária" : "araucárias"}.
-              </p>
+                <Link
+                  href="/checkout"
+                  className="label-lg mt-8 flex min-h-14 items-center justify-center bg-[#fff] px-8 text-azul transition-opacity duration-300 hover:opacity-85 focus-visible:outline-[#fff]"
+                >
+                  Finalizar compra
+                </Link>
+                <p className="label mt-4 text-center text-muted">{microcopy.demo}</p>
+                <p className="mt-6 text-16 text-soft">
+                  Este pedido planta {count} {count === 1 ? "araucária" : "araucárias"}.
+                </p>
 
-              <div className="mt-12 grid gap-10 border-t border-line pt-8 md:grid-cols-2 md:gap-8">
-                <ShippingEstimate
-                  subtotal={t.subtotal}
-                  freeByCoupon={!!t.coupon?.freeShipping}
-                  selected={shipping?.id ?? null}
-                  onSelect={setShipping}
-                />
-                <div className="[&>form]:mt-0 [&>div]:mt-0">
-                  <CouponForm />
+                <div className="mt-12 grid gap-10 border-t border-line pt-8 sm:grid-cols-2 sm:gap-8">
+                  <ShippingEstimate
+                    subtotal={t.subtotal}
+                    freeByCoupon={!!t.coupon?.freeShipping}
+                    selected={shipping?.id ?? null}
+                    onSelect={setShipping}
+                  />
+                  <div className="[&>div]:mt-0 [&>form]:mt-0">
+                    <CouponForm />
+                  </div>
                 </div>
               </div>
             </div>

@@ -16,9 +16,18 @@ Site + e-commerce funcional da marca de denim autoral **Remanesce**, coleção
 - Menu = páginas em cartões sobre o azul **#263054** (`components/layout/menu.tsx`): a página atual
   encolhe até virar cartão com escala UNIFORME + clip-path (`coverFrom`). Nunca usar scaleX/scaleY
   diferentes: isso esticava os pôsteres. Pôsteres com logotipo e a Sugar apple no alto.
-- Header: logotipo tipográfico oficial (`components/brand/wordmark.tsx`), sem relógio e sem seletor
-  de tema (removidos em 01/11/2026). Na sacola o header fica branco, sem `mix-blend-difference`.
+- Header: uma linha na grade do site, tudo alinhado pela linha de base (`barClass`/`logoClass` em
+  `components/layout/header.tsx`, reusados no menu aberto): logotipo na coluna 1, rótulo na coluna 9,
+  Menu/Sacola na margem direita; textos em Plus Jakarta 16 px/400. Sem relógio e sem seletor de tema.
+  Na sacola o header fica branco, sem `mix-blend-difference`.
+- Eixos das páginas: coluna 1 (margem) e coluna 9 (grade de 14). Hero, blocos de peça e header usam
+  esses dois; a sacola usa subgrid (miniatura na coluna 1, texto na seguinte, preço na margem direita).
+- Logotipo e "Início" saem com `TransitionLink` (`components/layout/page-transition.tsx`): opacidade
+  e deslocamento, sem escala.
 - Card → look: a imagem voa até a foto da página (`lib/store/flight.ts` + `flight-layer.tsx`).
+  O hero do look mostra frente e costas (empilhadas no desktop, carrossel no celular).
+- Ordem da vitrine em `data/collection.ts` (`showcase`): Raiz, Semente, Curiaçu, Guacira, Bráctea,
+  Gralha; os números exibidos (01–06) são a posição na vitrine, os códigos RMN-0N não mudam.
 - Tipografia: **PP Pangaia** (`src/fonts/`, Ultralight/UltralightItalic/Medium, `font-display`,
   utilities `headline` e `title-display`) nos títulos grandes, nomes das peças e páginas do menu;
   **Plus Jakarta Sans** no resto; tamanhos em múltiplos de 4/8
@@ -27,9 +36,8 @@ Site + e-commerce funcional da marca de denim autoral **Remanesce**, coleção
   pousada no fio, como na referência `sacola/image 4135`.
 - Grade de 6/14 colunas com gap de 8 px e margem de 8/16 px (utility `grid-site`).
 - Imagens das peças: `public/images/pecas/<look>/` (WebP 800/1600), geradas por `npm run imagens`
-  a partir de `modelos e roupas/` (pasta local, fora do git). A pasta `curiaçu` veio com as fotos do
-  Semente, então o Curiaçu ainda usa o recorte antigo (`roupas/roupa-3`). O Lenço Escama saiu do
-  catálogo. `referencias/`, `sacola/`, `identidade visual/` e `tipografia/` ficam fora do repositório.
+  a partir de `modelos e roupas/` (pasta local, fora do git); o favicon (`src/app/icon.png` e
+  `apple-icon.png`) sai de `favcon/favcon.jpg`. O Lenço Escama saiu do catálogo. `referencias/`, `sacola/`, `identidade visual/` e `tipografia/` ficam fora do repositório.
 
 ## Fontes de verdade
 `PROMPT.md` · `docs/conceito.md` · `docs/briefing.md` · `organizacao imagens/` · `public/images/`

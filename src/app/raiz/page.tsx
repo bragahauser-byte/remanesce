@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { NextBlock } from "@/components/look/next-block";
 import { EditorialRow, NumberedList, PageIntro, Prose, SectionTitle } from "@/components/page/editorial";
 import { chapters, denimCycle, plantingPoints, raiz } from "@/data/copy";
+import { edits } from "@/data/collection";
 import { looks } from "@/data/looks";
 
 export const metadata: Metadata = {
@@ -73,7 +74,7 @@ export default function RootsPage() {
         <p className="label mt-4 text-muted">Pontos e números de exemplo · projeto acadêmico.</p>
       </EditorialRow>
 
-      <NextBlock kicker="próxima página" title="início" href="/" image={{ src: looks[0].front, fit: looks[0].fit, alt: `Look ${looks[0].name}, de frente` }} />
+      <NextBlock kicker="próxima página" title="início" href="/" image={{ src: edits[0].image.front, fit: edits[0].image.fit, alt: edits[0].image.alt }} />
     </>
   );
 }

@@ -2,8 +2,8 @@
  * Os seis looks da coleção O Renascer da Permanência.
  * Fotos em public/images/pecas/<look>/ (geradas por `npm run imagens` a partir de
  * "modelos e roupas/"): frente e atrás com a modelo, e as peças sozinhas sobre branco.
- * O Curiaçu ainda usa o recorte antigo (public/images/roupas/roupa-3/): a pasta de
- * origem dele veio com as fotos do Semente.
+ * A ordem aqui é a numeração da coleção (códigos RMN-0N); a ordem da vitrine fica em
+ * collection.ts.
  */
 
 import { asset } from "@/lib/paths";
@@ -27,8 +27,6 @@ export type Look = {
 
 /** Foto da pasta de um look (versão de 1600 px; a de 800 px entra pelo srcset). */
 export const photo = (look: string, name: string) => asset(`/images/pecas/${look}/${name}-1600.webp`);
-
-const cutout = (n: number, side: "frente" | "verso") => asset(`/images/roupas/roupa-${n}/${side}.webp`);
 
 export const looks: Look[] = [
   {
@@ -57,9 +55,9 @@ export const looks: Look[] = [
     name: "Curiaçu",
     line: "De pé, como a árvore que ele virou.",
     description: "Top frente única de gola camisa com zíper e pantalona de cintura alta com escamas descendo pelas laterais.",
-    front: cutout(3, "frente"),
-    back: cutout(3, "verso"),
-    fit: "contain",
+    front: photo("curiacu", "frente"),
+    back: photo("curiacu", "atras"),
+    fit: "cover",
   },
   {
     number: 4,

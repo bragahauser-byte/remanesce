@@ -2,7 +2,7 @@
 import type { Metadata } from "next";
 import { NextBlock } from "@/components/look/next-block";
 import { EditorialRow, NumberedList, PageIntro, Prose, SectionTitle } from "@/components/page/editorial";
-import { editHref } from "@/data/collection";
+import { editHref, edits } from "@/data/collection";
 import { aboutStory, brand, conceptToPiece } from "@/data/copy";
 import { looks } from "@/data/looks";
 import { asset } from "@/lib/paths";
@@ -160,7 +160,7 @@ export default function AboutPage() {
 
       <EditorialRow imageSide="right" image={lookImage(3)}>
         <SectionTitle>Os seis looks</SectionTitle>
-        <NumberedList items={looks.map((l) => ({ title: l.name, href: editHref(l.slug) }))} />
+        <NumberedList items={edits.map((e) => ({ title: looks.find((l) => l.slug === e.slug)!.name, href: editHref(e.slug) }))} />
         <Prose>
           <p className="text-soft">
             Toda em denim, com o vermelho aparecendo por dentro. Ao unir natureza, memória e vestuário, a moda vira uma forma de

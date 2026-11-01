@@ -82,8 +82,10 @@ export function PieceBlock({ piece, index, side }: Props) {
 
   const inBag = size ? (lines.find((l) => l.slug === piece.slug && l.size === size)?.qty ?? 0) : 0;
 
+  // Os dois eixos da página (os mesmos do hero): coluna 1 e coluna 9 da grade de 14.
+  // Imagem e texto ocupam 6 colunas cada, espelhados, com 2 colunas de respiro entre eles.
   const imageCol = side === "left" ? "lg:col-start-1" : "lg:col-start-9";
-  const textCol = side === "left" ? "lg:col-start-9" : "lg:col-start-2 lg:row-start-1";
+  const textCol = side === "left" ? "lg:col-start-9" : "lg:col-start-1 lg:row-start-1";
 
   return (
     <section aria-labelledby={`${id}-nome`} className="grid-site mt-24 items-end gap-y-8 lg:mt-40">
@@ -95,7 +97,7 @@ export function PieceBlock({ piece, index, side }: Props) {
         </figcaption>
       </figure>
 
-      <div className={`col-span-6 lg:col-span-5 ${textCol}`}>
+      <div className={`col-span-6 ${textCol}`}>
         <p className="label text-muted">
           Peça {number} · {singular}
         </p>
@@ -129,7 +131,7 @@ export function PieceBlock({ piece, index, side }: Props) {
                   return (
                     <label
                       key={s.label}
-                      className={`label grid h-10 min-w-10 place-items-center border px-2 transition-colors has-checked:border-fg has-checked:bg-fg has-checked:text-bg has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-fg ${
+                      className={`label grid h-11 min-w-11 place-items-center border px-2 transition-colors has-checked:border-fg has-checked:bg-fg has-checked:text-bg has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-fg ${
                         out ? "cursor-not-allowed border-line text-muted line-through" : "cursor-pointer border-line hover:border-fg"
                       }`}
                     >

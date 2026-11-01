@@ -24,18 +24,20 @@ export function CartLineItem({ line }: { line: DetailedLine }) {
   const thumb = product.images.details[0];
 
   return (
-    <li className="flex gap-4 py-6 md:gap-6">
+    // A linha herda as colunas da grade da sacola (subgrid): miniatura na coluna 1,
+    // texto a partir da coluna seguinte e preço encostado na margem direita.
+    <li className="col-span-full grid grid-cols-subgrid gap-y-4 py-6">
       <ProductLink
         slug={product.slug}
         tabIndex={-1}
         aria-hidden
-        className={`relative aspect-[4/5] w-24 shrink-0 overflow-hidden md:w-28 ${thumb.kind === "peca" ? "bg-[#fff]" : "bg-panel"}`}
+        className={`relative col-span-2 aspect-[4/5] w-full self-start overflow-hidden lg:col-span-1 ${thumb.kind === "peca" ? "bg-[#fff]" : "bg-panel"}`}
       >
-        <ProductImage image={thumb} alt="" sizes="112px" />
+        <ProductImage image={thumb} alt="" sizes="(min-width: 1025px) 96px, 30vw" />
       </ProductLink>
 
-      <div className="flex min-w-0 flex-1 flex-col gap-4 md:flex-row md:justify-between md:gap-8">
-        <div className="min-w-0">
+      <div className="col-span-4 flex min-w-0 flex-col gap-4 lg:col-span-13 lg:grid lg:grid-cols-subgrid">
+        <div className="min-w-0 lg:col-span-8">
           <ProductLink
             slug={product.slug}
             className="block font-display text-16 font-medium uppercase leading-tight tracking-[0.02em] underline-offset-4 hover:underline md:text-[1.125rem]"
@@ -53,7 +55,7 @@ export function CartLineItem({ line }: { line: DetailedLine }) {
                 <select
                   value={line.size}
                   onChange={(e) => setSize(product.slug, line.size, e.target.value)}
-                  className="h-10 border border-line bg-transparent px-2 text-12 text-fg [&>option]:text-[#111]"
+                  className="h-11 border border-line bg-transparent px-3 text-16 text-fg [&>option]:text-[#111]"
                 >
                   {product.sizes.map((s) => {
                     const out = stockOf(product, s.label) === 0;
@@ -67,11 +69,11 @@ export function CartLineItem({ line }: { line: DetailedLine }) {
                 </select>
               </label>
             )}
-            <div className="flex h-10 items-center border border-line" role="group" aria-label={`Quantidade de ${product.name}`}>
+            <div className="flex h-11 items-center border border-line" role="group" aria-label={`Quantidade de ${product.name}`}>
               <button
                 type="button"
                 onClick={() => setQty(product.slug, line.size, line.qty - 1, max)}
-                className="grid h-full w-10 place-items-center transition-opacity hover:opacity-60"
+                className="grid h-full w-11 place-items-center transition-opacity hover:opacity-60"
                 aria-label="Diminuir"
               >
                 <Icon name="menos" size={16} />
@@ -83,7 +85,7 @@ export function CartLineItem({ line }: { line: DetailedLine }) {
                 type="button"
                 onClick={() => setQty(product.slug, line.size, line.qty + 1, max)}
                 disabled={line.qty >= max}
-                className="grid h-full w-10 place-items-center transition-opacity hover:opacity-60 disabled:opacity-30"
+                className="grid h-full w-11 place-items-center transition-opacity hover:opacity-60 disabled:opacity-30"
                 aria-label="Aumentar"
               >
                 <Icon name="mais" size={16} />
@@ -92,7 +94,7 @@ export function CartLineItem({ line }: { line: DetailedLine }) {
             <button
               type="button"
               onClick={() => remove(product.slug, line.size)}
-              className="label min-h-10 underline-offset-4 hover:underline"
+              className="label min-h-11 underline-offset-4 hover:underline"
             >
               Remover
             </button>
@@ -100,7 +102,7 @@ export function CartLineItem({ line }: { line: DetailedLine }) {
           {line.qty > max && <p className="label mt-2 text-pinhao">Só restam {max} neste tamanho.</p>}
         </div>
 
-        <div className="shrink-0 md:text-right">
+        <div className="lg:col-span-3 lg:col-start-11 lg:text-right">
           <p className="text-16 tabular-nums md:text-[1.125rem]">{formatBRL(line.total)}</p>
           <p className="font-display text-12 font-extralight italic text-soft">
             Qtd: {line.qty}

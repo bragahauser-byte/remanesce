@@ -21,9 +21,18 @@ export type Edit = {
   startSide: "left" | "right";
 };
 
-export const edits: Edit[] = looks.map<Edit>((look, i) => ({
+/**
+ * Ordem da vitrine (galeria do início, menu, "próximo look"). Raiz abre a coleção e
+ * Bráctea ocupa a quinta posição; os outros looks seguem a ordem da coleção.
+ */
+const showcase = ["raiz", "semente", "curiacu", "guacira", "bractea", "gralha"];
+
+const ordered = showcase.map((slug) => looks.find((l) => l.slug === slug)!);
+
+export const edits: Edit[] = ordered.map<Edit>((look, i) => ({
   slug: look.slug,
-  number: look.number,
+  /** Posição na vitrine (01–06), usada nos rótulos. */
+  number: i + 1,
   title: look.name.toLowerCase(),
   line: look.line,
   description: look.description,

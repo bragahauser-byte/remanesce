@@ -6,7 +6,7 @@
  * do look ("detalhe", com objectPosition + zoom).
  */
 
-import { looks, photo } from "./looks";
+import { getLook, photo } from "./looks";
 
 export type Category = "tops" | "saias" | "calcas" | "vestidos" | "jaquetas";
 
@@ -82,7 +82,7 @@ const CARE = [
 
 /** Peça com foto própria: a foto sozinha abre a lista; as do look vêm depois. */
 function pieceImages(n: number, piece: string, shot: "topo" | "inferior" | "peca") {
-  const look = looks[n - 1];
+  const look = getLook(n)!;
   const own: ProductImage = { src: photo(look.slug, shot), kind: "peca", alt: `${piece}, foto da peça sobre fundo branco` };
   return {
     front: own,
@@ -93,7 +93,7 @@ function pieceImages(n: number, piece: string, shot: "topo" | "inferior" | "peca
 
 /** Peça sem foto própria: recortes da foto do look. */
 function lookImages(n: number, piece: string, focus: string, zoom: number, focus2?: string, zoom2?: number) {
-  const look = looks[n - 1];
+  const look = getLook(n)!;
   return {
     front: { src: look.front, kind: "look" as const, fit: look.fit, alt: `${piece}, vista de frente, no look ${look.name}` },
     back: { src: look.back, kind: "look" as const, fit: look.fit, alt: `${piece}, vista de costas, no look ${look.name}` },
@@ -195,7 +195,7 @@ export const products: Product[] = [
     short: "Frente única de gola camisa com zíper e barra em escamas.",
     price: 44900,
     color: "Índigo profundo · zíper metálico",
-    images: lookImages(3, "Top Curiaçu", "50% 26%", 1.8),
+    images: pieceImages(3, "Top Curiaçu", "topo"),
     sizes: letters([3, 4, 4, 3, 2]),
     story:
       "Leva o nome do guerreiro que virou araucária. A gola camisa é a postura de quem fica de pé; as escamas na barra, o primeiro sinal da árvore que ele se tornou.",
@@ -220,7 +220,7 @@ export const products: Product[] = [
     short: "Pantalona de cintura alta com escamas descendo pelas laterais, do quadril à barra.",
     price: 89000,
     color: "Índigo profundo · escamas laterais",
-    images: lookImages(3, "Calça Curiaçu", "28% 70%", 1.5, "72% 70%", 1.5),
+    images: pieceImages(3, "Calça Curiaçu", "inferior"),
     sizes: numbers([1, 3, 4, 4, 2, 1, 0]),
     story:
       "As escamas descem pelas laterais como galhos que crescem para baixo, procurando a terra. Uma pantalona de cintura alta para andar com o corpo inteiro, como quem tem raiz.",

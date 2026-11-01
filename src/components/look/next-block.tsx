@@ -1,12 +1,12 @@
 "use client";
 
 import gsap from "gsap";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
 import { microcopy } from "@/data/copy";
 import { useReducedMotion } from "@/lib/hooks";
 import { toBox, useFlight } from "@/lib/store/flight";
+import { TransitionLink } from "@/components/layout/page-transition";
 import { LookFigure } from "./figure";
 
 type Props = {
@@ -48,7 +48,7 @@ export function NextBlock({ kicker, title, href, image, flightSlug }: Props) {
 
   return (
     <footer className="mt-32 lg:mt-48">
-      <Link href={href} onClick={onClick} className="group grid-site min-h-[60dvh] items-end pb-[var(--pad)]">
+      <TransitionLink href={href} onClick={onClick} className="group grid-site min-h-[60dvh] items-end pb-[var(--pad)]">
         <p data-fade className="headline col-span-6 lg:col-span-10">
           <span className="block">{kicker}</span>
           <span className="block text-muted transition-colors duration-500 group-hover:text-fg">{title}</span>
@@ -61,7 +61,7 @@ export function NextBlock({ kicker, title, href, image, flightSlug }: Props) {
           alt={image.alt}
           className="col-span-2 col-start-5 mt-8 aspect-[396/496] w-full lg:col-span-2 lg:col-start-13 lg:mt-0"
         />
-      </Link>
+      </TransitionLink>
       <div className="grid-site label border-t border-line py-4 text-muted">
         <p className="col-span-3 lg:col-span-4">© 2026 Remanesce</p>
         <p className="col-span-3 lg:col-span-6">{microcopy.academic}</p>

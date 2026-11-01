@@ -6,12 +6,14 @@ import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Wordmark } from "@/components/brand/wordmark";
 import { LookFigure } from "@/components/look/figure";
+import { edits } from "@/data/collection";
 import { primaryPages } from "@/data/copy";
 import { looks } from "@/data/looks";
 import { asset } from "@/lib/paths";
 import { useFocusTrap } from "@/lib/focus-trap";
 import { useReducedMotion } from "@/lib/hooks";
 import { useUI } from "@/lib/store/ui";
+import { barClass, hitArea, logoClass } from "./header";
 import { getLenis } from "./smooth-scroll";
 
 type Href = (typeof primaryPages)[number]["href"];
@@ -42,8 +44,8 @@ function Preview({ href, title }: { href: Href; title: string }) {
         {href === "/" &&
           [0, 1, 2].map((i) => (
             <div key={i} className="flex w-[44%] shrink-0 flex-col">
-              <span className="mb-[1.5cqw] text-[1.8cqw] font-medium uppercase">{looks[i].name}</span>
-              <LookFigure src={looks[i].front} fit={looks[i].fit} alt="" className="aspect-[396/496] w-full" />
+              <span className="mb-[1.5cqw] text-[1.8cqw] font-medium uppercase">{edits[i].title}</span>
+              <LookFigure src={edits[i].image.front} fit={edits[i].image.fit} alt="" className="aspect-[396/496] w-full" />
             </div>
           ))}
         {href === "/sobre" && (
@@ -252,12 +254,20 @@ export function Menu() {
     >
       <div data-menu-bg className="absolute inset-0 bg-stage" onClick={dismiss} aria-hidden />
 
-      <div className="grid-site label pointer-events-none relative z-[3] items-start pt-3 text-[#fff] md:pt-4">
-        <div data-menu-chrome className="col-span-4 lg:col-span-12">
-          <Wordmark title="Remanesce" className="h-5 w-auto md:h-6 lg:h-7 xl:h-8" />
-          <p className="mt-3">Páginas</p>
-        </div>
-        <button data-menu-chrome type="button" onClick={dismiss} className="label pointer-events-auto col-span-2 justify-self-end text-right lg:col-span-2">
+      {/* Mesma estrutura do header: logotipo na coluna 1, rótulo na 9, ação na borda direita. */}
+      <div className={`${barClass} pointer-events-none relative z-[3] text-[#fff]`}>
+        <span data-menu-chrome className="col-span-3 justify-self-start">
+          <Wordmark title="Remanesce" className={logoClass} />
+        </span>
+        <p data-menu-chrome className="hidden lg:col-span-4 lg:col-start-9 lg:block">
+          Páginas
+        </p>
+        <button
+          data-menu-chrome
+          type="button"
+          onClick={dismiss}
+          className={`pointer-events-auto col-span-3 justify-self-end lg:col-span-2 lg:col-start-13 ${hitArea}`}
+        >
           <span className="roll">
             <span>Fechar</span>
             <span aria-hidden>Fechar</span>

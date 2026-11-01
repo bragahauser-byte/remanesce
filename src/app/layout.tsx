@@ -5,6 +5,7 @@ import localFont from "next/font/local";
 import { FlightLayer } from "@/components/layout/flight-layer";
 import { Header } from "@/components/layout/header";
 import { Menu } from "@/components/layout/menu";
+import { PageTransition } from "@/components/layout/page-transition";
 import { SmoothScroll } from "@/components/layout/smooth-scroll";
 import { brand } from "@/data/copy";
 import { asset } from "@/lib/paths";
@@ -70,6 +71,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Suspense fallback={null}>
           <Menu />
           <SmoothScroll />
+          <PageTransition />
         </Suspense>
       </body>
     </html>

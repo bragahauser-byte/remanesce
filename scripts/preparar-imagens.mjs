@@ -4,6 +4,7 @@
  *   identidade visual/elementos graficos/Sugar apple.png → public/images/marca/sugar-apple.webp
  *   identidade visual/elementos graficos/Bird.svg        → public/images/marca/bird-linha.svg (traço branco)
  *   fotos dos looks                                       → public/images/og.jpg (1200×630)
+ *   favcon/favcon.jpg                                     → src/app/icon.png (512) e apple-icon.png (180)
  * Uso: npm run imagens
  */
 
@@ -15,13 +16,11 @@ const root = process.cwd();
 const src = (...p) => path.join(root, ...p);
 const out = (...p) => path.join(root, "public", "images", ...p);
 
-/*
- * Pasta de origem → pasta publicada. A pasta "curiaçu" veio com as mesmas fotos da
- * "semente" (arquivos idênticos), então o look Curiaçu continua com as imagens antigas.
- */
+/* Pasta de origem → pasta publicada. */
 const looks = {
   bractea: { from: "bráctea", files: ["frente", "atras", "topo", "inferior"] },
   semente: { from: "semente", files: ["frente", "atras", "peca"] },
+  curiacu: { from: "curiaçu", files: ["frente", "atras", "topo", "inferior"] },
   guacira: { from: "guacira", files: ["frente", "atras", "topo", "inferior"] },
   raiz: { from: "raiz", files: ["frente", "atras", "topo", "inferior"] },
   gralha: { from: "gralha", files: ["frente", "atras", "topo", "inferior"] },
@@ -61,15 +60,20 @@ await writeFile(
 );
 
 // Imagem de compartilhamento: as fotos de frente lado a lado.
-const strip = ["bractea", "semente", "guacira", "raiz", "gralha"];
+const strip = ["raiz", "semente", "curiacu", "guacira", "bractea", "gralha"];
 const tiles = await Promise.all(
   strip.map((slug) =>
-    sharp(out("pecas", slug, "frente-1600.webp")).resize(240, 630, { fit: "cover", position: "centre" }).toBuffer(),
+    sharp(out("pecas", slug, "frente-1600.webp")).resize(200, 630, { fit: "cover", position: "centre" }).toBuffer(),
   ),
 );
 await sharp({ create: { width: 1200, height: 630, channels: 3, background: "#f2f0ee" } })
-  .composite(tiles.map((input, i) => ({ input, left: i * 240, top: 0 })))
+  .composite(tiles.map((input, i) => ({ input, left: i * 200, top: 0 })))
   .jpeg({ quality: 82 })
   .toFile(out("og.jpg"));
+
+// Favicon: o "R" da marca sobre branco (arquivo opaco, já quadrado).
+const favicon = src("favcon", "favcon.jpg");
+await sharp(favicon).resize(512, 512).png().toFile(path.join(root, "src", "app", "icon.png"));
+await sharp(favicon).resize(180, 180).png().toFile(path.join(root, "src", "app", "apple-icon.png"));
 
 console.log("ok");
