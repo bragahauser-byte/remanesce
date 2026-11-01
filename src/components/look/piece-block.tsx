@@ -1,38 +1,73 @@
 "use client";
 
 import Link from "next/link";
-import { useId, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { categories, type Product } from "@/data/products";
 import { formatPrice, installmentsLabel } from "@/lib/format";
 import { useCart } from "@/lib/store/cart";
 import { useStock } from "@/lib/stock";
-import { LookFigure } from "./figure";
+import { LookFigure, srcSetOf } from "./figure";
 
 type Props = {
   piece: Product;
   index: number;
   side: "left" | "right";
-  src: string;
-  alt: string;
 };
+
+/** Foto da peça sozinha (fundo branco, inteira) ou, sem ela, o recorte da foto do look. */
+function PieceImage({ piece }: { piece: Product }) {
+  const image = piece.images.details[0];
+  if (image.kind === "peca") {
+    return (
+      <div className="relative aspect-square w-full overflow-hidden bg-[#fff]">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={image.src}
+          srcSet={srcSetOf(image.src)}
+          sizes="(min-width: 1025px) 45vw, 100vw"
+          alt={image.alt}
+          loading="lazy"
+          decoding="async"
+          className="absolute inset-0 h-full w-full object-contain"
+        />
+      </div>
+    );
+  }
+  return (
+    <LookFigure
+      src={image.src}
+      alt={image.alt}
+      fit={piece.images.front.fit}
+      focus={image.objectPosition}
+      zoom={image.zoom}
+      className="aspect-square w-full"
+    />
+  );
+}
 
 /**
  * Uma peça do look: imagem de um lado, texto do outro, alternando a cada peça.
- * Nome e preço entram na composição sem painel de compra: tamanhos em texto e
- * um link para guardar na sacola.
+ * Nome em PP Pangaia, preço, tamanhos e o botão "Adicionar à sacola".
  */
-export function PieceBlock({ piece, index, side, src, alt }: Props) {
+export function PieceBlock({ piece, index, side }: Props) {
   const stockOf = useStock();
   const add = useCart((s) => s.add);
   const lines = useCart((s) => s.lines);
   const single = piece.sizes.length === 1;
   const [size, setSize] = useState<string | null>(single ? piece.sizes[0].label : null);
   const [status, setStatus] = useState<"idle" | "need-size" | "added" | "limit">("idle");
+  // Confirmação discreta: o botão fica preenchido por um instante a cada peça guardada.
+  const [flash, setFlash] = useState(0);
   const id = useId();
+
+  useEffect(() => {
+    if (!flash) return;
+    const t = window.setTimeout(() => setFlash(0), 1200);
+    return () => window.clearTimeout(t);
+  }, [flash]);
 
   const number = String(index + 1).padStart(2, "0");
   const singular = categories.find((c) => c.key === piece.category)?.singular ?? "";
-  const detail = piece.images.details[0];
   const soldOut = piece.sizes.every((s) => stockOf(piece, s.label) === 0);
 
   function onAdd() {
@@ -42,7 +77,10 @@ export function PieceBlock({ piece, index, side, src, alt }: Props) {
     if (available - already <= 0) return setStatus("limit");
     add({ slug: piece.slug, size, qty: 1 }, available);
     setStatus("added");
+    setFlash((n) => n + 1);
   }
+
+  const inBag = size ? (lines.find((l) => l.slug === piece.slug && l.size === size)?.qty ?? 0) : 0;
 
   const imageCol = side === "left" ? "lg:col-start-1" : "lg:col-start-9";
   const textCol = side === "left" ? "lg:col-start-9" : "lg:col-start-2 lg:row-start-1";
@@ -50,7 +88,7 @@ export function PieceBlock({ piece, index, side, src, alt }: Props) {
   return (
     <section aria-labelledby={`${id}-nome`} className="grid-site mt-24 items-end gap-y-8 lg:mt-40">
       <figure className={`col-span-6 ${imageCol}`}>
-        <LookFigure src={src} alt={alt} focus={detail?.objectPosition} zoom={Math.min(detail?.zoom ?? 1, 1.3)} className="aspect-[4/5] w-full" />
+        <PieceImage piece={piece} />
         <figcaption className="label mt-2 flex gap-8">
           <span>{number}.</span>
           <span>{piece.name}</span>
@@ -61,7 +99,7 @@ export function PieceBlock({ piece, index, side, src, alt }: Props) {
         <p className="label text-muted">
           Peça {number} · {singular}
         </p>
-        <h2 id={`${id}-nome`} className="mt-4 text-32 font-light tracking-[-0.03em] lg:text-48">
+        <h2 id={`${id}-nome`} className="title-display mt-4">
           {piece.name}
         </h2>
         <p className="mt-4 flex flex-wrap items-baseline gap-x-4 gap-y-1">
@@ -116,16 +154,23 @@ export function PieceBlock({ piece, index, side, src, alt }: Props) {
             </fieldset>
           )}
 
-          <div className="mt-6 flex flex-wrap items-baseline gap-x-8 gap-y-2">
-            <button type="button" onClick={onAdd} disabled={soldOut} className="label-lg link-stitch disabled:opacity-40">
+          <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+            <button
+              type="button"
+              onClick={onAdd}
+              disabled={soldOut}
+              aria-describedby={`${id}-status`}
+              data-added={flash ? "" : undefined}
+              className="btn-line w-full data-added:bg-fg data-added:text-bg sm:w-auto sm:min-w-64"
+            >
               {soldOut ? "Esgotado" : "Adicionar à sacola"}
             </button>
-            <p role="status" className="label text-muted">
+            <p id={`${id}-status`} role="status" aria-live="polite" className="label text-muted">
               {status === "need-size" && "Escolha um tamanho."}
               {status === "limit" && "Você já tem todas as unidades deste tamanho."}
               {status === "added" && (
                 <>
-                  Guardado na sacola ·{" "}
+                  Guardado na sacola{inBag > 1 ? ` (${inBag} no tamanho ${size})` : ""} ·{" "}
                   <Link href="/sacola" className="text-fg underline underline-offset-4">
                     ver sacola
                   </Link>

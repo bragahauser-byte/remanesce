@@ -3,7 +3,6 @@
 @import "../styles/textures.css";
 
 @custom-variant pointer-fine (@media (hover: hover) and (pointer: fine));
-@custom-variant terra (&:where([data-theme="terra"], [data-theme="terra"] *));
 
 /* ------------------------------------------------------------------ base */
 
@@ -29,18 +28,6 @@
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-  }
-
-  /* A troca de tema é lenta e deliberada, como a passagem do dia para a noite. */
-  html.theme-anim,
-  html.theme-anim body,
-  html.theme-anim * {
-    transition:
-      background-color 900ms var(--ease),
-      color 900ms var(--ease),
-      border-color 900ms var(--ease),
-      fill 900ms var(--ease),
-      stroke 900ms var(--ease) !important;
   }
 
   ::selection {
@@ -103,13 +90,14 @@ html.lenis body {
   font-weight: 600;
 }
 
-/* Títulos gigantes em caixa baixa: 48 → 64 → 96 → 120 px. */
+/* Títulos gigantes em caixa baixa, em PP Pangaia Ultralight: 48 → 64 → 96 → 120 px. */
 @utility headline {
-  font-family: var(--font-sans);
-  font-weight: 300;
+  font-family: var(--font-display);
+  font-weight: 200;
   font-size: 3rem;
-  line-height: 1;
-  letter-spacing: -0.04em;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
   @media (width >= 768px) {
     font-size: 4rem;
   }
@@ -118,6 +106,19 @@ html.lenis body {
   }
   @media (width >= 1440px) {
     font-size: 7.5rem;
+  }
+}
+
+/* Título de peça ou de seção em PP Pangaia: 32 → 48 px. */
+@utility title-display {
+  font-family: var(--font-display);
+  font-weight: 200;
+  font-size: 2rem;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  @media (width >= 1025px) {
+    font-size: 3rem;
   }
 }
 
@@ -237,6 +238,44 @@ html.lenis body {
   padding-inline: var(--pad);
 }
 
+/* Botão de contorno: retângulo reto, texto em rótulo, inverte no hover. */
+@utility btn-line {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  min-height: 3rem;
+  padding-inline: 2rem;
+  border: 1px solid currentColor;
+  border-radius: 0;
+  background: transparent;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 500;
+  text-decoration: none;
+  transition:
+    background-color 300ms var(--ease),
+    color 300ms var(--ease);
+  &:hover:not(:disabled) {
+    background: var(--fg);
+    color: var(--bg);
+    border-color: var(--fg);
+  }
+  &:active:not(:disabled) {
+    transform: translateY(1px);
+  }
+  &:focus-visible {
+    outline-offset: 3px;
+  }
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
 /* Link editorial: sublinhado fino que encolhe no hover. */
 @utility link-stitch {
   background-image: linear-gradient(currentColor, currentColor);
@@ -248,6 +287,40 @@ html.lenis body {
   &:hover {
     background-size: 0% 1px;
     background-position: 100% 100%;
+  }
+}
+
+/*
+ * Superfície azul (#263054) com texto branco: sacola. Redefine as cores de superfície
+ * e as fixas usadas pelos campos compartilhados (frete, cupom), como um tema local.
+ */
+@utility surface-azul {
+  --bg: var(--azul);
+  --fg: #ffffff;
+  --soft: color-mix(in srgb, #ffffff 82%, var(--azul));
+  --muted: color-mix(in srgb, #ffffff 70%, var(--azul));
+  --line: color-mix(in srgb, #ffffff 30%, var(--azul));
+  /* As cores do Tailwind são resolvidas no :root; aqui elas precisam ser redefinidas também. */
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --color-soft: var(--soft);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-tinta: #ffffff;
+  --color-preto: #ffffff;
+  --color-branco: var(--azul);
+  --color-cobre: #ffffff;
+  --color-pinhao: #ffc2c2;
+  background: var(--bg);
+  color: var(--fg);
+  & ::selection {
+    background: color-mix(in srgb, #ffffff 30%, transparent);
+  }
+  & :focus-visible {
+    outline-color: #ffffff;
+  }
+  & input::placeholder {
+    color: var(--muted);
   }
 }
 

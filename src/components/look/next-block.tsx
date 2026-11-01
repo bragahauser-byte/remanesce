@@ -13,7 +13,7 @@ type Props = {
   kicker: string;
   title: string;
   href: string;
-  image: { src: string; alt: string };
+  image: { src: string; alt: string; fit?: "cover" | "contain" };
   /** Com o slug do look, a miniatura voa até a foto da página seguinte. */
   flightSlug?: string;
 };
@@ -36,7 +36,7 @@ export function NextBlock({ kicker, title, href, image, flightSlug }: Props) {
     e.preventDefault();
     if (busy.current) return;
     busy.current = true;
-    startFlight({ slug: flightSlug, src: image.src, from: toBox(figure.getBoundingClientRect()) });
+    startFlight({ slug: flightSlug, src: image.src, fit: image.fit ?? "cover", from: toBox(figure.getBoundingClientRect()) });
     gsap.set(figure, { visibility: "hidden" });
     gsap.to(e.currentTarget.querySelectorAll("[data-fade]"), {
       opacity: 0,
@@ -56,6 +56,8 @@ export function NextBlock({ kicker, title, href, image, flightSlug }: Props) {
         <LookFigure
           ref={figureRef}
           src={image.src}
+          fit={image.fit}
+          sizes="(min-width: 1025px) 18vw, 40vw"
           alt={image.alt}
           className="col-span-2 col-start-5 mt-8 aspect-[396/496] w-full lg:col-span-2 lg:col-start-13 lg:mt-0"
         />

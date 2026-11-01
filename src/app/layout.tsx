@@ -1,13 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import { Suspense } from "react";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import { FlightLayer } from "@/components/layout/flight-layer";
 import { Header } from "@/components/layout/header";
 import { Menu } from "@/components/layout/menu";
 import { SmoothScroll } from "@/components/layout/smooth-scroll";
 import { brand } from "@/data/copy";
 import { asset } from "@/lib/paths";
-import { themeInitScript } from "@/lib/theme";
 import "./globals.css";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -15,6 +15,18 @@ const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   display: "swap",
+});
+
+/* PP Pangaia (Pangram Pangram): só nos títulos grandes, nos nomes das peças e nas páginas do menu. */
+const pangaia = localFont({
+  variable: "--font-pangaia",
+  src: [
+    { path: "../fonts/PPPangaia-Ultralight.otf", weight: "200", style: "normal" },
+    { path: "../fonts/PPPangaia-UltralightItalic.otf", weight: "200", style: "italic" },
+    { path: "../fonts/PPPangaia-Medium.otf", weight: "500", style: "normal" },
+  ],
+  display: "swap",
+  fallback: ["Times New Roman", "Georgia", "serif"],
 });
 
 export const metadata: Metadata = {
@@ -31,7 +43,7 @@ export const metadata: Metadata = {
     siteName: brand.name,
     title: `${brand.name} · ${brand.collection}`,
     description: brand.description,
-    images: [{ url: asset("/images/lineup/lineup-frente.jpg"), width: 1600, height: 900, alt: "Line-up da coleção O Renascer da Permanência" }],
+    images: [{ url: asset("/images/og.jpg"), width: 1200, height: 630, alt: "Looks da coleção O Renascer da Permanência" }],
   },
   twitter: { card: "summary_large_image" },
 };
@@ -42,10 +54,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="pt-BR" className={jakarta.variable} suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
-      </head>
+    <html lang="pt-BR" className={`${jakarta.variable} ${pangaia.variable}`} suppressHydrationWarning>
       <body>
         <a
           href="#conteudo"

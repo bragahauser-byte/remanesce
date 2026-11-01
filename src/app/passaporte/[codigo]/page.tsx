@@ -50,7 +50,7 @@ export default async function PassportPage({ params }: PageProps<"/passaporte/[c
             <BrandSymbol size={32} />
             <p className="label text-cobre">Passaporte da Peça</p>
           </div>
-          <h1 className="serif mt-6 text-h1 text-tinta">{product.name}</h1>
+          <h1 className="mt-6 font-display text-h1 font-extralight tracking-[-0.02em] text-tinta">{product.name}</h1>
           <dl className="mt-8 grid grid-cols-2 gap-6 border-y border-dashed border-cobre/50 py-6">
             <div>
               <dt className="label text-tinta/55">Código</dt>
@@ -58,7 +58,7 @@ export default async function PassportPage({ params }: PageProps<"/passaporte/[c
             </div>
             <div>
               <dt className="label text-tinta/55">Look</dt>
-              <dd className="serif mt-1 text-[1.15rem]">{look ? `${String(look.number).padStart(2, "0")} · ${look.name}` : "Acessório"}</dd>
+              <dd className="serif mt-1 text-[1.15rem]">{look ? `${String(look.number).padStart(2, "0")} · ${look.name}` : "—"}</dd>
             </div>
             <div>
               <dt className="label text-tinta/55">Criada em</dt>

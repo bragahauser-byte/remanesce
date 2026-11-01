@@ -59,7 +59,7 @@ export function LookHero({ edit }: { edit: Edit }) {
           </h1>
           <div data-meta className="label mt-6 grid grid-cols-2 gap-2 lg:mt-16">
             <p>
-              {edit.number <= 6 ? `Look ${String(edit.number).padStart(2, "0")}` : "Acessório"}
+              Look {String(edit.number).padStart(2, "0")}
               <br />
               <span className="text-muted">
                 {pieces} {pieces === 1 ? "peça" : "peças"}
@@ -77,6 +77,7 @@ export function LookHero({ edit }: { edit: Edit }) {
       <LookFigure
         ref={figureRef}
         src={edit.image.front}
+        fit={edit.image.fit}
         alt={edit.image.alt}
         priority
         className={`order-1 col-span-6 mt-16 aspect-[4/5] w-full lg:order-2 lg:aspect-auto lg:h-[calc(100dvh-80px)] ${arriving ? "invisible" : ""}`}

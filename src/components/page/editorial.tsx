@@ -14,7 +14,7 @@ export function EditorialRow({
   children,
   imageSide = "left",
 }: {
-  image?: { src: string; alt: string; kind?: "figure" | "photo" };
+  image?: { src: string; alt: string; kind?: "figure" | "photo"; fit?: "cover" | "contain" };
   children: ReactNode;
   imageSide?: "left" | "right";
 }) {
@@ -25,10 +25,10 @@ export function EditorialRow({
           {image.kind === "photo" ? (
             <div className="aspect-[4/5] overflow-hidden bg-panel">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={image.src} alt={image.alt} loading="lazy" className="h-full w-full object-cover mix-blend-multiply terra:mix-blend-normal" />
+              <img src={image.src} alt={image.alt} loading="lazy" className="h-full w-full object-cover mix-blend-multiply" />
             </div>
           ) : (
-            <LookFigure src={image.src} alt={image.alt} className="aspect-[4/5] w-full" />
+            <LookFigure src={image.src} alt={image.alt} fit={image.fit} sizes="(min-width: 1025px) 27vw, 85vw" className="aspect-[4/5] w-full" />
           )}
         </div>
       )}

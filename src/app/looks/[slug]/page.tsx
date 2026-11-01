@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: PageProps<"/looks/[slug]">): 
   const { slug } = await params;
   const edit = getEdit(slug);
   if (!edit) return {};
-  const title = edit.number <= 6 ? `Look ${edit.title}` : edit.title;
+  const title = `Look ${edit.title}`;
   return {
     title,
     description: `${edit.line} ${edit.description}`,
@@ -33,24 +33,13 @@ export default async function LookPage({ params }: PageProps<"/looks/[slug]">) {
       {edit.pieces.map((piece, i) => {
         const flip = i % 2 === 1;
         const side = flip ? (edit.startSide === "left" ? "right" : "left") : edit.startSide;
-        // As peças alternam a vista do look: costas, frente, costas…
-        const back = i % 2 === 0;
-        return (
-          <PieceBlock
-            key={piece.slug}
-            piece={piece}
-            index={i}
-            side={side}
-            src={back ? edit.image.back : edit.image.front}
-            alt={piece.images[back ? "back" : "front"].alt}
-          />
-        );
+        return <PieceBlock key={piece.slug} piece={piece} index={i} side={side} />;
       })}
       <NextBlock
-        kicker={next.number <= 6 ? "próximo look" : "e também"}
+        kicker="próximo look"
         title={next.title}
         href={editHref(next.slug)}
-        image={{ src: next.image.front, alt: next.image.alt }}
+        image={{ src: next.image.front, alt: next.image.alt, fit: next.image.fit }}
         flightSlug={next.slug}
       />
     </article>

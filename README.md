@@ -34,8 +34,9 @@ Cada push na `main` publica o site no GitHub Pages pelo workflow `.github/workfl
 
 - **Início**: galeria horizontal (roda do mouse, arrastar, toque ou teclado). O card abre o look.
 - **Look** (`/looks/[slug]`): título e foto lado a lado, peças com preço e tamanho, próximo look.
-- **Conceito** e **Raiz**: páginas editoriais com os textos da equipe.
-- **Menu**: as três páginas em cartões. O círculo no canto superior direito troca o tema (claro/terra).
+- **Sobre nós** e **Raiz**: páginas editoriais com os textos da equipe e a lenda da Araucária (RPC).
+- **Menu**: as três páginas em cartões sobre o azul #263054.
+- **Sacola**: azul com texto branco, peças, frete por CEP, cupom e checkout simulado.
 
 ## Roupas recortadas (frente e verso)
 
@@ -59,6 +60,15 @@ O script `scripts/recortar-roupas.mjs` (com `sharp`) acha cada figura pelo perfi
 separa figuras quase encostadas pelo vale de menor tinta e remove o fundo por preenchimento a
 partir das bordas, mais os vãos internos (entre pernas e braços), com a borda descontaminada do
 linho para não deixar halo.
+
+### Fotos das peças
+
+As fotos de estúdio ficam em `modelos e roupas/<look>/` (fora do git). Para gerar as versões do site
+(`public/images/pecas/`, Sugar apple, pássaro e imagem de compartilhamento):
+
+```bash
+npm run imagens
+```
 
 ## Estrutura
 

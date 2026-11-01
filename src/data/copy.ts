@@ -23,7 +23,7 @@ export const brand = {
 /** As três páginas principais (menu em cartões). */
 export const primaryPages = [
   { href: "/", label: "Início", title: "início" },
-  { href: "/conceito", label: "Conceito", title: "conceito" },
+  { href: "/sobre", label: "Sobre nós", title: "sobre nós" },
   { href: "/raiz", label: "Raiz", title: "raiz" },
 ] as const;
 
@@ -215,3 +215,50 @@ export const palette = [
   { token: "indigo", name: "Índigo denim", hex: "#161B27", rgb: "22 27 39", cmyk: "44 31 0 85", use: "Acento raro: o denim; fim da transição do glifo.", share: 2 },
   { token: "cobre", name: "Pesponto", hex: "#B9763E", rgb: "185 118 62", cmyk: "0 36 66 27", use: "Detalhes: sublinhado tracejado, costuras dos mockups.", share: 1 },
 ] as const;
+
+/*
+ * Sobre nós: reportagem da RPC sobre a lenda da Araucária (texto da fonte, só
+ * organizado em seções). A lenda é da tradição indígena; a Remanesce não é autora.
+ */
+export const aboutStory = {
+  title: "Folclore brasileiro: o que a Araucária, símbolo do Paraná, tem em comum com a novela Renascer?",
+  subtitle: "Conheça a lenda indígena sobre renascimento.",
+  source: "RPC",
+  date: "02/02/2024, às 17h09",
+  intro: [
+    "Renascer estreou em 22 de janeiro de 2024. A releitura da novela, entrelaçando passado e presente, resgata não apenas figuras memoráveis, mas também um ícone inesquecível da versão original: o majestoso jequitibá-rei.",
+    "Logo no início, José Inocêncio faz uma promessa aos pés do gigante Jequitibá-rei, árvore nativa da Bahia, local em que a novela se passa.",
+    "Nesse momento, a famosa frase é dita pelo personagem:",
+  ],
+  quote: {
+    text: "Aqui, aos seus pés e à sua sombra eu vou plantar o meu destino [...] Enquanto o meu facão estiver encravado aos seus pés, nem eu nem você haveremos de morrer. Nem morte matada, nem de morte morrida!",
+    author: "José Inocêncio",
+    role: "personagem interpretado por Humberto Carrão",
+  },
+  context:
+    "A árvore Jequitibá é um símbolo muito importante para a novela, que conta com muitas lendas e misticismo. Assim como no sul da Bahia, o Paraná também possui sua árvore símbolo: a Araucária.",
+  question: "E você, conhece a lenda de renascimento da Araucária?",
+  legend: [
+    {
+      heading: "Curiaçu e Guacira",
+      paragraphs: [
+        "Há muito tempo, quando o Paraná era coberto por matas, viviam tribos indígenas na região chamada Paiquerê. Um destaque era Curiaçu, indígena único em sua tribo, admirado por sua estatura e habilidades excepcionais.",
+        "Durante uma caçada, Curiaçu salvou Guacira, filha do pajé inimigo, de uma onça-pintada. Contudo, um mal-entendido levou guerreiros a atacarem Curiaçu com flechadas. Após uma luta corajosa, ele escapou com Guacira, muito ferido.",
+        "Mesmo machucado, ele pediu a Guacira que o escondesse. Ela o levou para a mata. Ao tentar encontrá-lo, nunca teve sucesso.",
+      ],
+    },
+    {
+      heading: "A primeira Araucária",
+      paragraphs: [
+        "No local, uma Araucária majestosa surgiu, seus galhos pareciam flechas cravadas no tronco. Foi assim que surgiu a primeira Araucária, o pinheiro-do-paraná, marcando a história e o renascimento de Curiaçu.",
+      ],
+    },
+    {
+      heading: "A gralha-azul",
+      paragraphs: [
+        "Depois, Tupã, criador do mundo, transformou Guacira em uma gralha-azul.",
+        "A lenda persiste, pois a gralha enterra pinhões, pensando serem gotas de sangue de Curiaçu. Esses pinhões deram origem a vastas florestas de Araucárias em Paiquerê, mantendo viva a história de amor e sacrifício.",
+      ],
+    },
+  ],
+} as const;

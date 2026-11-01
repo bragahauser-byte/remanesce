@@ -60,7 +60,16 @@ export const useCart = create<CartState>()(
         }),
       clear: () => set({ lines: [], coupon: null }),
     }),
-    { name: "remanesce:sacola", version: 1 },
+    {
+      name: "remanesce:sacola",
+      version: 2,
+      // v2: o Lenço Escama saiu do catálogo; sacolas antigas perdem só essa linha.
+      migrate: (persisted, version) => {
+        const state = (persisted ?? {}) as Partial<CartState>;
+        const lines = Array.isArray(state.lines) ? state.lines : [];
+        return { ...state, lines: version < 2 ? lines.filter((l) => l.slug !== "lenco-escama") : lines } as CartState;
+      },
+    },
   ),
 );
 

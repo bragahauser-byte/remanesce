@@ -1,13 +1,13 @@
 /*
  * Remanesce · tokens da marca (v3, estudo editorial)
- * Uma família só: Plus Jakarta Sans. Tamanhos em múltiplos de 4 e 8 px.
- * Dois temas: "claro" (branco, padrão) e "terra" (marrom escuro e neutros quentes),
- * trocados pelo seletor redondo no canto superior direito.
+ * Duas famílias: PP Pangaia (títulos grandes, nomes das peças e páginas do menu) e
+ * Plus Jakarta Sans (texto, rótulos e controles). Tamanhos em múltiplos de 4 e 8 px.
+ * Azul da marca #263054 no menu e na sacola, com texto branco.
  */
 
 @theme {
   --color-*: initial;
-  /* Cores de tema (mudam com data-theme) */
+  /* Cores de superfície */
   --color-bg: var(--bg);
   --color-fg: var(--fg);
   --color-muted: var(--muted);
@@ -15,6 +15,7 @@
   --color-line: var(--line);
   --color-panel: var(--panel);
   --color-stage: var(--stage);
+  --color-azul: #263054;
   /* Cores fixas da marca */
   --color-preto: #181508;
   --color-tinta: #111111;
@@ -31,6 +32,7 @@
   --color-current: currentColor;
 
   --font-sans: var(--font-jakarta), "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-display: var(--font-pangaia), "Times New Roman", Georgia, serif;
   /* Aliases antigos apontam para a mesma família: o site inteiro é Plus Jakarta Sans. */
   --font-serif: var(--font-sans);
   --font-italic: var(--font-sans);
@@ -107,10 +109,11 @@
   --muted: #8c8a85;
   --soft: #5c5a55;
   --line: #e4e1db;
-  /* Fundo atrás das roupas recortadas */
-  --panel: #f1ede4;
-  /* Fundo do menu (atrás das páginas em cartão) */
-  --stage: #7d7a68;
+  /* Fundo atrás das fotos e recortes (o mesmo cinza quente do estúdio das fotos) */
+  --panel: #f0eeec;
+  /* Azul oficial: fundo do menu (atrás das páginas em cartão) e da sacola */
+  --azul: #263054;
+  --stage: var(--azul);
 
   /* Compatibilidade com componentes antigos */
   --page-bg: var(--bg);
@@ -118,27 +121,6 @@
 
   --gutter: 8px;
   --pad: 8px;
-}
-
-/* Tema terra: os tons quentes do modo noite da referência */
-:root[data-theme="terra"] {
-  --bg: #2c2922;
-  --fg: #e3ddcf;
-  --muted: #9a9384;
-  --soft: #c2bba9;
-  --line: #4a453a;
-  --panel: #3a362d;
-  --stage: #1a1915;
-
-  /* As utilidades fixas (text-tinta, bg-branco…) das páginas de sacola, checkout e marca
-     também viram: o Tailwind 4 lê as cores por variável. */
-  --color-tinta: #e3ddcf;
-  --color-branco: #2c2922;
-  --color-preto: #ece7db;
-  --color-papel: #34302a;
-  --color-linho: #3a362d;
-  --color-linha: #4a453a;
-  --color-cinza: #9a9384;
 }
 
 @media (min-width: 768px) {

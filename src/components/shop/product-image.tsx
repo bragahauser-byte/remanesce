@@ -11,11 +11,13 @@ type Props = {
 };
 
 /**
- * Foto do look inteiro (contida, flutuando sobre o linho) ou recorte de detalhe
- * (cobre a moldura, com ponto focal e ampliação). Preencha o pai com position: relative.
+ * Foto da peça sozinha (inteira, contida sobre branco), foto do look (cover para as
+ * fotos de estúdio, contida para os recortes) ou recorte de detalhe (cobre a moldura,
+ * com ponto focal e ampliação). Preencha o pai com position: relative.
  */
 export function ProductImage({ image, sizes, className = "", priority, alt }: Props) {
   const detail = image.kind === "detalhe";
+  const cover = detail || (image.kind === "look" && image.fit === "cover");
   return (
     <Image
       src={image.src}
@@ -24,7 +26,7 @@ export function ProductImage({ image, sizes, className = "", priority, alt }: Pr
       sizes={sizes}
       priority={priority}
       unoptimized={image.src.endsWith(".svg")}
-      className={`${detail ? "object-cover" : "object-contain"} ${className}`}
+      className={`${cover ? "object-cover" : "object-contain"} ${image.kind === "peca" ? "bg-[#fff]" : ""} ${className}`}
       style={
         detail
           ? {

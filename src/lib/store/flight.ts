@@ -5,6 +5,7 @@ export type Box = { x: number; y: number; w: number; h: number };
 export type Flight = {
   slug: string;
   src: string;
+  fit: "cover" | "contain";
   from: Box;
 };
 

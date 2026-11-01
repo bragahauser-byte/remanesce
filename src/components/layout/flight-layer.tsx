@@ -2,6 +2,7 @@
 
 import gsap from "gsap";
 import { useEffect, useRef } from "react";
+import { srcSetOf } from "@/components/look/figure";
 import { useFlight } from "@/lib/store/flight";
 
 /** A cópia da imagem que viaja do card até a página do look. */
@@ -32,7 +33,7 @@ export function FlightLayer() {
   }, [target, end]);
 
   if (!flight) return null;
-  const { from, src } = flight;
+  const { from, src, fit } = flight;
 
   return (
     <div
@@ -41,8 +42,15 @@ export function FlightLayer() {
       className="pointer-events-none fixed z-[45] grid grid-cols-1 grid-rows-1 place-items-center overflow-hidden bg-panel"
       style={{ left: from.x, top: from.y, width: from.w, height: from.h }}
     >
+      {/* A caixa muda de tamanho; a imagem só recalcula o cover/contain, sem esticar. */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={src} alt="" className="h-[92%] w-auto max-w-[92%] object-contain" />
+      <img
+        src={src}
+        srcSet={srcSetOf(src)}
+        sizes="60vw"
+        alt=""
+        className={fit === "cover" ? "h-full w-full object-cover" : "h-[92%] w-auto max-w-[92%] object-contain"}
+      />
     </div>
   );
 }

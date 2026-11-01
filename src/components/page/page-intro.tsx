@@ -22,7 +22,7 @@ export function PageIntro({ kicker, children }: { kicker: string; children: Reac
       <p data-intro className="label col-span-6 mb-6 text-muted lg:col-span-14 lg:mb-8">
         {kicker}
       </p>
-      <h1 data-intro className="headline col-span-6 font-normal tracking-[-0.045em] lg:col-span-11">
+      <h1 data-intro className="headline col-span-6 lg:col-span-11">
         {children}
       </h1>
     </header>

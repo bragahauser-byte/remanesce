@@ -4,7 +4,7 @@ import gsap from "gsap";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
-import { BrandSymbol } from "@/components/brand/logo";
+import { Wordmark } from "@/components/brand/wordmark";
 import { LookFigure } from "@/components/look/figure";
 import { primaryPages } from "@/data/copy";
 import { looks } from "@/data/looks";
@@ -19,43 +19,70 @@ type Href = (typeof primaryPages)[number]["href"];
 /** Rota atual → página principal a que pertence (os looks fazem parte do início). */
 function sectionOf(pathname: string): Href | null {
   if (pathname === "/" || pathname.startsWith("/looks")) return "/";
-  if (pathname.startsWith("/conceito")) return "/conceito";
+  if (pathname.startsWith("/sobre")) return "/sobre";
   if (pathname.startsWith("/raiz")) return "/raiz";
   return null;
 }
 
-/** Miniatura de cada página dentro do cartão (cabeçalho, título em caixa baixa e imagens). */
+/**
+ * Pôster de cada página dentro do cartão: logotipo e a Sugar apple no alto, título
+ * em PP Pangaia e as fotos da página. Tudo em unidades do contêiner (cqw), então o
+ * pôster tem a mesma composição em qualquer largura de cartão.
+ */
 function Preview({ href, title }: { href: Href; title: string }) {
   return (
     <div className="flex h-full flex-col bg-bg text-fg [container-type:inline-size]">
-      <div className="flex items-start justify-between p-[3cqw] text-[2cqw] font-medium uppercase leading-tight">
-        <span>
-          Remanesce
-          <br />
-          Denim autoral
-        </span>
-        <BrandSymbol size={32} seed="currentColor" className="h-[9cqw] w-auto" />
+      <div className="flex items-start justify-between p-[4cqw]">
+        <Wordmark title="" aria-hidden className="mt-[1cqw] h-[3.4cqw] w-auto" />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={asset("/images/marca/sugar-apple.webp")} alt="" width={320} height={325} className="aspect-[320/325] h-auto w-[11cqw]" />
       </div>
-      <p className="px-[3cqw] text-[12cqw] font-light leading-none tracking-[-0.04em]">{title}</p>
-      <div className="mt-auto flex gap-[1.5cqw] overflow-hidden p-[3cqw] pt-0">
+      <p className="px-[4cqw] font-display text-[14cqw] font-extralight leading-[0.95] tracking-[-0.02em]">{title}</p>
+      <div className="mt-auto flex gap-[1.5cqw] overflow-hidden p-[4cqw] pt-0">
         {href === "/" &&
           [0, 1, 2].map((i) => (
             <div key={i} className="flex w-[44%] shrink-0 flex-col">
               <span className="mb-[1.5cqw] text-[1.8cqw] font-medium uppercase">{looks[i].name}</span>
-              <LookFigure src={looks[i].cutout.front} alt="" className="aspect-[396/496] w-full" />
+              <LookFigure src={looks[i].front} fit={looks[i].fit} alt="" className="aspect-[396/496] w-full" />
             </div>
           ))}
-        {href === "/conceito" && (
-          <div className="aspect-[16/9] w-full overflow-hidden bg-panel">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={asset("/images/lineup/lineup-frente.jpg")} alt="" className="h-full w-full object-cover" />
-          </div>
+        {href === "/sobre" && (
+          <>
+            <LookFigure src={looks[3].front} fit={looks[3].fit} alt="" className="aspect-[4/5] w-[44%] shrink-0" />
+            <LookFigure src={looks[5].back} fit={looks[5].fit} alt="" className="aspect-[4/5] w-[44%] shrink-0" />
+          </>
         )}
-        {href === "/raiz" && <LookFigure src={looks[2].cutout.front} alt="" className="aspect-[4/5] w-[56%]" />}
+        {href === "/raiz" && <LookFigure src={looks[4].front} fit={looks[4].fit} alt="" className="aspect-[4/5] w-[56%]" />}
       </div>
     </div>
   );
 }
+
+/**
+ * Do cartão para a tela inteira sem deformar: escala uniforme (a maior das duas
+ * razões, como object-fit: cover) com o cartão centralizado na tela e um clip-path
+ * que recorta o excesso na proporção da tela. A proporção do conteúdo nunca muda;
+ * só a janela de recorte se abre ou se fecha. Medido com o cartão em repouso.
+ */
+function coverFrom(tile: HTMLElement) {
+  const w = tile.offsetWidth;
+  const h = tile.offsetHeight;
+  const r = tile.getBoundingClientRect();
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+  const scale = Math.max(vw / w, vh / h);
+  const insetX = Math.max(0, (w - vw / scale) / 2);
+  const insetY = Math.max(0, (h - vh / scale) / 2);
+  return {
+    x: vw / 2 - (r.left + r.width / 2),
+    y: vh / 2 - (r.top + r.height / 2),
+    scale,
+    clipPath: `inset(${insetY}px ${insetX}px ${insetY}px ${insetX}px)`,
+  };
+}
+
+/** Cartão em repouso (mesma sintaxe de clip-path para o GSAP interpolar os números). */
+const REST = { x: 0, y: 0, scale: 1, clipPath: "inset(0px 0px 0px 0px)" };
 
 /**
  * Menu da referência: a página atual encolhe até virar um cartão, ao lado das
@@ -83,17 +110,6 @@ export function Menu() {
     setOrigin(current);
   }
 
-  /** Retângulo da tela inteira expresso como transform a partir do cartão. */
-  const fullFrom = useCallback((tile: HTMLElement) => {
-    const r = tile.getBoundingClientRect();
-    return {
-      x: -r.left,
-      y: -r.top,
-      scaleX: window.innerWidth / r.width,
-      scaleY: window.innerHeight / r.height,
-    };
-  }, []);
-
   const stage = () => document.getElementById("stage");
 
   // Abrir
@@ -112,7 +128,7 @@ export function Menu() {
     const chrome = root.querySelectorAll("[data-menu-chrome]");
 
     if (reduced) {
-      gsap.set([bg, ...tiles.map(([, el]) => el), ...chrome], { opacity: 1, clearProps: "transform" });
+      gsap.set([bg, ...tiles.map(([, el]) => el), ...chrome], { opacity: 1, clearProps: "transform,clipPath" });
       busy.current = false;
       return;
     }
@@ -121,12 +137,11 @@ export function Menu() {
     tl.fromTo(bg, { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.out" }, 0);
     tl.to(stage(), { opacity: 0, duration: 0.3, ease: "power2.out" }, 0);
     if (currentTile) {
-      tl.fromTo(
-        currentTile,
-        { ...fullFrom(currentTile), opacity: 1, transformOrigin: "0 0" },
-        { x: 0, y: 0, scaleX: 1, scaleY: 1, duration: 1, ease: "expo.inOut" },
-        0,
-      );
+      // Mede em repouso, depois parte da tela inteira e encolhe até o cartão.
+      gsap.set(currentTile, { ...REST, zIndex: 2, transformOrigin: "50% 50%" });
+      tl.fromTo(currentTile, { ...coverFrom(currentTile), opacity: 1 }, { ...REST, duration: 1, ease: "expo.inOut" }, 0);
+      // Sem clip-path em repouso: ele cortaria o contorno de foco do cartão.
+      tl.set(currentTile, { zIndex: "auto", clearProps: "clipPath" });
     }
     tl.fromTo(
       others,
@@ -136,7 +151,7 @@ export function Menu() {
     );
     tl.fromTo(chrome, { opacity: 0 }, { opacity: 1, duration: 0.4 }, 0.6);
     return () => void tl.kill();
-  }, [open, mounted, origin, reduced, fullFrom]);
+  }, [open, mounted, origin, reduced]);
 
   // Depois de trocar de página por um cartão: revela a página nova.
   useEffect(() => {
@@ -183,13 +198,14 @@ export function Menu() {
     tl.to(root.querySelectorAll("[data-menu-chrome]"), { opacity: 0, duration: 0.2 }, 0);
     tl.to(others, { opacity: 0, y: 64, duration: 0.5, ease: "power2.in", stagger: 0.04 }, 0);
     if (currentTile) {
-      tl.to(currentTile, { ...fullFrom(currentTile), duration: 0.9, ease: "expo.inOut" }, 0.1);
+      gsap.set(currentTile, { ...REST, zIndex: 2, transformOrigin: "50% 50%" });
+      tl.to(currentTile, { ...coverFrom(currentTile), duration: 0.9, ease: "expo.inOut" }, 0.1);
       tl.set(stage(), { opacity: 1 }, ">-0.05");
     } else {
       tl.to(stage(), { opacity: 1, duration: 0.4 }, 0.3);
     }
     tl.to(root.querySelector("[data-menu-bg]"), { opacity: 0, duration: 0.3 }, currentTile ? ">-0.1" : 0.3);
-  }, [close, current, reduced, fullFrom]);
+  }, [close, current, reduced]);
 
   const go = useCallback(
     (href: Href, e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -209,17 +225,17 @@ export function Menu() {
       const tl = gsap.timeline({ onComplete: () => router.push(href) });
       tl.to(root.querySelectorAll("[data-menu-chrome]"), { opacity: 0, duration: 0.2 }, 0);
       tl.to(others, { opacity: 0, duration: 0.4, ease: "power2.out" }, 0);
-      tl.set(tile, { zIndex: 2, transformOrigin: "0 0" }, 0);
-      tl.to(tile, { ...fullFrom(tile), duration: 0.9, ease: "expo.inOut" }, 0.05);
+      gsap.set(tile, { ...REST, zIndex: 2, transformOrigin: "50% 50%" });
+      tl.to(tile, { ...coverFrom(tile), duration: 0.9, ease: "expo.inOut" }, 0.05);
     },
-    [current, pathname, dismiss, reduced, router, fullFrom],
+    [current, pathname, dismiss, reduced, router],
   );
 
   useFocusTrap(rootRef, open && mounted, dismiss);
 
   useEffect(() => {
     router.prefetch("/");
-    router.prefetch("/conceito");
+    router.prefetch("/sobre");
     router.prefetch("/raiz");
   }, [router]);
 
@@ -236,13 +252,12 @@ export function Menu() {
     >
       <div data-menu-bg className="absolute inset-0 bg-stage" onClick={dismiss} aria-hidden />
 
-      <div className="grid-site label pointer-events-none relative z-[3] pt-2 text-[#f4f2ee] md:pt-4">
-        <p data-menu-chrome className="col-span-3 md:col-span-2 lg:col-span-8">
-          Remanesce
-          <br />
-          Páginas
-        </p>
-        <button data-menu-chrome type="button" onClick={dismiss} className="label pointer-events-auto col-span-2 text-left lg:col-span-4">
+      <div className="grid-site label pointer-events-none relative z-[3] items-start pt-3 text-[#fff] md:pt-4">
+        <div data-menu-chrome className="col-span-4 lg:col-span-12">
+          <Wordmark title="Remanesce" className="h-5 w-auto md:h-6 lg:h-7 xl:h-8" />
+          <p className="mt-3">Páginas</p>
+        </div>
+        <button data-menu-chrome type="button" onClick={dismiss} className="label pointer-events-auto col-span-2 justify-self-end text-right lg:col-span-2">
           <span className="roll">
             <span>Fechar</span>
             <span aria-hidden>Fechar</span>
@@ -265,7 +280,7 @@ export function Menu() {
             onClick={(e) => go(page.href, e)}
             aria-current={page.href === current ? "page" : undefined}
             aria-label={page.href === current ? `${page.label}, página atual (fechar o menu)` : page.label}
-            className="group pointer-events-auto relative block aspect-[538/708] w-[72vw] shrink-0 overflow-hidden opacity-0 will-change-transform focus-visible:outline-offset-8 md:w-[40vw] lg:w-[28vw] lg:max-w-[calc(75vh*538/708)]"
+            className="group pointer-events-auto relative block aspect-[538/708] w-[72vw] max-w-[calc(70dvh*538/708)] shrink-0 overflow-hidden opacity-0 will-change-transform focus-visible:outline-offset-8 focus-visible:outline-[#fff] md:w-[40vw] lg:w-[28vw] lg:max-w-[calc(75dvh*538/708)]"
           >
             <Preview href={page.href} title={page.title} />
             <span aria-hidden className="absolute inset-0 bg-[#000] opacity-0 transition-opacity duration-500 group-hover:opacity-[0.06]" />

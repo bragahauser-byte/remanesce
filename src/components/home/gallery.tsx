@@ -137,7 +137,7 @@ export function Gallery() {
     window.setTimeout(() => (drag.current = null), 0);
   };
 
-  const open = (e: React.MouseEvent<HTMLAnchorElement>, slug: string, src: string) => {
+  const open = (e: React.MouseEvent<HTMLAnchorElement>, slug: string, src: string, fit: "cover" | "contain") => {
     if (drag.current?.moved) {
       e.preventDefault();
       return;
@@ -149,7 +149,7 @@ export function Gallery() {
     const track = trackRef.current!;
     const item = e.currentTarget.closest<HTMLElement>("[data-item]")!;
     const box = item.querySelector<HTMLElement>("[data-figure]")!;
-    startFlight({ slug, src, from: toBox(box.getBoundingClientRect()) });
+    startFlight({ slug, src, fit, from: toBox(box.getBoundingClientRect()) });
     gsap.set(box, { visibility: "hidden" });
 
     // Os outros cards recuam a partir do pé, os rótulos descem para dentro da máscara.
@@ -179,7 +179,7 @@ export function Gallery() {
         >
           <Link
             href={editHref(edit.slug)}
-            onClick={(e) => open(e, edit.slug, edit.image.front)}
+            onClick={(e) => open(e, edit.slug, edit.image.front, edit.image.fit)}
             onDragStart={(e) => e.preventDefault()}
             onFocus={(e) => e.currentTarget.scrollIntoView({ block: "nearest", inline: "nearest" })}
             className="group block transition-transform duration-500 ease-[var(--ease)] pointer-fine:hover:-translate-y-2"
@@ -200,6 +200,8 @@ export function Gallery() {
               <LookFigure
                 src={edit.image.front}
                 back={edit.image.back}
+                fit={edit.image.fit}
+                sizes="(min-width: 1025px) 36vw, (min-width: 768px) 46vw, 104vw"
                 alt={edit.image.alt}
                 priority={i < 4}
                 className="aspect-[396/496] w-full"
