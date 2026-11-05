@@ -13,10 +13,10 @@ gsap.registerPlugin(ScrollTrigger);
  * tudo e desfaz ao sair. Com movimento reduzido nada é animado.
  *
  *   data-reveal="image"  moldura que se abre de baixo para cima, a foto assenta (1.18 → 1)
- *   data-reveal="up"     bloco que sobe 48 px e aparece
+ *   data-reveal="up"     texto que aparece em fade (ease in-out, sem deslocamento)
  *   data-parallax="0.12" desloca na vertical enquanto atravessa a tela (fração da altura)
  *   data-zoom            foto em tela cheia que se aproxima devagar (1.16 → 1, scrub)
- *   data-words           texto que acende palavra por palavra (use <Words>)
+ *   data-words           texto longo que aparece em fade ao entrar (use <Words>)
  */
 export function ScrollMotion() {
   useLayoutEffect(() => {
@@ -31,11 +31,12 @@ export function ScrollMotion() {
         if (img) tl.fromTo(img, { scale: 1.18 }, { scale: 1, duration: 1.8, ease: "expo.out" }, 0.1);
       });
 
-      gsap.utils.toArray<HTMLElement>("[data-reveal='up']").forEach((el) => {
+      // Tipografia: só fade, com ease in-out (técnica editorial, sem deslocar as linhas).
+      gsap.utils.toArray<HTMLElement>("[data-reveal='up'], [data-words]").forEach((el) => {
         gsap.fromTo(
           el,
-          { y: 48, opacity: 0 },
-          { y: 0, opacity: 1, duration: 1.2, ease: "expo.out", scrollTrigger: { trigger: el, start: "top 90%", once: true } },
+          { opacity: 0 },
+          { opacity: 1, duration: 1.1, ease: "sine.inOut", scrollTrigger: { trigger: el, start: "top 88%", once: true } },
         );
       });
 
@@ -56,14 +57,6 @@ export function ScrollMotion() {
         );
       });
 
-      gsap.utils.toArray<HTMLElement>("[data-words]").forEach((el) => {
-        const words = el.querySelectorAll("[data-word]");
-        gsap.fromTo(
-          words,
-          { opacity: 0.14 },
-          { opacity: 1, ease: "none", stagger: 0.1, scrollTrigger: { trigger: el, start: "top 85%", end: "bottom 55%", scrub: 0.6 } },
-        );
-      });
     }, root);
 
     // Fontes e imagens mudam as alturas depois do primeiro cálculo.
@@ -79,16 +72,11 @@ export function ScrollMotion() {
   return null;
 }
 
-/** Texto dividido em palavras para o efeito data-words (sem quebrar a leitura). */
+/** Texto longo que aparece em fade ao entrar na tela (efeito data-words). */
 export function Words({ text, className, as: Tag = "p" }: { text: string; className?: string; as?: "p" | "h2" | "blockquote" | "span" }) {
   return (
     <Tag data-words className={className}>
-      {text.split(" ").map((w, i) => (
-        <span key={i} data-word className="inline">
-          {w}
-          {" "}
-        </span>
-      ))}
+      {text}
     </Tag>
   );
 }

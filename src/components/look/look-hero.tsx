@@ -38,8 +38,9 @@ export function LookHero({ edit }: { edit: Edit }) {
     if (!root || reduced || prefersReducedMotion()) return;
     const ctx = gsap.context(() => {
       const delay = useFlight.getState().flight ? 0.6 : 0.15;
-      gsap.from("[data-line] > span", { yPercent: 110, duration: 1.3, ease: "expo.out", stagger: 0.08, delay });
-      gsap.from("[data-meta] > *", { opacity: 0, y: 12, duration: 0.9, ease: "expo.out", stagger: 0.08, delay: delay + 0.35 });
+      // Tipografia só em fade (ease in-out): título, depois os rótulos.
+      gsap.from("[data-line]", { opacity: 0, duration: 1.1, ease: "sine.inOut", stagger: 0.08, delay });
+      gsap.from("[data-meta] > *", { opacity: 0, duration: 0.9, ease: "sine.inOut", stagger: 0.1, delay: delay + 0.3 });
       if (!useFlight.getState().flight) {
         gsap.fromTo(
           figureRef.current,
@@ -123,12 +124,12 @@ export function LookHero({ edit }: { edit: Edit }) {
                 alt={v.alt}
                 priority={i === 0}
                 sizes="(min-width: 1025px) 50vw, 100vw"
-                className={`aspect-[4/5] w-full lg:aspect-auto lg:h-[calc(100dvh-var(--header-h)-var(--pad))] ${i === 0 && arriving ? "invisible" : ""}`}
+                className={`aspect-[4/5] w-full lg:ml-auto lg:aspect-auto lg:h-[var(--hero-h)] lg:w-[var(--hero-w)] ${i === 0 && arriving ? "invisible" : ""}`}
               />
             </figure>
           ))}
         </div>
-        <div className="label mt-3 flex gap-6 lg:absolute lg:bottom-4 lg:left-4 lg:mt-0" role="group" aria-label="Escolher vista">
+        <div className="label mt-3 flex gap-6 lg:absolute lg:bottom-3 lg:right-4 lg:mt-0" role="group" aria-label="Escolher vista">
           {views.map((v, i) => (
             <button
               key={v.key}

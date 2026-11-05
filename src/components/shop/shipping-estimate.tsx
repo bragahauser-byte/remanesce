@@ -59,7 +59,7 @@ export function ShippingEstimate({
             placeholder="00000-000"
             value={cep}
             onChange={(e) => setCep(maskCep(e.target.value))}
-            className="min-w-0 flex-1 bg-transparent py-2 font-mono text-[14px] tracking-[0.06em] focus:outline-none"
+            className="min-w-0 flex-1 bg-transparent py-2 font-mono text-14 tracking-[0.06em] focus:outline-none"
           />
           <button type="submit" className="label px-2 hover:text-cobre" disabled={state === "loading"}>
             {state === "loading" ? "Buscando…" : "Calcular"}
@@ -94,7 +94,7 @@ export function ShippingEstimate({
                     <span className="text-small text-tinta/60">{o.days}</span>
                   </span>
                 </span>
-                <span className="font-mono text-[13px]">{o.price === 0 ? "Grátis" : formatBRL(o.price)}</span>
+                <span className="font-mono text-14">{o.price === 0 ? "Grátis" : formatBRL(o.price)}</span>
               </label>
             ))}
           </div>

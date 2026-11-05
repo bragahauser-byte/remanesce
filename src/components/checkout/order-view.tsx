@@ -78,7 +78,7 @@ export function OrderView() {
                   {product && <ProductImage image={product.images.details[0]} alt="" sizes="60px" />}
                 </div>
                 <div className="min-w-0 flex-1">
-                  <p className="serif text-[1.1rem] leading-tight">{item.name}</p>
+                  <p className="serif text-20 leading-tight">{item.name}</p>
                   <p className="label mt-1 text-tinta/55">
                     Tam. {item.size} · {item.qty}× {formatBRL(item.price)}
                   </p>
@@ -129,7 +129,7 @@ function Line({ label, value, strong }: { label: string; value: string; strong?:
   return (
     <div className={`flex justify-between gap-4 ${strong ? "pt-1 font-medium" : ""}`}>
       <dt className="text-tinta/75">{label}</dt>
-      <dd className="font-mono text-[13px]">{value}</dd>
+      <dd className="font-mono text-14">{value}</dd>
     </div>
   );
 }

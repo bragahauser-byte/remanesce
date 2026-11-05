@@ -34,7 +34,7 @@ export default function ContactPage() {
         </figure>
 
         <div className="order-1 col-span-6 lg:order-2 lg:col-span-4 lg:col-start-6 lg:row-start-1 lg:pl-[clamp(32px,3.7vw,72px)]">
-          <p data-reveal="up" className="max-w-[30em] text-16 leading-[1.25] lg:text-[clamp(1rem,0.926vw,1.25rem)]">
+          <p data-reveal="up" className="t-body max-w-[30em]">
             {contact.intro}
           </p>
           <img
@@ -48,7 +48,7 @@ export default function ContactPage() {
         </div>
 
         <address data-reveal="up" className="order-2 col-span-6 not-italic lg:order-3 lg:col-span-3 lg:col-start-11 lg:row-start-1">
-          <dl className="space-y-4 text-16 leading-[1.25] lg:text-[clamp(1rem,0.926vw,1.25rem)]">
+          <dl className="t-body space-y-5">
             {contact.channels.map((c) => (
               <div key={c.label}>
                 <dt className="label text-muted">{c.label}</dt>
@@ -64,7 +64,7 @@ export default function ContactPage() {
               </div>
             ))}
           </dl>
-          <p className="mt-8 max-w-[22em] text-16 leading-[1.25] text-muted lg:text-[clamp(0.875rem,0.81vw,1.0625rem)]">{contact.note}</p>
+          <p className="t-small mt-8 max-w-[22em] text-secondary">{contact.note}</p>
         </address>
       </section>
       <SiteFooter />

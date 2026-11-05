@@ -38,17 +38,17 @@ export function EditorialRow({
 }
 
 export function SectionTitle({ children }: { children: ReactNode }) {
-  return <h2 className="text-24 font-normal uppercase tracking-[-0.01em] lg:text-32">{children}</h2>;
+  return <h2 className="text-24 font-normal uppercase lg:text-32">{children}</h2>;
 }
 
 /** Parágrafos de 24 → 32 px, como o texto corrido grande da referência. */
 export function Prose({ children }: { children: ReactNode }) {
-  return <div className="mt-8 space-y-8 text-24 font-light tracking-[-0.02em] lg:text-32 [&_strong]:font-medium">{children}</div>;
+  return <div className="mt-8 space-y-8 text-24 lg:text-32 [&_strong]:font-medium">{children}</div>;
 }
 
 export function NumberedList({ items }: { items: { title: string; text?: string; href?: string }[] }) {
   return (
-    <ol className="mt-8 text-24 font-light tracking-[-0.02em] lg:text-32">
+    <ol className="mt-8 text-24 lg:text-32">
       {items.map((item, i) => (
         <li key={item.title} className="grid grid-cols-[48px_1fr] gap-x-2 lg:grid-cols-[72px_1fr]">
           <span className="tabular-nums">{String(i + 1).padStart(2, "0")}.</span>

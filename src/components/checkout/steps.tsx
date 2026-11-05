@@ -190,7 +190,7 @@ export function DeliveryStep({
                     <span className="mt-1 block text-small text-tinta/60">{o.days}</span>
                   </span>
                 </span>
-                <span className="font-mono text-[13px]">{o.price === 0 ? "Grátis" : formatBRL(o.price)}</span>
+                <span className="font-mono text-14">{o.price === 0 ? "Grátis" : formatBRL(o.price)}</span>
               </label>
             ))}
           </div>

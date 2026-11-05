@@ -29,7 +29,7 @@ function Perch() {
         alt=""
         width={568}
         height={480}
-        className="absolute bottom-0 right-[1%] h-12 w-auto md:h-20 lg:h-[clamp(80px,7.4vw,140px)]"
+        className="absolute bottom-0 left-[8%] h-12 w-auto md:left-auto md:right-[30%] md:h-16 lg:h-[clamp(72px,6vw,112px)]"
       />
     </div>
   );
@@ -62,29 +62,32 @@ export function BagView() {
 
   const count = t.pieces;
 
+  const row = "flex items-baseline justify-between gap-6 border-b border-inverse/20 py-3";
+
   return (
-    <section aria-labelledby="sacola-titulo" className="surface-azul min-h-dvh pb-24 pt-[max(calc(var(--header-h)+64px),26dvh)]">
+    <section aria-labelledby="sacola-titulo" className="surface-azul min-h-dvh pb-24 pt-[calc(var(--header-h)+clamp(48px,12vh,160px))]">
       <div className="grid-site">
         <div className="col-span-full grid grid-cols-subgrid lg:col-span-12">
-          <header className="col-span-full flex items-end justify-between gap-x-8 border-b border-[#fff]/50 pb-4 lg:pb-[clamp(12px,1.1vw,24px)]">
-            <h1 id="sacola-titulo" className="ui-lg uppercase">
+          {/* Título da página e contagem, sobre o primeiro fio. */}
+          <header className="col-span-full flex items-end justify-between gap-x-8 border-b border-inverse/40 pb-4">
+            <h1 id="sacola-titulo" className="t-title uppercase">
               Sua seleção
             </h1>
-            <p className="label pb-1 text-[#fff]/50" aria-live="polite">
+            <p className="label text-inverse-secondary" aria-live="polite">
               {!hydrated ? " " : count === 0 ? "Vazia" : `${count} ${count === 1 ? "peça" : "peças"}`}
             </p>
           </header>
 
           {!hydrated ? (
-            <div className="col-span-full min-h-[40vh] border-b border-[#fff]/50" aria-busy="true" />
+            <div className="col-span-full min-h-[40vh] border-b border-inverse/40" aria-busy="true" />
           ) : t.detailed.length === 0 ? (
-            <div className="col-span-full grid grid-cols-subgrid border-b border-[#fff]/50 pb-20 pt-12 lg:py-16">
+            <div className="col-span-full grid grid-cols-subgrid border-b border-inverse/40 pb-24 pt-12 lg:py-20">
               <div className={textCol}>
-                <p className="title-display max-w-[18ch]">{microcopy.emptyBag}</p>
-                <p className="mt-4 max-w-[44ch] text-16 text-[#fff]/50">As peças que você guardar aparecem aqui, com o tamanho escolhido.</p>
+                <p className="title-display max-w-[14ch]">{microcopy.emptyBag}</p>
+                <p className="t-body mt-4 max-w-[34em] text-inverse-secondary">As peças que você guardar aparecem aqui, com o tamanho escolhido.</p>
                 <TransitionLink
                   href="/"
-                  className="nav-text mt-10 flex h-[clamp(52px,3.35vw,60px)] w-full max-w-[343px] items-center justify-center bg-[#fff] text-[#000] transition-opacity hover:opacity-85"
+                  className="nav-text mt-10 flex h-14 w-full max-w-[343px] items-center justify-center bg-[#fff] text-[#111] transition-opacity duration-300 ease-in-out hover:opacity-85"
                 >
                   {microcopy.emptyBagCta}
                 </TransitionLink>
@@ -100,39 +103,55 @@ export function BagView() {
           <Perch />
 
           {hydrated && t.detailed.length > 0 && (
-            <div className="col-span-full mt-10 grid grid-cols-subgrid gap-y-12 lg:mt-14">
-              <div className={textCol}>
-                <dl className="grid grid-cols-[1fr_auto] gap-x-6 gap-y-2 text-16">
-                  <dt className="text-[#fff]/50">Subtotal</dt>
-                  <dd className="tabular-nums">{formatPrice(t.subtotal)}</dd>
+            <div className="col-span-full mt-16 grid grid-cols-subgrid gap-y-16 lg:mt-20">
+              {/* Resumo: o que se paga, em ordem de leitura, e a ação principal. */}
+              <section aria-labelledby="resumo-titulo" className="col-span-6 lg:order-2 lg:col-span-3 lg:col-start-10">
+                <h2 id="resumo-titulo" className="label text-inverse-secondary">
+                  Resumo do pedido
+                </h2>
+                <dl className="t-body mt-4 border-t border-inverse/40">
+                  <div className={row}>
+                    <dt className="text-inverse-secondary">Subtotal</dt>
+                    <dd className="tabular-nums">{formatPrice(t.subtotal)}</dd>
+                  </div>
                   {t.discount > 0 && (
-                    <>
-                      <dt className="text-[#fff]/50">Cupom {t.coupon?.code}</dt>
+                    <div className={row}>
+                      <dt className="text-inverse-secondary">Cupom {t.coupon?.code}</dt>
                       <dd className="tabular-nums">− {formatPrice(t.discount)}</dd>
-                    </>
+                    </div>
                   )}
-                  <dt className="text-[#fff]/50">Frete</dt>
-                  <dd className="text-right">
-                    {shipping ? (shipping.price === 0 ? "Grátis" : formatPrice(shipping.price)) : <span className="text-[#fff]/50">Calcule ao lado</span>}
-                  </dd>
+                  <div className={row}>
+                    <dt className="text-inverse-secondary">Frete</dt>
+                    <dd className="text-right">
+                      {shipping ? (shipping.price === 0 ? "Grátis" : formatPrice(shipping.price)) : <span className="text-inverse-secondary">a calcular</span>}
+                    </dd>
+                  </div>
+                  <div className="flex items-baseline justify-between gap-6 pt-5">
+                    <dt className="t-title">Total</dt>
+                    <dd className="t-title tabular-nums">{formatPrice(t.total)}</dd>
+                  </div>
+                  <div className="text-right">
+                    <dt className="sr-only">Parcelamento</dt>
+                    <dd className="t-small text-inverse-secondary">
+                      {installmentsLabel(t.total)}
+                      {installmentsLabel(t.total).startsWith("ou") ? " sem juros" : ""}
+                    </dd>
+                  </div>
                 </dl>
-                <p className="ui-lg mt-6 flex flex-wrap gap-x-6 tabular-nums">
-                  <span>{formatPrice(t.total)}</span>
-                  <span className="text-[#fff]/50">{installmentsLabel(t.total)}</span>
-                </p>
                 <Link
                   href="/checkout"
-                  className="nav-text mt-6 flex h-[clamp(52px,3.35vw,60px)] w-full max-w-[343px] items-center justify-center bg-[#fff] text-[#000] transition-opacity duration-300 hover:opacity-85 focus-visible:outline-[#fff]"
+                  className="nav-text mt-8 flex h-14 w-full items-center justify-center bg-[#fff] text-[#111] transition-opacity duration-300 ease-in-out hover:opacity-85 focus-visible:outline-[#fff]"
                 >
                   Comprar
                 </Link>
-                <p className="label mt-4 text-[#fff]/50">{microcopy.demo}</p>
-                <p className="mt-2 text-16 text-[#fff]/50">
+                <p className="t-caption mt-4 text-inverse-secondary">{microcopy.demo}</p>
+                <p className="t-small mt-1 text-inverse-secondary">
                   Este pedido planta {count} {count === 1 ? "araucária" : "araucárias"}.
                 </p>
-              </div>
+              </section>
 
-              <div className="col-span-6 grid gap-10 sm:grid-cols-2 lg:col-span-4 lg:col-start-9 lg:grid-cols-1">
+              {/* Entrega e cupom, no eixo do texto das peças. */}
+              <div className="col-span-6 grid content-start gap-10 sm:grid-cols-2 lg:order-1 lg:col-span-5 lg:col-start-4 lg:gap-x-[var(--gap)]">
                 <ShippingEstimate
                   subtotal={t.subtotal}
                   freeByCoupon={!!t.coupon?.freeShipping}

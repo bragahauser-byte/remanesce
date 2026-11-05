@@ -12,7 +12,7 @@ export function PageIntro({ kicker, children }: { kicker: string; children: Reac
   useLayoutEffect(() => {
     if (reduced || prefersReducedMotion() || !ref.current) return;
     const ctx = gsap.context(() => {
-      gsap.from("[data-intro]", { y: 64, opacity: 0, duration: 1.2, ease: "expo.out", stagger: 0.1, delay: 0.1 });
+      gsap.from("[data-intro]", { opacity: 0, duration: 1.1, ease: "sine.inOut", stagger: 0.12, delay: 0.1 });
     }, ref);
     return () => ctx.revert();
   }, [reduced]);

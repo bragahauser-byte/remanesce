@@ -1,7 +1,7 @@
 /*
- * Remanesce · tokens da marca (v3, estudo editorial)
- * Duas famílias: PP Pangaia (títulos grandes, nomes das peças e páginas do menu) e
- * Instrument Sans (texto, rótulos, navegação e controles). Tamanhos em múltiplos de 4 e 8 px.
+ * Remanesce · tokens da marca (v4, novembro de 2026)
+ * Duas famílias: PP Pangaia (títulos, nomes das peças, pôsteres do menu) e Instrument Sans
+ * (texto, rótulos, navegação e controles). Escala tipográfica única, definida em :root.
  * Azul da marca #263054 no menu e na sacola, com texto branco.
  */
 
@@ -16,6 +16,12 @@
   --color-panel: var(--panel);
   --color-stage: var(--stage);
   --color-azul: #263054;
+  /* Cores do texto (regra tipográfica) */
+  --color-primary: var(--text-primary);
+  --color-secondary: var(--text-secondary);
+  --color-inverse: var(--text-inverse);
+  --color-inverse-secondary: var(--text-inverse-secondary);
+  --color-accent: var(--text-accent);
   /* Cores fixas da marca */
   --color-preto: #181508;
   --color-tinta: #111111;
@@ -31,50 +37,81 @@
   --color-transparent: transparent;
   --color-current: currentColor;
 
-  --font-sans: var(--font-instrument), "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-sans: var(--font-instrument), "Instrument Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-display: var(--font-pangaia), "Times New Roman", Georgia, serif;
   /* Aliases antigos apontam para a mesma família: o texto do site inteiro é Instrument Sans. */
   --font-serif: var(--font-sans);
   --font-italic: var(--font-sans);
   --font-mono: var(--font-sans);
 
-  /* Escala tipográfica (px): 12 · 16 · 24 · 32 · 40 · 48 · 64 · 96 · 120 */
-  --text-12: 0.75rem;
-  --text-12--line-height: 1.3333;
-  --text-16: 1rem;
-  --text-16--line-height: 1.5;
-  --text-24: 1.5rem;
-  --text-24--line-height: 1.3333;
-  --text-32: 2rem;
-  --text-32--line-height: 1.25;
-  --text-40: 2.5rem;
-  --text-40--line-height: 1.2;
-  --text-48: 3rem;
-  --text-48--line-height: 1.1667;
-  --text-64: 4rem;
-  --text-64--line-height: 1;
-  --text-96: 6rem;
-  --text-96--line-height: 1;
-  --text-120: 7.5rem;
-  --text-120--line-height: 1;
+  /*
+   * Escala tipográfica (regra da equipe, nov/2026). As classes do Tailwind apontam para os
+   * tokens de :root, então qualquer text-* do site já segue a regra:
+   *   12 caption · 14 small · 16 body · 20 lead · 24 title
+   *   32 display-s · 48 display-m · 64 display-l · 96 display-xl · 120 display-2xl · 160 display-3xl
+   */
+  --text-12: var(--text-caption);
+  --text-12--line-height: var(--lh-caption);
+  --text-12--letter-spacing: var(--ls-caption);
+  --text-14: var(--text-small);
+  --text-14--line-height: var(--lh-small);
+  --text-14--letter-spacing: var(--ls-small);
+  --text-16: var(--text-body);
+  --text-16--line-height: var(--lh-body);
+  --text-16--letter-spacing: var(--ls-body);
+  --text-20: var(--text-lead);
+  --text-20--line-height: var(--lh-lead);
+  --text-20--letter-spacing: var(--ls-lead);
+  --text-24: var(--text-title);
+  --text-24--line-height: var(--lh-title);
+  --text-24--letter-spacing: var(--ls-title);
+  --text-32: var(--display-s);
+  --text-32--line-height: var(--lh-display-s);
+  --text-32--letter-spacing: var(--ls-display-s);
+  --text-40: var(--display-s);
+  --text-40--line-height: var(--lh-display-s);
+  --text-40--letter-spacing: var(--ls-display-s);
+  --text-48: var(--display-m);
+  --text-48--line-height: var(--lh-display-m);
+  --text-48--letter-spacing: var(--ls-display-m);
+  --text-64: var(--display-l);
+  --text-64--line-height: var(--lh-display-l);
+  --text-64--letter-spacing: var(--ls-display-l);
+  --text-96: var(--display-xl);
+  --text-96--line-height: var(--lh-display-xl);
+  --text-96--letter-spacing: var(--ls-display-xl);
+  --text-120: var(--display-2xl);
+  --text-120--line-height: var(--lh-display-2xl);
+  --text-120--letter-spacing: var(--ls-display-2xl);
+  --text-160: var(--display-3xl);
+  --text-160--line-height: var(--lh-display-3xl);
+  --text-160--letter-spacing: var(--ls-display-3xl);
 
   /* Aliases usados pelas páginas utilitárias (sacola, checkout, marca, passaporte) */
-  --text-display: 6rem;
-  --text-display--line-height: 1;
-  --text-h1: 4rem;
-  --text-h1--line-height: 1;
-  --text-h2: 3rem;
-  --text-h2--line-height: 1.1667;
-  --text-h3: 2rem;
-  --text-h3--line-height: 1.25;
-  --text-h4: 1.5rem;
-  --text-h4--line-height: 1.3333;
-  --text-body: 1rem;
-  --text-body--line-height: 1.5;
-  --text-small: 0.875rem;
-  --text-small--line-height: 1.4286;
-  --text-label: 0.75rem;
-  --text-label--line-height: 1.3333;
+  --text-display: var(--display-2xl);
+  --text-display--line-height: var(--lh-display-2xl);
+  --text-display--letter-spacing: var(--ls-display-2xl);
+  --text-h1: var(--display-l);
+  --text-h1--line-height: var(--lh-display-l);
+  --text-h1--letter-spacing: var(--ls-display-l);
+  --text-h2: var(--display-m);
+  --text-h2--line-height: var(--lh-display-m);
+  --text-h2--letter-spacing: var(--ls-display-m);
+  --text-h3: var(--display-s);
+  --text-h3--line-height: var(--lh-display-s);
+  --text-h3--letter-spacing: var(--ls-display-s);
+  --text-h4: var(--text-title);
+  --text-h4--line-height: var(--lh-title);
+  --text-h4--letter-spacing: var(--ls-title);
+  --text-body: var(--text-body);
+  --text-body--line-height: var(--lh-body);
+  --text-body--letter-spacing: var(--ls-body);
+  --text-small: var(--text-small);
+  --text-small--line-height: var(--lh-small);
+  --text-small--letter-spacing: var(--ls-small);
+  --text-label: var(--text-label);
+  --text-label--line-height: var(--lh-label);
+  --text-label--letter-spacing: var(--ls-label);
 
   --radius-pill: 999px;
   --radius-card: 0;
@@ -88,6 +125,33 @@
 }
 
 :root {
+  /* ------------------------------------------------ tipografia (regra da equipe) */
+  /* texto */
+  --text-caption: 0.75rem;   --lh-caption: 1rem;      --ls-caption: 0.01em;
+  --text-label: 0.75rem;     --lh-label: 1rem;        --ls-label: 0.08em;
+  --text-small: 0.875rem;    --lh-small: 1.25rem;     --ls-small: 0;
+  --text-body: 1rem;         --lh-body: 1.5rem;       --ls-body: 0;
+  --text-lead: 1.25rem;      --lh-lead: 1.75rem;      --ls-lead: -0.005em;
+  --text-title: 1.5rem;      --lh-title: 2rem;        --ls-title: -0.01em;
+
+  /* display (390px → 1440px) */
+  --display-s:   clamp(2rem, 1.81rem + 0.762vw, 2.5rem);   --lh-display-s: 1.1;    --ls-display-s: -0.02em;
+  --display-m:   clamp(2.25rem, 1.97rem + 1.14vw, 3rem);   --lh-display-m: 1.08;   --ls-display-m: -0.02em;
+  --display-l:   clamp(2.5rem, 1.94rem + 2.29vw, 4rem);    --lh-display-l: 1;      --ls-display-l: -0.025em;
+  --display-xl:  clamp(3.5rem, 2.57rem + 3.81vw, 6rem);    --lh-display-xl: 0.96;  --ls-display-xl: -0.03em;
+  --display-2xl: clamp(4.5rem, 3.2rem + 5.33vw, 8rem);     --lh-display-2xl: 0.94; --ls-display-2xl: -0.035em;
+  --display-3xl: clamp(5.5rem, 3.83rem + 6.86vw, 10rem);   --lh-display-3xl: 0.92; --ls-display-3xl: -0.04em;
+
+  /* cores do texto */
+  --text-primary: #111111;
+  --text-secondary: #6B6862;
+  --text-muted: #8C8A85;
+  --text-inverse: #FFFFFF;
+  --text-inverse-secondary: #B5B1A8;
+  --text-accent: #650410;
+
+  --page-margin: 24px;
+
   --preto: #181508;
   --tinta: #111111;
   --branco: #ffffff;
@@ -105,9 +169,9 @@
 
   /* Tema claro (padrão) */
   --bg: #ffffff;
-  --fg: #111111;
-  --muted: #8c8a85;
-  --soft: #5c5a55;
+  --fg: var(--text-primary);
+  --muted: var(--text-muted);
+  --soft: var(--text-secondary);
   --line: #e4e1db;
   /* Fundo atrás das fotos e recortes (o mesmo cinza quente do estúdio das fotos) */
   --panel: #f0eeec;
@@ -125,20 +189,33 @@
    */
   --pad: 16px;
   --gap: 12px;
-  /* Logotipo do header: 317 px de largura em 1728 px (18,3vw), proporção 1338 × 186. */
-  --logo-h: 22px;
-  /* Altura reservada para o header (margem + logotipo + respiro). */
-  --header-h: calc(var(--pad) * 2 + var(--logo-h) + 8px);
+  /*
+   * Logotipo do header, ligado à escala: 2,5 × a altura das maiúsculas da navegação
+   * (Instrument, caps ≈ 0,7 em). Celular: small (14) → 24 px; tablet: body (16) → 28 px; desktop: title (24) → 44 px,
+   * o mesmo da prancha (317 × 44 em 1728). Proporção do desenho 1338 × 186.
+   */
+  --logo-h: 1.5rem;
+  /* Altura do header: margem + logotipo + margem (o fundo branco cobre exatamente isso). */
+  --header-h: calc(var(--pad) * 2 + var(--logo-h));
   /* Card da vitrine (frente 596 × 719 na prancha): mesma medida no início, no menu e no contato. */
   --card-w: min(84vw, calc((100dvh - 150px) * 596 / 719));
   --card-h: calc(var(--card-w) * 719 / 596);
+  /* Metade direita da grade de 14 (colunas 8–14): 7 colunas + 6 gaps. */
+  --half: calc((100vw - 2 * var(--pad) - 13 * var(--gap)) / 2 + 6 * var(--gap));
+  /*
+   * Foto grande do look (tela PRODUTO): altura da tela abaixo do header, proporção entre
+   * 0,66 e 0,82 (a da prancha). A foto é quadrada; assim o corte é sempre nas laterais
+   * (fundo de estúdio) e nunca na cabeça ou nos pés, em qualquer tela.
+   */
+  --hero-h: min(calc(100dvh - var(--header-h) - var(--pad)), calc(var(--half) / 0.66));
+  --hero-w: min(var(--half), calc(var(--hero-h) * 0.82));
 }
 
 @media (min-width: 768px) {
   :root {
     --pad: 20px;
     --gap: 16px;
-    --logo-h: clamp(26px, 3.2vw, 34px);
+    --logo-h: 1.75rem;
     --card-w: min(46vw, calc((100dvh - 200px) * 596 / 719));
   }
 }
@@ -147,7 +224,7 @@
   :root {
     --pad: 24px;
     --gap: 24px;
-    --logo-h: clamp(30px, 2.55vw, 60px);
+    --logo-h: 2.75rem;
     --card-w: min(34.5vw, calc(64.4dvh * 596 / 719));
   }
 }

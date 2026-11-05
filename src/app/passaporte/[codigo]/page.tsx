@@ -58,7 +58,7 @@ export default async function PassportPage({ params }: PageProps<"/passaporte/[c
             </div>
             <div>
               <dt className="label text-tinta/55">Look</dt>
-              <dd className="serif mt-1 text-[1.15rem]">{look ? `${String(look.number).padStart(2, "0")} · ${look.name}` : "—"}</dd>
+              <dd className="serif mt-1 text-20">{look ? `${String(look.number).padStart(2, "0")} · ${look.name}` : "—"}</dd>
             </div>
             <div>
               <dt className="label text-tinta/55">Criada em</dt>
@@ -82,7 +82,7 @@ export default async function PassportPage({ params }: PageProps<"/passaporte/[c
             </p>
           </div>
           <h2 className="label-lg mt-10">A história da peça</h2>
-          <p className="mt-3 text-[1.1rem] leading-relaxed">{product.story}</p>
+          <p className="mt-3 text-20 leading-relaxed">{product.story}</p>
           {look && <p className="serif mt-3 italic text-tinta">“{look.line}”</p>}
           <ProductLink slug={product.slug} className="label link-stitch mt-6 inline-block">
             Ver a peça na loja

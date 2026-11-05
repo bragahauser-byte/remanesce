@@ -100,7 +100,7 @@ function PixPanel({ total, orderId, onPay }: { total: number; orderId: string; o
         {expired && <p className="label absolute inset-0 grid place-items-center text-center text-pinhao">Código expirado</p>}
       </div>
       <div>
-        <p className="font-mono text-[1.35rem]">{formatBRL(total)}</p>
+        <p className="font-mono text-20">{formatBRL(total)}</p>
         <p className="mt-1 text-small text-tinta/70">Abra o app do seu banco, escolha Pix e leia o QR Code ou cole o código.</p>
         <p className="label mt-4" aria-live="off">
           {expired ? (
@@ -112,7 +112,7 @@ function PixPanel({ total, orderId, onPay }: { total: number; orderId: string; o
           )}
         </p>
         <div className="mt-4 flex border border-tinta/20">
-          <input readOnly value={payload} aria-label="Código Pix copia e cola" className="min-w-0 flex-1 bg-transparent px-3 py-2.5 font-mono text-[11px] text-tinta/70" />
+          <input readOnly value={payload} aria-label="Código Pix copia e cola" className="min-w-0 flex-1 bg-transparent px-3 py-2.5 font-mono text-12 text-tinta/70" />
           <button type="button" onClick={copy} className="label flex shrink-0 items-center gap-2 border-l border-tinta/20 px-4 hover:text-cobre">
             <Icon name={copied ? "check" : "copiar"} size={16} /> {copied ? "Copiado" : "Copiar"}
           </button>
@@ -228,7 +228,7 @@ function CardPanel({ total, onPay }: { total: number; onPay: (p: Payment) => voi
           <select
             id="installments"
             {...register("installments")}
-            className="mt-1.5 block w-full border-b border-tinta/30 bg-transparent py-2.5 font-mono text-[14px] focus:border-tinta focus:outline-none"
+            className="mt-1.5 block w-full border-b border-tinta/30 bg-transparent py-2.5 font-mono text-14 focus:border-tinta focus:outline-none"
           >
             {Array.from({ length: maxN }, (_, i) => i + 1).map((n) => (
               <option key={n} value={n}>

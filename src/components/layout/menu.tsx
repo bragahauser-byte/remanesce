@@ -92,17 +92,22 @@ function Img({ src, className }: { src: string; className: string }) {
 function Poster({ href, title }: { href: Href; title: string }) {
   return (
     <div className="absolute left-0 top-0 h-[var(--vis-h)] w-[var(--vis-w)] overflow-hidden bg-[#fff] text-[#111] [container-type:size]">
-      <p data-poster-chrome className="absolute left-[2cqw] top-[1.2cqw] font-display text-[10.5cqw] font-extralight leading-[1] tracking-[-0.02em]">{title}</p>
-      {href !== "/contato" && (
-        <img
-          data-poster-chrome
-          src={asset("/images/marca/sugar-apple.webp")}
-          alt=""
-          width={320}
-          height={325}
-          className="absolute right-[2cqw] top-[2.2cqw] aspect-[320/325] w-[10cqw]"
-        />
-      )}
+      {/* Título no pôster: o display da escala, reduzido junto com o cartão (cqw). */}
+      <p
+        data-poster-chrome
+        className="absolute left-[2cqw] top-[1.2cqw] font-display text-[10.5cqw] font-extralight leading-[var(--lh-display-3xl)] tracking-[var(--ls-display-l)]"
+      >
+        {title}
+      </p>
+      {/* Sugar apple nos três cartões (início, sobre nós e contato). */}
+      <img
+        data-poster-chrome
+        src={asset("/images/marca/sugar-apple.webp")}
+        alt=""
+        width={320}
+        height={325}
+        className="absolute right-[2cqw] top-[2.2cqw] aspect-[320/325] w-[10cqw]"
+      />
       {href === "/" && (
         // No desktop o pôster repete a geometria do início (cards rentes ao pé), então a
         // página e o cartão se dissolvem um no outro sem fantasma.

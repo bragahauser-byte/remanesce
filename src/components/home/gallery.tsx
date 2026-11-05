@@ -88,7 +88,7 @@ export function Gallery() {
     });
     // No toque o nome fica sempre visível: ele sobe junto com a entrada (no mouse ele só aparece no hover).
     if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
-      tl.from(track.querySelectorAll("[data-name]"), { yPercent: 100, duration: 0.8, ease: "expo.out", stagger: 0.04, clearProps: "transform" }, "-=0.6");
+      tl.from(track.querySelectorAll("[data-name]"), { opacity: 0, duration: 0.8, ease: "sine.inOut", stagger: 0.05, clearProps: "opacity" }, "-=0.6");
     }
     return () => void tl.kill();
   }, [reduced]);
@@ -182,7 +182,7 @@ export function Gallery() {
     const others = Array.from(track.querySelectorAll<HTMLElement>("[data-item]")).filter((el) => el !== item);
     const tl = gsap.timeline({ onComplete: () => router.push(editHref(slug), { scroll: true }) });
     tl.to(others, { scale: 0.9, opacity: 0, duration: 0.6, ease: "power3.in", stagger: 0.02, transformOrigin: "50% 100%" }, 0);
-    tl.to(item.querySelector("[data-name]"), { yPercent: 100, duration: 0.4, ease: "power2.in" }, 0);
+    tl.to(item.querySelector("[data-name]"), { opacity: 0, duration: 0.4, ease: "sine.in" }, 0);
   };
 
   return (
@@ -212,11 +212,11 @@ export function Gallery() {
               onFocus={(e) => e.currentTarget.scrollIntoView({ block: "nearest", inline: "nearest" })}
               className="group block"
             >
-              {/* Nome e preço sobem por trás de uma máscara no hover (sempre visíveis no toque). */}
+              {/* Nome e preço aparecem em fade no hover (sempre visíveis no toque). */}
               <span className="mb-3 block overflow-hidden lg:mb-[clamp(12px,1.39vw,28px)]">
                 <span
                   data-name
-                  className="nav-text block truncate transition-transform duration-700 ease-[var(--ease)] pointer-fine:translate-y-full pointer-fine:group-hover:translate-y-0 pointer-fine:group-focus-visible:translate-y-0"
+                  className="nav-text block truncate transition-opacity duration-500 ease-in-out pointer-fine:opacity-0 pointer-fine:group-hover:opacity-100 pointer-fine:group-focus-visible:opacity-100"
                 >
                   {edit.title} <span className="text-muted">— a partir de {formatPrice(from)}</span>
                 </span>

@@ -116,7 +116,7 @@ function CheckoutFlow() {
           <span className="label">
             {t.pieces} {t.pieces === 1 ? "peça" : "peças"} · ver resumo
           </span>
-          <span className="font-mono text-[14px]">{formatBRL(t.total)}</span>
+          <span className="font-mono text-14">{formatBRL(t.total)}</span>
         </a>
         <div className="mt-12">
           {step === 1 && (

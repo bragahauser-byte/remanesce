@@ -22,14 +22,16 @@ const looks = {
   semente: { from: "semente", files: ["frente", "atras", "peca"] },
   curiacu: { from: "curiaçu", files: ["frente", "atras", "topo", "inferior"] },
   guacira: { from: "guacira", files: ["frente", "atras", "topo", "inferior"] },
-  raiz: { from: "raiz", files: ["frente", "atras", "topo", "inferior"] },
+  raiz: { from: "raiz", files: ["frente", "atras", "topo", "inferior", ["Top Faixa", "faixa"]] },
   gralha: { from: "gralha", files: ["frente", "atras", "topo", "inferior"] },
 };
 
 for (const [slug, { from, files }] of Object.entries(looks)) {
   await mkdir(out("pecas", slug), { recursive: true });
-  for (const name of files) {
-    const input = src("modelos e roupas", from, `${name}.jpg`);
+  // Um item pode ser [arquivo de origem, nome publicado] (ex.: "Top Faixa.jpg" → faixa-*.webp).
+  for (const entry of files) {
+    const [file, name] = Array.isArray(entry) ? entry : [entry, entry];
+    const input = src("modelos e roupas", from, `${file}.jpg`);
     for (const width of [800, 1600]) {
       await sharp(input).resize(width).webp({ quality: width > 800 ? 80 : 82 }).toFile(out("pecas", slug, `${name}-${width}.webp`));
     }

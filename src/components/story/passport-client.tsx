@@ -103,7 +103,7 @@ export function PassportMemories({ code }: { code: string }) {
               {formatDate(m.date)}
               {m.where ? ` · ${m.where}` : ""}
             </p>
-            <p className="serif mt-1 text-[1.2rem]">{m.text}</p>
+            <p className="serif mt-1 text-20">{m.text}</p>
             <button type="button" onClick={() => save(memories.filter((x) => x.id !== m.id))} className="label mt-2 text-branco/45 hover:text-branco">
               Apagar
             </button>

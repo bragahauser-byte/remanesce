@@ -20,8 +20,8 @@ const help = [
 ];
 
 /** Título de coluna em PP Pangaia, como "About" e "Assistance" da tela de rodapé. */
-const heading = "font-display text-24 font-extralight leading-[1.05] lg:text-[clamp(1.25rem,1.39vw,1.75rem)]";
-const link = "label block py-1.5 transition-opacity duration-300 hover:opacity-50 lg:text-[0.8125rem]";
+const heading = "t-title font-display font-extralight";
+const link = "label block py-2 transition-opacity duration-300 ease-in-out hover:opacity-50";
 
 /**
  * Rodapé (tela PRODUTO SCROLL 5, sem o bege: tudo branco). Três colunas na grade
@@ -89,13 +89,13 @@ export function SiteFooter() {
                   setState("idle");
                 }}
                 placeholder="Seu e-mail"
-                className="min-h-11 w-full bg-transparent font-display text-16 font-extralight outline-none placeholder:text-[#8c8a85] lg:text-24"
+                className="t-lead min-h-11 w-full bg-transparent font-display font-extralight outline-none placeholder:text-muted"
               />
               <button type="submit" className="label min-h-11 shrink-0 pl-4 transition-opacity hover:opacity-50">
                 {newsletter.button}
               </button>
             </div>
-            <p role="status" aria-live="polite" className="label mt-2 min-h-4 text-[#8c8a85]">
+            <p role="status" aria-live="polite" className="t-caption mt-2 min-h-4 text-muted">
               {state === "ok" && newsletter.success}
               {state === "invalid" && newsletter.invalid}
             </p>
@@ -114,7 +114,7 @@ export function SiteFooter() {
           <img src={asset("/images/marca/sugar-apple.webp")} alt="" width={320} height={325} className="mb-6 h-auto w-16 lg:w-[clamp(64px,5.6vw,112px)]" />
           <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-2">
             <p className="nav-text">© 2026 Remanesce</p>
-            <p className="label text-[#8c8a85]">{microcopy.academic}</p>
+            <p className="t-caption text-muted">{microcopy.academic}</p>
           </div>
         </div>
       </div>

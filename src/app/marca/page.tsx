@@ -96,7 +96,7 @@ export default async function BrandPage() {
           <h1 className="serif mt-4 text-h1 text-tinta">
             A <em>marca</em>
           </h1>
-          <p className="mt-6 max-w-xl text-[1.1rem] text-tinta/80">
+          <p className="mt-6 max-w-xl text-20 text-tinta/80">
             Um manual vivo: tudo aqui é o próprio sistema do site. Clique numa cor para copiar o HEX, num ícone para copiar o SVG.
           </p>
         </div>
@@ -121,7 +121,7 @@ export default async function BrandPage() {
           <Section id="logo" n="01" title="Logotipo e símbolo" intro="Uma pinha geométrica feita de escamas em ponta, dentro de um losango vertical. No centro, o pinhão vermelho: o que está guardado por dentro. O logotipo é Bodoni Moda em caixa alta, tracking 0,18em.">
             <div className="grid gap-4 md:grid-cols-3">
               <div className="grid aspect-[4/3] place-items-center bg-papel p-6 md:col-span-2">
-                <Logo variant="horizontal" className="text-[clamp(1.4rem,3vw,2.4rem)]" symbolSize={64} />
+                <Logo variant="horizontal" className="text-32" symbolSize={64} />
               </div>
               <div className="grid aspect-[4/3] place-items-center bg-tinta p-6 text-branco">
                 <Logo variant="stacked" className="text-xl" symbolSize={72} />
@@ -132,17 +132,17 @@ export default async function BrandPage() {
               <div className="relative grid aspect-[4/3] place-items-center bg-papel">
                 <div className="relative p-6 outline-1 outline-dashed outline-cobre">
                   <BrandSymbol size={80} />
-                  <span className="label absolute -top-6 left-0 text-[10px] text-cobre">x</span>
+                  <span className="label absolute -top-6 left-0 text-12 text-cobre">x</span>
                   <span className="absolute inset-0 -m-[1px] outline-1 outline-tinta/10" />
                 </div>
-                <p className="label absolute bottom-3 left-3 text-[10px] text-tinta/60">Área de proteção = x (altura do pinhão × 2)</p>
+                <p className="label absolute bottom-3 left-3 text-12 text-tinta/60">Área de proteção = x (altura do pinhão × 2)</p>
               </div>
               <div className="relative grid aspect-[4/3] place-items-center gap-2 bg-papel">
                 <div className="flex items-end gap-6">
                   <BrandSymbol size={16} />
-                  <span className="wordmark text-[11px]">Remanesce</span>
+                  <span className="wordmark text-12">Remanesce</span>
                 </div>
-                <p className="label absolute bottom-3 left-3 text-[10px] text-tinta/60">Mínimo: símbolo 16px · logotipo 80px de largura</p>
+                <p className="label absolute bottom-3 left-3 text-12 text-tinta/60">Mínimo: símbolo 16px · logotipo 80px de largura</p>
               </div>
             </div>
             <h3 className="label-lg mt-14">Usos incorretos</h3>
@@ -195,7 +195,7 @@ export default async function BrandPage() {
                   </div>
                   <div className="flex flex-col justify-between gap-6">
                     <p className={`${f.className} ${f.className === "serif" ? "text-h2" : "text-h4"} leading-tight`}>{f.sample}</p>
-                    <p className={`${f.className} break-all text-[1.1rem] text-tinta/60`}>Aa Bb Cc Ç ã é ô 0123456789 R$ — “”</p>
+                    <p className={`${f.className} break-all text-20 text-tinta/60`}>Aa Bb Cc Ç ã é ô 0123456789 R$ — “”</p>
                   </div>
                 </article>
               ))}
@@ -235,7 +235,7 @@ export default async function BrandPage() {
               ].map(([name, use, el]) => (
                 <li key={name as string}>
                   <div className="aspect-[4/3] overflow-hidden ring-1 ring-tinta/10">{el}</div>
-                  <p className="serif mt-3 text-[1.2rem]">{name}</p>
+                  <p className="serif mt-3 text-20">{name}</p>
                   <p className="mt-1 text-small text-tinta/70">{use}</p>
                 </li>
               ))}

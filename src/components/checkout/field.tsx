@@ -25,7 +25,7 @@ export const Field = forwardRef<HTMLInputElement, FieldProps>(function Field(
         aria-describedby={error ? `${fieldId}-erro` : undefined}
         className={`mt-1.5 block w-full border-b bg-transparent py-2.5 text-body focus:outline-none ${
           error ? "border-pinhao" : "border-tinta/30 focus:border-tinta"
-        } ${mono ? "font-mono text-[15px] tracking-[0.04em]" : ""}`}
+        } ${mono ? "font-mono text-14 tracking-[0.04em]" : ""}`}
         {...rest}
       />
       {error ? (

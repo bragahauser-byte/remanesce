@@ -9,7 +9,8 @@ export function Film({ poster, video, alt }: { poster: string; video?: string; a
   const small = poster.replace(/-2400\.webp$/, "-1600.webp");
   return (
     <section aria-label="Filme do look" className="px-[var(--pad)] pt-16 lg:pt-0">
-      <div className="relative aspect-[4/5] w-full overflow-hidden bg-panel md:aspect-video lg:aspect-auto lg:h-[calc(100dvh-var(--header-h)-var(--pad))]">
+      {/* Proporção do próprio quadro (4214 × 2348): a foto inteira, sem cortar a modelo. */}
+      <div className="relative aspect-[4/5] w-full overflow-hidden bg-panel md:aspect-[4214/2348]">
         {video ? (
           <video
             src={video}

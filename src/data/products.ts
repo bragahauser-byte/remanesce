@@ -81,7 +81,7 @@ const CARE = [
 ];
 
 /** Peça com foto própria: a foto sozinha abre a lista; as do look vêm depois. */
-function pieceImages(n: number, piece: string, shot: "topo" | "inferior" | "peca") {
+function pieceImages(n: number, piece: string, shot: "topo" | "inferior" | "peca" | "faixa") {
   const look = getLook(n)!;
   const own: ProductImage = { src: photo(look.slug, shot), kind: "peca", alt: `${piece}, foto da peça sobre fundo branco` };
   return {
@@ -91,24 +91,6 @@ function pieceImages(n: number, piece: string, shot: "topo" | "inferior" | "peca
   };
 }
 
-/** Peça sem foto própria: recortes da foto do look. */
-function lookImages(n: number, piece: string, focus: string, zoom: number, focus2?: string, zoom2?: number) {
-  const look = getLook(n)!;
-  return {
-    front: { src: look.front, kind: "look" as const, fit: look.fit, alt: `${piece}, vista de frente, no look ${look.name}` },
-    back: { src: look.back, kind: "look" as const, fit: look.fit, alt: `${piece}, vista de costas, no look ${look.name}` },
-    details: [
-      { src: look.front, kind: "detalhe" as const, alt: `Detalhe de ${piece.toLowerCase()}, frente`, objectPosition: focus, zoom },
-      {
-        src: look.back,
-        kind: "detalhe" as const,
-        alt: `Detalhe de ${piece.toLowerCase()}, costas`,
-        objectPosition: focus2 ?? focus,
-        zoom: zoom2 ?? zoom,
-      },
-    ],
-  };
-}
 
 export const products: Product[] = [
   {
@@ -317,13 +299,13 @@ export const products: Product[] = [
     name: "Top Faixa Raiz",
     category: "tops",
     look: 5,
-    short: "Bandeau de denim com pesponto aparente.",
+    short: "Bandeau de denim com losangos vermelhos presos por travetes de metal.",
     price: 28900,
-    color: "Índigo profundo · pesponto cobre",
-    images: lookImages(5, "Top Faixa Raiz", "50% 31%", 2.6),
+    color: "Índigo profundo · losangos em vermelho pinhão",
+    images: pieceImages(5, "Top Faixa Raiz", "faixa"),
     sizes: letters([4, 6, 6, 5, 3]),
     story:
-      "A peça mais simples da coleção, e por isso a base de tudo. O pesponto aparente é a costura que normalmente se esconde: aqui, a estrutura vira desenho.",
+      "A peça mais simples da coleção, e por isso a base de tudo. Os losangos se abrem na frente e deixam ver o vermelho por dentro, presos por travetes de metal como as sementes alinhadas na calça.",
     composition: COMPOSITION,
     care: CARE,
     tags: ["100% DENIM"],

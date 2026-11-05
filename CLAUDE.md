@@ -16,11 +16,22 @@ Site + e-commerce funcional da marca de denim autoral **Remanesce**, coleção
 - Grade: 14 colunas no desktop com margem e gap de 24 px (`--pad`, `--gap` em `styles/tokens.css`);
   6 colunas no celular (16/12). `--card-w`/`--card-h` = card da vitrine (596 × 719 na prancha), usado no
   início, no menu (pôsteres) e no contato.
-- Tipografia: **PP Pangaia** (títulos, nomes das peças, pôsteres do menu, colunas do rodapé) e
-  **Instrument Sans** no resto (substituiu a Plus Jakarta Sans). Navegação do topo em `nav-text`
-  (24 px na prancha, caixa alta); textos grandes de interface em `ui-lg` (28,8 px na prancha).
-- Header (`components/layout/header.tsx`): logotipo grande (`--logo-h`, 317 px na prancha) e SACOLA /
-  MENU à direita. Nos looks e na sacola aparece FECHAR (volta à página anterior).
+- Tipografia (regra da equipe, nov/2026): **PP Pangaia** (títulos, nomes das peças, pôsteres do menu,
+  colunas do rodapé) e **Instrument Sans** no resto. Escala única em `:root` de `styles/tokens.css`
+  (caption 12 · label 12/0.08em/500 · small 14 · body 16 · lead 20 · title 24 · display-s/m/l/xl/2xl/3xl
+  fluidos de 390 a 1440). Usar os utilitários `t-caption`, `label`, `t-small`, `t-body`, `t-lead`,
+  `t-title`, `display-*` (ou `text-12/14/16/20/24/32/48/64/96/120/160`, que apontam para os mesmos
+  tokens). Nada de tamanho solto em px/rem/clamp. Cores do texto: `text-primary`, `text-secondary`,
+  `text-muted`, `text-inverse`, `text-inverse-secondary`, `text-accent`.
+- Movimento na tipografia: só fade (in/out) com ease in-out; nada de texto subindo, rolando ou letra
+  por letra. Imagens podem ter máscara, parallax e zoom.
+- Header (`components/layout/header.tsx`): logotipo com 2,5× a altura das maiúsculas da navegação
+  (`--logo-h`: 24 px no celular com nav small, 28 no tablet com body, 44 no desktop com title, o mesmo
+  317 × 44 da prancha); o alto das maiúsculas alinha com o alto do logotipo (`text-box` recortado).
+  Nas páginas brancas que rolam (look, Sobre nós, Contato…) o header ganha fundo branco ao rolar;
+  na sacola, fundo azul. Nos looks e na sacola aparece FECHAR (volta à página anterior).
+- Foto grande do look: `--hero-h`/`--hero-w` (proporção entre 0,66 e 0,82, alinhada à direita) para a
+  foto quadrada nunca cortar cabeça ou pés; o filme usa a proporção do próprio quadro.
 - Menu (`components/layout/menu.tsx`), como no brandonyasin: cada cartão é a tela inteira em escala
   UNIFORME com clip-path no canto de cima à esquerda (nada estica). A página atual é sempre o primeiro
   cartão; ao abrir, o `#stage` real encolhe pela mesma conta e se dissolve no pôster. Escolher ou fechar

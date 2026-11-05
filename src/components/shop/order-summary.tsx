@@ -33,10 +33,10 @@ export function OrderSummary({
             <li key={`${l.slug}:${l.size}`} className="flex gap-3">
               <div className="relative h-16 w-12 shrink-0 overflow-hidden bg-branco">
                 <ProductImage image={l.product.images.details[0]} alt="" sizes="48px" />
-                <span className="absolute -right-0 -top-0 grid size-4 place-items-center bg-tinta font-mono text-[9px] text-branco">{l.qty}</span>
+                <span className="absolute -right-0 -top-0 grid size-4 place-items-center bg-tinta font-mono text-12 text-branco">{l.qty}</span>
               </div>
               <div className="min-w-0 flex-1">
-                <p className="serif truncate text-[1.05rem] leading-tight">{l.product.name}</p>
+                <p className="serif truncate text-20 leading-tight">{l.product.name}</p>
                 <p className="label mt-0.5 text-tinta/55">Tam. {l.size}</p>
               </div>
               <p className="label shrink-0">{formatBRL(l.total)}</p>
@@ -61,7 +61,7 @@ export function OrderSummary({
       </div>
       <div className="flex items-baseline justify-between">
         <span className="label-lg">Total</span>
-        <span className="font-mono text-[1.35rem]">{formatBRL(t.total)}</span>
+        <span className="font-mono text-20">{formatBRL(t.total)}</span>
       </div>
       <p className="mt-1 text-right text-small text-tinta/60">
         {parcel.n > 1 ? `ou ${parcel.n}× de ${formatBRL(parcel.value)} sem juros` : "à vista"}
@@ -80,7 +80,7 @@ function Row({ label, value, accent, muted }: { label: string; value: string; ac
   return (
     <div className="flex justify-between gap-4">
       <dt className="text-tinta/75">{label}</dt>
-      <dd className={`font-mono text-[13px] ${accent ? "text-pinhao" : ""} ${muted ? "text-tinta/50" : ""}`}>{value}</dd>
+      <dd className={`font-mono text-14 ${accent ? "text-pinhao" : ""} ${muted ? "text-tinta/50" : ""}`}>{value}</dd>
     </div>
   );
 }
@@ -131,7 +131,7 @@ export function CouponForm() {
           placeholder="Ex.: PERMANENCIA10"
           aria-invalid={!!error || undefined}
           aria-describedby="cupom-erro"
-          className="min-w-0 flex-1 bg-transparent py-2 font-mono text-[13px] uppercase tracking-[0.06em] placeholder:normal-case placeholder:tracking-normal placeholder:text-tinta/40 focus:outline-none"
+          className="min-w-0 flex-1 bg-transparent py-2 font-mono text-14 uppercase tracking-[0.06em] placeholder:normal-case placeholder:tracking-normal placeholder:text-tinta/40 focus:outline-none"
         />
         <button type="submit" className="label px-2 hover:text-cobre">
           Aplicar

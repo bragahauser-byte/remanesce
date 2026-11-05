@@ -43,11 +43,11 @@ export function LooksIndex() {
               onPointerEnter={() => setActive(i)}
               onFocus={() => setActive(i)}
               onBlur={() => setActive(null)}
-              className="group grid grid-cols-6 items-baseline gap-x-[var(--gap)] py-4 lg:grid-cols-14 lg:py-5"
+              className="group grid grid-cols-6 items-baseline gap-x-[var(--gap)] py-5 lg:grid-cols-14 lg:py-8"
             >
               <span className="label col-span-1 tabular-nums text-muted">{String(e.number).padStart(2, "0")}</span>
               <span
-                className={`col-span-5 font-display text-[3rem] font-extralight leading-[0.95] tracking-[-0.02em] transition-[color,transform] duration-700 ease-[var(--ease)] md:text-[4.5rem] lg:col-span-8 lg:col-start-3 lg:text-[clamp(4.5rem,7.4vw,9rem)] pointer-fine:group-hover:translate-x-[2vw] ${
+                className={`display-xl col-span-5 font-display font-extralight transition-colors duration-500 ease-in-out lg:col-span-8 lg:col-start-3 ${
                   active !== null && active !== i ? "text-muted" : ""
                 }`}
               >

@@ -9,7 +9,7 @@ import { getLenis } from "./smooth-scroll";
 
 /*
  * Transição entre páginas para os links de texto (logotipo, "Início", fim de página):
- * a página atual some em opacidade, a rota troca e a nova entra subindo 24 px.
+ * a página atual some em opacidade e a nova entra em fade (ease in-out).
  * Só opacidade e deslocamento: nada muda de escala. Os cards (voo da imagem) e o
  * menu têm transições próprias e não passam por aqui.
  */
@@ -24,7 +24,7 @@ export function leaveTo(href: string, push: (href: string) => void) {
   const el = stage();
   if (!el || prefersReducedMotion()) return push(href);
   pending = href;
-  gsap.to(el, { opacity: 0, duration: 0.32, ease: "power2.in", overwrite: true, onComplete: () => push(href) });
+  gsap.to(el, { opacity: 0, duration: 0.35, ease: "sine.in", overwrite: true, onComplete: () => push(href) });
   // Se a rota não trocar (erro de rede), a página volta a aparecer em vez de ficar vazia.
   window.clearTimeout(safety);
   safety = window.setTimeout(() => {
@@ -76,8 +76,7 @@ export function PageTransition() {
     getLenis()?.scrollTo(0, { immediate: true, force: true });
     window.scrollTo(0, 0);
     const tl = gsap.timeline();
-    tl.fromTo(el, { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power2.out", clearProps: "opacity" }, 0);
-    tl.fromTo("#conteudo > *", { y: 24 }, { y: 0, duration: 0.9, ease: "expo.out", clearProps: "transform" }, 0);
+    tl.fromTo(el, { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "sine.out", clearProps: "opacity" }, 0);
   }, [pathname]);
 
   return null;
