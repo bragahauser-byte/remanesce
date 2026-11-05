@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Suspense } from "react";
-import { Plus_Jakarta_Sans } from "next/font/google";
+import { Instrument_Sans } from "next/font/google";
 import localFont from "next/font/local";
 import { FlightLayer } from "@/components/layout/flight-layer";
 import { Header } from "@/components/layout/header";
@@ -11,10 +11,11 @@ import { brand } from "@/data/copy";
 import { asset } from "@/lib/paths";
 import "./globals.css";
 
-const jakarta = Plus_Jakarta_Sans({
-  variable: "--font-jakarta",
+/* Instrument Sans: texto, rótulos, navegação e controles (substitui a Plus Jakarta Sans). */
+const instrument = Instrument_Sans({
+  variable: "--font-instrument",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600"],
   display: "swap",
 });
 
@@ -55,7 +56,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="pt-BR" className={`${jakarta.variable} ${pangaia.variable}`} suppressHydrationWarning>
+    <html lang="pt-BR" className={`${instrument.variable} ${pangaia.variable}`} suppressHydrationWarning>
       <body>
         <a
           href="#conteudo"

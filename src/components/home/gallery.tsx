@@ -5,7 +5,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useLayoutEffect, useRef } from "react";
 import { LookFigure } from "@/components/look/figure";
-import { editHref, edits, priceRange } from "@/data/collection";
+import { editHref, edits } from "@/data/collection";
+import { formatPrice } from "@/lib/format";
 import { prefersReducedMotion, useReducedMotion } from "@/lib/hooks";
 import { toBox, useFlight } from "@/lib/store/flight";
 
@@ -85,7 +86,10 @@ export function Gallery() {
       ease: "expo.inOut",
       stagger: 0.03,
     });
-    tl.from(track.querySelectorAll("[data-name]"), { yPercent: 100, duration: 0.8, ease: "expo.out", stagger: 0.04 }, "-=0.6");
+    // No toque o nome fica sempre visível: ele sobe junto com a entrada (no mouse ele só aparece no hover).
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+      tl.from(track.querySelectorAll("[data-name]"), { yPercent: 100, duration: 0.8, ease: "expo.out", stagger: 0.04, clearProps: "transform" }, "-=0.6");
+    }
     return () => void tl.kill();
   }, [reduced]);
 
@@ -102,13 +106,33 @@ export function Gallery() {
       if (!raf.current) target.current = track.scrollLeft;
       animateTo(target.current + delta * unit);
     };
-    const onScroll = () => writeSession(SCROLL_KEY, String(Math.round(track.scrollLeft)));
+    // Parallax dentro de cada foto: a imagem anda um pouco menos que o card (referência).
+    const layers = Array.from(track.querySelectorAll<HTMLElement>("[data-px]"));
+    let ticking = 0;
+    const parallax = () => {
+      ticking = 0;
+      if (prefersReducedMotion()) return;
+      const vw = window.innerWidth;
+      for (const el of layers) {
+        const r = el.parentElement!.getBoundingClientRect();
+        const t = (r.left + r.width / 2 - vw / 2) / vw; // -1 … 1
+        el.style.transform = `translate3d(${(-t * 5).toFixed(3)}%,0,0) scale(1.1)`;
+      }
+    };
+    parallax();
+    const onScroll = () => {
+      writeSession(SCROLL_KEY, String(Math.round(track.scrollLeft)));
+      if (!ticking) ticking = requestAnimationFrame(parallax);
+    };
+    window.addEventListener("resize", parallax);
 
     track.addEventListener("wheel", onWheel, { passive: false });
     track.addEventListener("scroll", onScroll, { passive: true });
     return () => {
       track.removeEventListener("wheel", onWheel);
       track.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", parallax);
+      cancelAnimationFrame(ticking);
       cancelAnimationFrame(raf.current);
       raf.current = 0;
     };
@@ -149,6 +173,8 @@ export function Gallery() {
     const track = trackRef.current!;
     const item = e.currentTarget.closest<HTMLElement>("[data-item]")!;
     const box = item.querySelector<HTMLElement>("[data-figure]")!;
+    const layer = box.querySelector<HTMLElement>("[data-px]");
+    if (layer) layer.style.transform = "";
     startFlight({ slug, src, fit, from: toBox(box.getBoundingClientRect()) });
     gsap.set(box, { visibility: "hidden" });
 
@@ -156,7 +182,7 @@ export function Gallery() {
     const others = Array.from(track.querySelectorAll<HTMLElement>("[data-item]")).filter((el) => el !== item);
     const tl = gsap.timeline({ onComplete: () => router.push(editHref(slug), { scroll: true }) });
     tl.to(others, { scale: 0.9, opacity: 0, duration: 0.6, ease: "power3.in", stagger: 0.02, transformOrigin: "50% 100%" }, 0);
-    tl.to(track.querySelectorAll("[data-name]"), { yPercent: 100, duration: 0.4, ease: "power2.in" }, 0);
+    tl.to(item.querySelector("[data-name]"), { yPercent: 100, duration: 0.4, ease: "power2.in" }, 0);
   };
 
   return (
@@ -168,51 +194,50 @@ export function Gallery() {
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
       onPointerCancel={onPointerUp}
-      className="flex h-[calc(100dvh-40px)] select-none items-end gap-2 overflow-x-auto overscroll-x-contain px-[var(--pad)] pb-[var(--pad)] [scrollbar-width:none] md:h-[calc(100dvh-56px)] lg:h-[calc(100dvh-88px)] [&::-webkit-scrollbar]:hidden"
+      className="flex h-dvh select-none items-end gap-[var(--gap)] overflow-x-auto overscroll-x-contain px-[var(--pad)] pb-[var(--pad)] [scrollbar-width:none] scroll-px-[var(--pad)] [@media(pointer:coarse)]:snap-x [@media(pointer:coarse)]:snap-mandatory [&::-webkit-scrollbar]:hidden"
     >
-      {edits.map((edit, i) => (
-        <article
-          key={edit.slug}
-          data-item
-          style={{ zIndex: edits.length - i }}
-          className="relative w-[83%] shrink-0 will-change-transform md:w-[36.6%] lg:w-[calc(28.74%-8px)]"
-        >
-          <Link
-            href={editHref(edit.slug)}
-            onClick={(e) => open(e, edit.slug, edit.image.front, edit.image.fit)}
-            onDragStart={(e) => e.preventDefault()}
-            onFocus={(e) => e.currentTarget.scrollIntoView({ block: "nearest", inline: "nearest" })}
-            className="group block transition-transform duration-500 ease-[var(--ease)] pointer-fine:hover:-translate-y-2"
+      {edits.map((edit, i) => {
+        const from = Math.min(...edit.pieces.map((p) => p.price));
+        return (
+          <article
+            key={edit.slug}
+            data-item
+            style={{ zIndex: edits.length - i }}
+            className="relative w-[var(--card-w)] shrink-0 snap-start will-change-transform"
           >
-            <span className="mb-2 block overflow-hidden lg:mb-4">
-              <span data-name className="label flex justify-between gap-4">
-                <span className="roll-host w-full min-w-0">
-                  <span className="truncate">
-                    {String(edit.number).padStart(2, "0")} {edit.title}
-                  </span>
-                  <span aria-hidden className="truncate">
-                    {edit.pieces.length} {edit.pieces.length === 1 ? "peça" : "peças"} · {priceRange(edit)}
-                  </span>
+            <Link
+              href={editHref(edit.slug)}
+              onClick={(e) => open(e, edit.slug, edit.image.front, edit.image.fit)}
+              onDragStart={(e) => e.preventDefault()}
+              onFocus={(e) => e.currentTarget.scrollIntoView({ block: "nearest", inline: "nearest" })}
+              className="group block"
+            >
+              {/* Nome e preço sobem por trás de uma máscara no hover (sempre visíveis no toque). */}
+              <span className="mb-3 block overflow-hidden lg:mb-[clamp(12px,1.39vw,28px)]">
+                <span
+                  data-name
+                  className="nav-text block truncate transition-transform duration-700 ease-[var(--ease)] pointer-fine:translate-y-full pointer-fine:group-hover:translate-y-0 pointer-fine:group-focus-visible:translate-y-0"
+                >
+                  {edit.title} <span className="text-muted">— a partir de {formatPrice(from)}</span>
                 </span>
               </span>
-            </span>
-            <div data-figure>
-              <LookFigure
-                src={edit.image.front}
-                back={edit.image.back}
-                fit={edit.image.fit}
-                sizes="(min-width: 1025px) 36vw, (min-width: 768px) 46vw, 104vw"
-                alt={edit.image.alt}
-                priority={i < 4}
-                className="aspect-[396/496] w-full"
-              />
-            </div>
-            <span className="label mt-2 block text-muted pointer-fine:sr-only">
-              {edit.pieces.length} {edit.pieces.length === 1 ? "peça" : "peças"}, {priceRange(edit)}
-            </span>
-          </Link>
-        </article>
-      ))}
+              <div data-figure className="relative aspect-[596/719] w-full overflow-hidden bg-panel">
+                <div data-px className="absolute inset-0 will-change-transform [transform:scale(1.1)]">
+                  <LookFigure
+                    src={edit.image.front}
+                    back={edit.image.back}
+                    fit={edit.image.fit}
+                    sizes="(min-width: 1025px) 36vw, (min-width: 768px) 50vw, 90vw"
+                    alt={edit.image.alt}
+                    priority={i < 4}
+                    className="h-full w-full"
+                  />
+                </div>
+              </div>
+            </Link>
+          </article>
+        );
+      })}
     </div>
   );
 }

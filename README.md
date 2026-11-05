@@ -32,11 +32,20 @@ Cada push na `main` publica o site no GitHub Pages pelo workflow `.github/workfl
 
 ## Navegação
 
-- **Início**: galeria horizontal (roda do mouse, arrastar, toque ou teclado). O card abre o look.
-- **Look** (`/looks/[slug]`): título e foto lado a lado, peças com preço e tamanho, próximo look.
-- **Sobre nós** e **Raiz**: páginas editoriais com os textos da equipe e a lenda da Araucária (RPC).
-- **Menu**: as três páginas em cartões sobre o azul #263054.
+- **Início**: galeria horizontal (roda do mouse, arrastar, toque ou teclado); nome e preço aparecem no
+  hover. O card voa até a página do look.
+- **Look** (`/looks/[slug]`): título preso e foto, texto do look, peças com preço e tamanho, filme em
+  tela cheia, próximo look e rodapé.
+- **Sobre nós**: edição de revista em grade suíça, com as fotos editoriais, a lenda da Araucária (RPC)
+  e o índice dos seis looks.
+- **Contato**: texto da marca, canais e a gralha voando.
+- **Menu**: as três páginas (Início, Sobre nós, Contato) como cartões sobre o azul #263054; a página
+  atual encolhe até virar o primeiro cartão.
 - **Sacola**: azul com texto branco, peças, frete por CEP, cupom e checkout simulado.
+- **Raiz**: página editorial das origens, pelo rodapé.
+
+Tipografia: PP Pangaia (títulos) e Instrument Sans (texto). Imagens novas de novembro:
+`npm run imagens:novembro` (lê a pasta local `updates novembro/`).
 
 ## Roupas recortadas (frente e verso)
 

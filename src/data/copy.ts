@@ -20,12 +20,24 @@ export const brand = {
   siteUrl: SITE_URL,
 };
 
-/** As três páginas principais (menu em cartões). */
+/** As três páginas principais (menu em cartões, telas de novembro). */
 export const primaryPages = [
   { href: "/", label: "Início", title: "início" },
   { href: "/sobre", label: "Sobre nós", title: "sobre nós" },
-  { href: "/raiz", label: "Raiz", title: "raiz" },
+  { href: "/contato", label: "Contato", title: "contato" },
 ] as const;
+
+/** Página de contato (texto da equipe, tela "CONTATO" de novembro). */
+export const contact = {
+  intro:
+    "Acreditamos que cada detalhe conta uma história. Nossa marca nasce do encontro entre criatividade, identidade e expressão, valorizando a autenticidade em cada criação. Estamos sempre abertos a novas conexões, parcerias e oportunidades. Seja para conhecer melhor nosso trabalho, esclarecer dúvidas ou compartilhar uma ideia, será um prazer conversar com você.",
+  channels: [
+    { label: "E-mail", value: "contato@remanesce.com.br", href: "mailto:contato@remanesce.com.br" },
+    { label: "Instagram", value: "@remanesce", href: "https://instagram.com/remanesce" },
+    { label: "Ateliê", value: "Curitiba · Paraná", href: null },
+  ],
+  note: "Reparo, ajuste e ressignificação de peças: escreva para o mesmo e-mail.",
+} as const;
 
 export const hero = {
   beats: ["Tudo muda.", "Nada se perde.", "O que permanece, renasce."],

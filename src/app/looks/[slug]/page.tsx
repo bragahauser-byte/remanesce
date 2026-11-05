@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { SiteFooter } from "@/components/layout/site-footer";
+import { Film } from "@/components/look/film";
 import { LookHero } from "@/components/look/look-hero";
 import { NextBlock } from "@/components/look/next-block";
 import { PieceBlock } from "@/components/look/piece-block";
+import { ScrollMotion } from "@/components/motion/scroll-motion";
 import { editHref, edits, getEdit, nextEdit } from "@/data/collection";
 
 export function generateStaticParams() {
@@ -21,6 +24,7 @@ export async function generateMetadata({ params }: PageProps<"/looks/[slug]">): 
   };
 }
 
+/** Página do look: telas PRODUTO e PRODUTO SCROLL 1–5. */
 export default async function LookPage({ params }: PageProps<"/looks/[slug]">) {
   const { slug } = await params;
   const edit = getEdit(slug);
@@ -35,6 +39,7 @@ export default async function LookPage({ params }: PageProps<"/looks/[slug]">) {
         const side = flip ? (edit.startSide === "left" ? "right" : "left") : edit.startSide;
         return <PieceBlock key={piece.slug} piece={piece} index={i} side={side} />;
       })}
+      <Film poster={edit.film.poster} video={edit.film.video} alt={`Look ${edit.title} no estúdio, de corpo inteiro.`} />
       <NextBlock
         kicker="próximo look"
         title={next.title}
@@ -42,6 +47,8 @@ export default async function LookPage({ params }: PageProps<"/looks/[slug]">) {
         image={{ src: next.image.front, alt: next.image.alt, fit: next.image.fit }}
         flightSlug={next.slug}
       />
+      <SiteFooter />
+      <ScrollMotion />
     </article>
   );
 }

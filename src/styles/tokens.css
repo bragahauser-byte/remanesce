@@ -1,7 +1,7 @@
 /*
  * Remanesce · tokens da marca (v3, estudo editorial)
  * Duas famílias: PP Pangaia (títulos grandes, nomes das peças e páginas do menu) e
- * Plus Jakarta Sans (texto, rótulos e controles). Tamanhos em múltiplos de 4 e 8 px.
+ * Instrument Sans (texto, rótulos, navegação e controles). Tamanhos em múltiplos de 4 e 8 px.
  * Azul da marca #263054 no menu e na sacola, com texto branco.
  */
 
@@ -31,9 +31,9 @@
   --color-transparent: transparent;
   --color-current: currentColor;
 
-  --font-sans: var(--font-jakarta), "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-sans: var(--font-instrument), "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-display: var(--font-pangaia), "Times New Roman", Georgia, serif;
-  /* Aliases antigos apontam para a mesma família: o site inteiro é Plus Jakarta Sans. */
+  /* Aliases antigos apontam para a mesma família: o texto do site inteiro é Instrument Sans. */
   --font-serif: var(--font-sans);
   --font-italic: var(--font-sans);
   --font-mono: var(--font-sans);
@@ -119,12 +119,35 @@
   --page-bg: var(--bg);
   --page-fg: var(--fg);
 
-  --gutter: 8px;
-  --pad: 8px;
+  /*
+   * Grade (telas de novembro, prancha de 1728 px): margem e gap de 24 px no desktop.
+   * Celular: 6 colunas, margem 16 e gap 12. Desktop (>= 1025 px): 14 colunas.
+   */
+  --pad: 16px;
+  --gap: 12px;
+  /* Logotipo do header: 317 px de largura em 1728 px (18,3vw), proporção 1338 × 186. */
+  --logo-h: 22px;
+  /* Altura reservada para o header (margem + logotipo + respiro). */
+  --header-h: calc(var(--pad) * 2 + var(--logo-h) + 8px);
+  /* Card da vitrine (frente 596 × 719 na prancha): mesma medida no início, no menu e no contato. */
+  --card-w: min(84vw, calc((100dvh - 150px) * 596 / 719));
+  --card-h: calc(var(--card-w) * 719 / 596);
 }
 
 @media (min-width: 768px) {
   :root {
-    --pad: 16px;
+    --pad: 20px;
+    --gap: 16px;
+    --logo-h: clamp(26px, 3.2vw, 34px);
+    --card-w: min(46vw, calc((100dvh - 200px) * 596 / 719));
+  }
+}
+
+@media (min-width: 1025px) {
+  :root {
+    --pad: 24px;
+    --gap: 24px;
+    --logo-h: clamp(30px, 2.55vw, 60px);
+    --card-w: min(34.5vw, calc(64.4dvh * 596 / 719));
   }
 }

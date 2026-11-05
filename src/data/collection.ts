@@ -15,6 +15,8 @@ export type Edit = {
   title: string;
   line: string;
   description: string;
+  manifesto: string;
+  film: { poster: string; video?: string };
   image: { front: string; back: string; alt: string; backAlt: string; fit: "cover" | "contain" };
   pieces: Product[];
   /** Lado da imagem do primeiro bloco de peça; os seguintes alternam. */
@@ -36,6 +38,8 @@ export const edits: Edit[] = ordered.map<Edit>((look, i) => ({
   title: look.name.toLowerCase(),
   line: look.line,
   description: look.description,
+  manifesto: look.manifesto,
+  film: look.film,
   image: {
     front: look.front,
     back: look.back,

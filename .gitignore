@@ -54,3 +54,6 @@ yarn-error.log*
 /tipografia/
 /sacola/
 /favcon/
+
+# Materiais da atualização de novembro (telas, fotos originais): o site usa as versões em public/
+/updates novembro/

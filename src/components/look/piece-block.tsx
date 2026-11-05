@@ -19,7 +19,7 @@ function PieceImage({ piece }: { piece: Product }) {
   const image = piece.images.details[0];
   if (image.kind === "peca") {
     return (
-      <div className="relative aspect-square w-full overflow-hidden bg-[#fff]">
+      <div data-reveal="image" className="relative aspect-square w-full overflow-hidden bg-[#fff]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={image.src}
@@ -28,7 +28,7 @@ function PieceImage({ piece }: { piece: Product }) {
           alt={image.alt}
           loading="lazy"
           decoding="async"
-          className="absolute inset-0 h-full w-full object-contain"
+          className="absolute inset-[4%] h-[92%] w-[92%] object-contain"
         />
       </div>
     );
@@ -82,13 +82,13 @@ export function PieceBlock({ piece, index, side }: Props) {
 
   const inBag = size ? (lines.find((l) => l.slug === piece.slug && l.size === size)?.qty ?? 0) : 0;
 
-  // Os dois eixos da página (os mesmos do hero): coluna 1 e coluna 9 da grade de 14.
-  // Imagem e texto ocupam 6 colunas cada, espelhados, com 2 colunas de respiro entre eles.
+  // Telas PRODUTO SCROLL 2 e 3: imagem em 6 colunas de um lado, texto em 6 do outro,
+  // com 2 colunas de respiro; cada peça ocupa uma tela e fica centrada nela.
   const imageCol = side === "left" ? "lg:col-start-1" : "lg:col-start-9";
   const textCol = side === "left" ? "lg:col-start-9" : "lg:col-start-1 lg:row-start-1";
 
   return (
-    <section aria-labelledby={`${id}-nome`} className="grid-site mt-24 items-end gap-y-8 lg:mt-40">
+    <section aria-labelledby={`${id}-nome`} className="grid-site items-center gap-y-8 py-16 lg:min-h-dvh lg:py-[var(--header-h)]">
       <figure className={`col-span-6 ${imageCol}`}>
         <PieceImage piece={piece} />
         <figcaption className="label mt-2 flex gap-8">
@@ -97,7 +97,7 @@ export function PieceBlock({ piece, index, side }: Props) {
         </figcaption>
       </figure>
 
-      <div className={`col-span-6 ${textCol}`}>
+      <div data-reveal="up" className={`col-span-6 ${textCol}`}>
         <p className="label text-muted">
           Peça {number} · {singular}
         </p>
